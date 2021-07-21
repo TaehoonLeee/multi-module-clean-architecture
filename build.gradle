@@ -16,7 +16,7 @@ buildscript {
         lifecycle_runtime_version = "2.4.0-alpha02"
         zxing_embedded_version = "4.2.0"
         exoplayerVersion = '2.14.1'
-        paging_version = '3.0.0'
+        paging_version = "3.1.0-alpha02"
     }
     repositories {
         google()

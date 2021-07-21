@@ -18,14 +18,14 @@ class UnsplashPhotoPagingSource constructor(
         val position = params.key?: 1
         val response = unsplashService.searchPhotos(query, position, params.loadSize)
 
-        return try {
+        return if (response is Result.Success) {
             LoadResult.Page(
-                data = (response as Result.Success).data.results,
+                data = response.data.results,
                 prevKey = if (position == 1) null else position - 1,
                 nextKey = if (position == response.data.totalPages) null else position + 1
             )
-        } catch (e: ClassCastException) {
-            LoadResult.Error(e)
+        } else {
+            LoadResult.Error(Exception())
         }
     }
 }
