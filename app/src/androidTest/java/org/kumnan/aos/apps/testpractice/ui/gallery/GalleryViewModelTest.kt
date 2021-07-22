@@ -1,8 +1,12 @@
 package org.kumnan.aos.apps.testpractice.ui.gallery
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.paging.PagingSource
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import junit.framework.TestCase
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -11,6 +15,7 @@ import org.kumnan.aos.apps.data.api.UnsplashService
 import org.kumnan.aos.apps.data.entity.UnsplashResponse
 import org.kumnan.aos.apps.data.mapper.ResponseMapper
 import org.kumnan.aos.apps.data.repository.UnsplashRepositoryImpl
+import org.kumnan.aos.apps.data.repository.datasource.UnsplashPhotoPagingSource
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto.UnsplashPhotoUrls
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto.UnsplashUser
@@ -24,6 +29,17 @@ class GalleryViewModelTest : TestCase() {
 
     private lateinit var viewModel: GalleryViewModel
 
+    private lateinit var fakeUnsplashService: UnsplashService
+
+    private val fakePhotoList = listOf(
+        UnsplashPhoto(
+            id = "1",
+            description = "first",
+            urls = UnsplashPhotoUrls("","","","",""),
+            user = UnsplashUser("first_user", "first_user")
+        )
+    )
+
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
@@ -31,15 +47,7 @@ class GalleryViewModelTest : TestCase() {
     public override fun setUp() {
         super.setUp()
 
-        val fakePhotoList = listOf(
-            UnsplashPhoto(
-                id = "1",
-                description = "first",
-                urls = UnsplashPhotoUrls("","","","",""),
-                user = UnsplashUser("first_user", "first_user")
-            )
-        )
-        val fakeUnsplashService = object : UnsplashService {
+        fakeUnsplashService = object : UnsplashService {
             override suspend fun searchPhotos(
                 query: String,
                 page: Int,
@@ -61,10 +69,29 @@ class GalleryViewModelTest : TestCase() {
     }
 
     @Test
+    @ExperimentalCoroutinesApi
     fun testGalleryViewModel() {
-        val result = viewModel.searchPageResult.getOrAwaitValue().firstOrNull {
+        val pageResult = viewModel.searchPageResult.getOrAwaitValue().firstOrNull {
             it.id == "1" && it.user.username == "first_user"
         }
-        assert(result != null)
+        assert(pageResult != null)
+
+        val pagingSource = UnsplashPhotoPagingSource(fakeUnsplashService, "")
+        runBlockingTest {
+            assertEquals(
+                expected = PagingSource.LoadResult.Page(
+                    data = fakePhotoList,
+                    prevKey = null,
+                    nextKey = null
+                ),
+                actual = pagingSource.load(
+                    PagingSource.LoadParams.Refresh(
+                        key = null,
+                        loadSize = 1,
+                        placeholdersEnabled = false
+                    )
+                )
+            )
+        }
     }
 }
