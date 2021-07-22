@@ -16,7 +16,7 @@ internal class ResponseCall<T> constructor(
         override fun onResponse(call: Call<T>, response: Response<T>) {
             response.body()?.let {
                 when(response.code()) {
-                    in 200..203 -> {
+                    in 200..208 -> {
                         callback.onResponse(this@ResponseCall, Response.success(Result.Success(it, response.code())))
                     }
                     in 400..409 -> {
