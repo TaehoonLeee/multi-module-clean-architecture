@@ -5,17 +5,16 @@ import androidx.paging.PagingSource
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import junit.framework.TestCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.kumnan.aos.apps.data.api.UnsplashService
 import org.kumnan.aos.apps.data.entity.UnsplashResponse
 import org.kumnan.aos.apps.data.mapper.ResponseMapper
 import org.kumnan.aos.apps.data.repository.UnsplashRepositoryImpl
 import org.kumnan.aos.apps.data.repository.datasource.UnsplashPhotoPagingSource
+import org.kumnan.aos.apps.data.retrofit.api.UnsplashService
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto.UnsplashPhotoUrls
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto.UnsplashUser
@@ -71,7 +70,7 @@ class GalleryViewModelTest : TestCase() {
     @Test
     @ExperimentalCoroutinesApi
     fun testGalleryViewModel() {
-        val pageResult = viewModel.searchPageResult.getOrAwaitValue().firstOrNull {
+        val pageResult = viewModel.searchPageResult.getOrAwaitValue()?.firstOrNull {
             it.id == "1" && it.user.username == "first_user"
         }
         assert(pageResult != null)
@@ -79,15 +78,15 @@ class GalleryViewModelTest : TestCase() {
         val pagingSource = UnsplashPhotoPagingSource(fakeUnsplashService, "")
         runBlockingTest {
             assertEquals(
-                expected = PagingSource.LoadResult.Page(
+                PagingSource.LoadResult.Page(
                     data = fakePhotoList,
                     prevKey = null,
                     nextKey = null
                 ),
-                actual = pagingSource.load(
+                pagingSource.load(
                     PagingSource.LoadParams.Refresh(
                         key = null,
-                        loadSize = 1,
+                        loadSize = 2,
                         placeholdersEnabled = false
                     )
                 )

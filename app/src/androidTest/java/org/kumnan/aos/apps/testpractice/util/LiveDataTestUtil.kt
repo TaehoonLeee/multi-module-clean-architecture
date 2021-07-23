@@ -6,7 +6,7 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.TimeoutException
 
-fun <T> LiveData<T>.getOrAwaitValue(): T {
+fun <T> LiveData<T>.getOrAwaitValue(): T? {
     var data: T? = null
     val latch = CountDownLatch(1)
 
@@ -30,5 +30,5 @@ fun <T> LiveData<T>.getOrAwaitValue(): T {
 
 
 
-    return data as T
+    return data
 }
