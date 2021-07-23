@@ -76,6 +76,6 @@ object DataModule {
         ktorUnsplashApi: KtorUnsplashApi
     ): UnsplashRepository {
 //        return UnsplashRepositoryImpl(unsplashService, ResponseMapper::responseToPhotoList)
-        return KtorUnsplashRepositoryImpl(ktorUnsplashApi)
+        return KtorUnsplashRepositoryImpl(ktorUnsplashApi, ResponseMapper::responseToPhotoList)
     }
 }
