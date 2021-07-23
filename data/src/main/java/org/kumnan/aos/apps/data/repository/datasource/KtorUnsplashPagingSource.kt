@@ -2,12 +2,11 @@ package org.kumnan.aos.apps.data.repository.datasource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import org.kumnan.aos.apps.data.retrofit.api.UnsplashService
+import org.kumnan.aos.apps.data.ktor.api.KtorUnsplashApi
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
-import org.kumnan.aos.apps.domain.entity.status.Result
 
-class UnsplashPhotoPagingSource constructor(
-    private val unsplashService: UnsplashService,
+class KtorUnsplashPagingSource constructor(
+    private val ktorUnsplashApi: KtorUnsplashApi,
     private val query: String
 ) : PagingSource<Int, UnsplashPhoto>() {
     override fun getRefreshKey(state: PagingState<Int, UnsplashPhoto>): Int? {
@@ -16,16 +15,16 @@ class UnsplashPhotoPagingSource constructor(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UnsplashPhoto> {
         val position = params.key?: 1
-        val response = unsplashService.searchPhotos(query, position, params.loadSize)
+        val response = ktorUnsplashApi.getSearchResponse(query, position, params.loadSize)
 
-        return if (response is Result.Success) {
+        return try {
             LoadResult.Page(
-                data = response.data.results,
+                data = response.results,
                 prevKey = if (position == 1) null else position - 1,
-                nextKey = if (position == response.data.totalPages) null else position + 1
+                nextKey = if (position == response.totalPages) null else position + 1
             )
-        } else {
-            LoadResult.Error(Exception())
+        } catch (e: Exception) {
+            LoadResult.Error(e)
         }
     }
 }

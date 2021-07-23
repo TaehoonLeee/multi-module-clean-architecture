@@ -1,4 +1,4 @@
-package org.kumnan.aos.apps.data.api
+package org.kumnan.aos.apps.data.retrofit.api
 
 import org.kumnan.aos.apps.data.entity.UnsplashResponse
 import org.kumnan.aos.apps.domain.entity.status.Result

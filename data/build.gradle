@@ -56,6 +56,12 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okHttp_version"
     implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
 
+    // Ktor
+    implementation "io.ktor:ktor-client-android:$ktor_version"
+    implementation "io.ktor:ktor-client-gson:$ktor_version"
+    implementation "io.ktor:ktor-client-okhttp:$ktor_version"
+    implementation "io.ktor:ktor-client-logging-jvm:$ktor_version"
+
     // Gson
     implementation "com.google.code.gson:gson:$gson_version"
 
@@ -63,5 +69,6 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+    // Paging
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
 }
