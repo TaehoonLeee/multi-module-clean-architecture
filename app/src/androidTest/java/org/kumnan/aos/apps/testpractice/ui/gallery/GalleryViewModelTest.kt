@@ -14,7 +14,6 @@ import org.kumnan.aos.apps.data.entity.UnsplashResponse
 import org.kumnan.aos.apps.data.mapper.ResponseMapper
 import org.kumnan.aos.apps.data.repository.UnsplashRepositoryImpl
 import org.kumnan.aos.apps.data.repository.datasource.UnsplashPhotoPagingSource
-import org.kumnan.aos.apps.data.retrofit.api.UnsplashService
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto.UnsplashPhotoUrls
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto.UnsplashUser

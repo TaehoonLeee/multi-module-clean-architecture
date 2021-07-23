@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.kumnan.aos.apps.data.entity.UnsplashResponse
-import org.kumnan.aos.apps.data.ktor.api.KtorUnsplashApi
+import org.kumnan.aos.apps.data.network.UnsplashService
 import org.kumnan.aos.apps.data.repository.datasource.KtorUnsplashPagingSource
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
 import org.kumnan.aos.apps.domain.entity.status.Result
@@ -15,7 +15,7 @@ import javax.inject.Singleton
 
 @Singleton
 class KtorUnsplashRepositoryImpl @Inject constructor(
-    private val ktorUnsplashApi: KtorUnsplashApi,
+    private val unsplashService: UnsplashService,
     private val responseToPhotoList: (Result<UnsplashResponse>) -> Result<List<UnsplashPhoto>>
 ) : UnsplashRepository {
 
@@ -23,7 +23,7 @@ class KtorUnsplashRepositoryImpl @Inject constructor(
         query: String,
         page: Int
     ): Flow<Result<List<UnsplashPhoto>>> = flow {
-        val response = ktorUnsplashApi.getSearchResponse(query, page)
+        val response = unsplashService.searchPhotos(query, page)
         emit(responseToPhotoList(response))
     }
 
@@ -34,6 +34,6 @@ class KtorUnsplashRepositoryImpl @Inject constructor(
                 maxSize = 100,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { KtorUnsplashPagingSource(ktorUnsplashApi, query) }
+            pagingSourceFactory = { KtorUnsplashPagingSource(unsplashService, query) }
         ).flow as Flow<T>
 }

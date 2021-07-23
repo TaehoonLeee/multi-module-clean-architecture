@@ -86,9 +86,7 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-scalars:$retrofit_version"
 
     // Ktor
-    implementation "io.ktor:ktor-client-android:$ktor_version"
     implementation "io.ktor:ktor-client-gson:$ktor_version"
-    implementation "io.ktor:ktor-client-okhttp:$ktor_version"
 
     // Paging
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"

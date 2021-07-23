@@ -1,4 +1,4 @@
-package org.kumnan.aos.apps.data.retrofit
+package org.kumnan.aos.apps.data.network.retrofit.factory
 
 import retrofit2.Call
 import retrofit2.CallAdapter

@@ -1,26 +1,28 @@
-package org.kumnan.aos.apps.data.ktor.api
+package org.kumnan.aos.apps.data.network.ktor
 
+import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.statement.*
+import io.ktor.client.request.get
 import org.kumnan.aos.apps.data.entity.UnsplashResponse
-import org.kumnan.aos.apps.data.ktor.KtorNetworkService
+import org.kumnan.aos.apps.data.network.UnsplashService
 import org.kumnan.aos.apps.domain.entity.status.Result
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class KtorUnsplashApi @Inject constructor(
-    private val ktorNetworkService: KtorNetworkService
-) {
+class KtorUnsplashService @Inject constructor(
+    private val httpClient: HttpClient
+) : UnsplashService {
 
-    suspend fun getSearchResponse(
+    override suspend fun searchPhotos(
         query: String,
-        page: Int = 1,
-        pageSize: Int = 20
+        page: Int,
+        perPage: Int
     ): Result<UnsplashResponse> {
         return try {
-            val response = ktorNetworkService.get<HttpResponse>(
-                "https://api.unsplash.com/search/photos?client_id=$CLIENT_ID&query=$query&page=$page&per_page=$pageSize"
+            val response = httpClient.get<HttpResponse>(
+                "https://api.unsplash.com/search/photos?client_id=$CLIENT_ID&query=$query&page=$page&per_page=$perPage"
             )
             Result.Success(response.receive(), response.status.value)
         } catch (e: Exception) {

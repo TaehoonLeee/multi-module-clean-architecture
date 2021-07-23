@@ -2,7 +2,7 @@ package org.kumnan.aos.apps.data.repository.datasource
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import org.kumnan.aos.apps.data.retrofit.api.UnsplashService
+import org.kumnan.aos.apps.data.network.UnsplashService
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
 import org.kumnan.aos.apps.domain.entity.status.Result
 

@@ -1,4 +1,4 @@
-package org.kumnan.aos.apps.data.retrofit
+package org.kumnan.aos.apps.data.network.retrofit.factory
 
 import okhttp3.Request
 import okio.Timeout

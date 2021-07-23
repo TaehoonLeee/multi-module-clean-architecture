@@ -9,18 +9,15 @@ import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.features.json.*
 import io.ktor.client.features.logging.*
 import okhttp3.OkHttpClient
-import org.kumnan.aos.apps.data.ktor.KtorNetworkService
-import org.kumnan.aos.apps.data.ktor.api.KtorUnsplashApi
 import org.kumnan.aos.apps.data.mapper.ResponseMapper
+import org.kumnan.aos.apps.data.network.UnsplashService
+import org.kumnan.aos.apps.data.network.ktor.KtorUnsplashService
 import org.kumnan.aos.apps.data.repository.KtorUnsplashRepositoryImpl
-import org.kumnan.aos.apps.data.repository.UnsplashRepositoryImpl
-import org.kumnan.aos.apps.data.retrofit.ResponseAdapterFactory
-import org.kumnan.aos.apps.data.retrofit.api.UnsplashService
+import org.kumnan.aos.apps.data.network.retrofit.factory.ResponseAdapterFactory
 import org.kumnan.aos.apps.domain.repository.UnsplashRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
-import kotlin.math.exp
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -39,12 +36,6 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun provideUnsplashService(retrofit: Retrofit): UnsplashService {
-        return retrofit.create(UnsplashService::class.java)
-    }
-
-    @Singleton
-    @Provides
     fun provideKtorHttpClient(): HttpClient {
         return HttpClient(OkHttp) {
             install(JsonFeature) {
@@ -58,24 +49,22 @@ object DataModule {
         }
     }
 
-    @Provides
-    fun provideKtorNetworkService(httpClient: HttpClient): KtorNetworkService {
-        return KtorNetworkService(httpClient)
-    }
-
     @Singleton
     @Provides
-    fun provideKtorUnsplashApi(ktorNetworkService: KtorNetworkService): KtorUnsplashApi {
-        return KtorUnsplashApi(ktorNetworkService)
+    fun provideUnsplashService(
+        retrofit: Retrofit,
+        okHttpClient: HttpClient
+    ): UnsplashService {
+//        return retrofit.create(RetrofitUnsplashService::class.java)
+        return KtorUnsplashService(okHttpClient)
     }
 
     @Singleton
     @Provides
     fun provideUnsplashRepository(
-        unsplashService: UnsplashService,
-        ktorUnsplashApi: KtorUnsplashApi
+        unsplashService: UnsplashService
     ): UnsplashRepository {
 //        return UnsplashRepositoryImpl(unsplashService, ResponseMapper::responseToPhotoList)
-        return KtorUnsplashRepositoryImpl(ktorUnsplashApi, ResponseMapper::responseToPhotoList)
+        return KtorUnsplashRepositoryImpl(unsplashService, ResponseMapper::responseToPhotoList)
     }
 }

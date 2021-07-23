@@ -1,4 +1,4 @@
-package org.kumnan.aos.apps.data.retrofit
+package org.kumnan.aos.apps.data.network.retrofit.factory
 
 import org.kumnan.aos.apps.domain.entity.status.Result
 import retrofit2.Call
