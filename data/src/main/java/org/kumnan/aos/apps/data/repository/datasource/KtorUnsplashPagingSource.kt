@@ -5,6 +5,7 @@ import androidx.paging.PagingState
 import org.kumnan.aos.apps.data.network.UnsplashService
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
 import org.kumnan.aos.apps.domain.entity.status.Result
+import java.lang.Exception
 
 class KtorUnsplashPagingSource constructor(
     private val unsplashService: UnsplashService,
@@ -18,14 +19,15 @@ class KtorUnsplashPagingSource constructor(
         val position = params.key?: 1
         val response = unsplashService.searchPhotos(query, position, params.loadSize)
 
-        return if (response is Result.Success) {
+        return try {
+            response as Result.Success
             LoadResult.Page(
                 data = response.data.results,
                 prevKey = if (position == 1) null else position - 1,
                 nextKey = if (position == response.data.totalPages) null else position + 1
             )
-        } else {
-            LoadResult.Error(Exception())
+        } catch (e: Exception) {
+            LoadResult.Error(e)
         }
     }
 }

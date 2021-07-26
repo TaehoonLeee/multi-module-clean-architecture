@@ -12,6 +12,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.kumnan.aos.apps.data.entity.UnsplashResponse
 import org.kumnan.aos.apps.data.mapper.ResponseMapper
+import org.kumnan.aos.apps.data.network.UnsplashService
 import org.kumnan.aos.apps.data.repository.UnsplashRepositoryImpl
 import org.kumnan.aos.apps.data.repository.datasource.UnsplashPhotoPagingSource
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto

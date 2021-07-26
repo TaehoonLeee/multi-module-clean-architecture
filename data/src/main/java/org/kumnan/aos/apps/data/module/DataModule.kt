@@ -6,8 +6,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.OkHttp
+import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.logging.*
+import io.ktor.client.request.*
+import io.ktor.http.*
 import okhttp3.OkHttpClient
 import org.kumnan.aos.apps.data.mapper.ResponseMapper
 import org.kumnan.aos.apps.data.network.UnsplashService
@@ -38,6 +41,16 @@ object DataModule {
     @Provides
     fun provideKtorHttpClient(): HttpClient {
         return HttpClient(OkHttp) {
+            defaultRequest {
+                headers {
+                    append("Accept-Version", "v1")
+                    append(HttpHeaders.Authorization, "Client-ID ti90oMOJyxTN-gKrvE39bi6LM2tbMAdOvey4QMKES0k")
+                }
+                url {
+                    protocol = URLProtocol.HTTPS
+                    host = "api.unsplash.com"
+                }
+            }
             install(JsonFeature) {
                 GsonSerializer()
             }
@@ -45,7 +58,6 @@ object DataModule {
                 logger = Logger.DEFAULT
                 level = LogLevel.ALL
             }
-            expectSuccess = true
         }
     }
 
