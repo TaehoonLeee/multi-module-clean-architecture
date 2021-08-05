@@ -1,11 +1,9 @@
 package org.kumnan.aos.apps.testpractice.ui.gallery
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import org.kumnan.aos.apps.domain.entity.status.Result
 import org.kumnan.aos.apps.testpractice.R
 import org.kumnan.aos.apps.testpractice.databinding.FragGalleryBinding
 import org.kumnan.aos.apps.testpractice.ui.base.BaseFragment

@@ -1,4 +1,4 @@
-package org.kumnan.aos.apps.testpractice.ui.gallery
+package org.kumnan.aos.apps.testpractice.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingSource
@@ -16,11 +16,11 @@ import org.kumnan.aos.apps.data.network.UnsplashService
 import org.kumnan.aos.apps.data.repository.UnsplashRepositoryImpl
 import org.kumnan.aos.apps.data.repository.datasource.UnsplashPhotoPagingSource
 import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
-import org.kumnan.aos.apps.domain.entity.UnsplashPhoto.UnsplashPhotoUrls
-import org.kumnan.aos.apps.domain.entity.UnsplashPhoto.UnsplashUser
 import org.kumnan.aos.apps.domain.entity.status.Result
 import org.kumnan.aos.apps.domain.interactor.GetSearchResultOfPageUseCase
 import org.kumnan.aos.apps.domain.interactor.GetSearchResultUseCase
+import org.kumnan.aos.apps.testpractice.ui.gallery.DefaultGalleryViewModel
+import org.kumnan.aos.apps.testpractice.ui.gallery.GalleryViewModel
 import org.kumnan.aos.apps.testpractice.util.getOrAwaitValue
 
 @RunWith(AndroidJUnit4::class)
@@ -34,8 +34,8 @@ class GalleryViewModelTest : TestCase() {
         UnsplashPhoto(
             id = "1",
             description = "first",
-            urls = UnsplashPhotoUrls("","","","",""),
-            user = UnsplashUser("first_user", "first_user")
+            urls = UnsplashPhoto.UnsplashPhotoUrls("","","","",""),
+            user = UnsplashPhoto.UnsplashUser("first_user", "first_user")
         )
     )
 
@@ -62,7 +62,7 @@ class GalleryViewModelTest : TestCase() {
             unSplashRepository
         )
 
-        viewModel = GalleryViewModel(
+        viewModel = DefaultGalleryViewModel(
             getSearchResultUseCase, getSearchResultOfPageUseCase
         )
     }

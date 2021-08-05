@@ -3,11 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/galleryFragment">
+    app:startDestination="@id/page_main">
 
-    <fragment
-        android:id="@+id/galleryFragment"
-        android:name="org.kumnan.aos.apps.testpractice.ui.gallery.GalleryFragment"
-        android:label="GalleryFragment"
-        tools:layout="@layout/frag_gallery"/>
+    <include app:graph="@navigation/page_market" />
+    <include app:graph="@navigation/page_my" />
+    <include app:graph="@navigation/page_main" />
 </navigation>

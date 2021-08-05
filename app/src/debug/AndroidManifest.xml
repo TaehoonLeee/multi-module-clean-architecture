@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.kumnan.aos.apps.testpractice">
+
+    <application>
+        <activity android:name=".debug.HiltTestActivity"
+            android:exported="false" />
+    </application>
+
+</manifest>

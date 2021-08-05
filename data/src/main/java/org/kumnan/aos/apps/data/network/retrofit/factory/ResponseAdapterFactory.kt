@@ -7,7 +7,7 @@ import java.lang.reflect.ParameterizedType
 import org.kumnan.aos.apps.domain.entity.status.Result
 import java.lang.reflect.Type
 
-internal class ResponseAdapterFactory : CallAdapter.Factory() {
+class ResponseAdapterFactory : CallAdapter.Factory() {
     override fun get(returnType: Type, annotations: Array<out Annotation>, retrofit: Retrofit): CallAdapter<*, *>? {
 
         if (Call::class.java != getRawType(returnType)) return null
