@@ -19,7 +19,6 @@ import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
 import org.kumnan.aos.apps.domain.entity.status.Result
 import org.kumnan.aos.apps.domain.interactor.GetSearchResultOfPageUseCase
 import org.kumnan.aos.apps.domain.interactor.GetSearchResultUseCase
-import org.kumnan.aos.apps.testpractice.ui.gallery.DefaultGalleryViewModel
 import org.kumnan.aos.apps.testpractice.ui.gallery.GalleryViewModel
 import org.kumnan.aos.apps.testpractice.util.getOrAwaitValue
 
@@ -62,7 +61,7 @@ class GalleryViewModelTest : TestCase() {
             unSplashRepository
         )
 
-        viewModel = DefaultGalleryViewModel(
+        viewModel = GalleryViewModel(
             getSearchResultUseCase, getSearchResultOfPageUseCase
         )
     }

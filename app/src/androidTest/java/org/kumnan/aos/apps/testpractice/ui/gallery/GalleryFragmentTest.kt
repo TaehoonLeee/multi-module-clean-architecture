@@ -1,7 +1,6 @@
 package org.kumnan.aos.apps.testpractice.ui.gallery
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.fragment.app.testing.launchFragment
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
@@ -37,12 +36,13 @@ class GalleryFragmentTest {
     @get:Rule(order = 0)
     val hiltRule = HiltAndroidRule(this)
 
-    @get:Rule(order = 2)
+    @get:Rule(order = 1)
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Module
     @InstallIn(SingletonComponent::class)
     class DataModule {
+
         @Singleton
         @Provides
         fun provideUnsplashService(): UnsplashService {
