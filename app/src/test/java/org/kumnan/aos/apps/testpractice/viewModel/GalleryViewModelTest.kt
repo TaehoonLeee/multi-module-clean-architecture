@@ -49,22 +49,20 @@ class GalleryViewModelTest : TestCase() {
         assertEquals(pageResult, FakePhotoListHolder.fakePhotoList)
 
         val pagingSource = UnsplashPhotoPagingSource(mockUnsplashService, "")
-        runBlockingTest {
-            assertEquals(
-                PagingSource.LoadResult.Page(
-                    data = FakePhotoListHolder.fakePhotoList,
-                    prevKey = null,
-                    nextKey = null
-                ),
-                pagingSource.load(
-                    PagingSource.LoadParams.Refresh(
-                        key = null,
-                        loadSize = 2,
-                        placeholdersEnabled = false
-                    )
+        assertEquals(
+            PagingSource.LoadResult.Page(
+                data = FakePhotoListHolder.fakePhotoList,
+                prevKey = null,
+                nextKey = null
+            ),
+            pagingSource.load(
+                PagingSource.LoadParams.Refresh(
+                    key = null,
+                    loadSize = 2,
+                    placeholdersEnabled = false
                 )
             )
-        }
+        )
     }
 
     private suspend fun createViewModel() = GalleryViewModel(
