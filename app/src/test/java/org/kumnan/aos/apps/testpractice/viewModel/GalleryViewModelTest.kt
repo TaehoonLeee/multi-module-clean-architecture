@@ -42,7 +42,7 @@ class GalleryViewModelTest : TestCase() {
 
     @Test
     @ExperimentalCoroutinesApi
-    fun testGalleryViewModel() = coroutineRule.testCoroutineDispatcher.runBlockingTest {
+    fun `뷰모델 리스트 초기화`() = coroutineRule.testCoroutineDispatcher.runBlockingTest {
         val viewModel = createViewModel()
 
         val pageResult = viewModel.searchPageResult.getOrAwaitValue()
