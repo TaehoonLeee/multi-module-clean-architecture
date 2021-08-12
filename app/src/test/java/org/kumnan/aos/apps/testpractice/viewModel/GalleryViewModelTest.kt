@@ -2,11 +2,9 @@ package org.kumnan.aos.apps.testpractice.viewModel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingSource
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import junit.framework.TestCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,70 +13,46 @@ import org.kumnan.aos.apps.data.mapper.ResponseMapper
 import org.kumnan.aos.apps.data.network.UnsplashService
 import org.kumnan.aos.apps.data.repository.UnsplashRepositoryImpl
 import org.kumnan.aos.apps.data.repository.datasource.UnsplashPhotoPagingSource
-import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
 import org.kumnan.aos.apps.domain.entity.status.Result
 import org.kumnan.aos.apps.domain.interactor.GetSearchResultOfPageUseCase
 import org.kumnan.aos.apps.domain.interactor.GetSearchResultUseCase
 import org.kumnan.aos.apps.testpractice.ui.gallery.GalleryViewModel
+import org.kumnan.aos.apps.testpractice.util.TestCoroutineRule
+import org.kumnan.aos.apps.testpractice.util.fakes.FakePhotoListHolder
 import org.kumnan.aos.apps.testpractice.util.getOrAwaitValue
+import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.ArgumentMatchers.anyString
+import org.mockito.Mockito.`when`
+import org.mockito.Mockito.mock
+import org.robolectric.RobolectricTestRunner
 
-@RunWith(AndroidJUnit4::class)
+@RunWith(RobolectricTestRunner::class)
 class GalleryViewModelTest : TestCase() {
 
-    private lateinit var viewModel: GalleryViewModel
+    @get:Rule(order = 0)
+    val coroutineRule = TestCoroutineRule()
 
-    private lateinit var fakeUnsplashService: UnsplashService
-
-    private val fakePhotoList = listOf(
-        UnsplashPhoto(
-            id = "1",
-            description = "first",
-            urls = UnsplashPhoto.UnsplashPhotoUrls("","","","",""),
-            user = UnsplashPhoto.UnsplashUser("first_user", "first_user")
-        )
-    )
-
-    @get:Rule
+    @get:Rule(order = 1)
     val instantTaskExecutorRule = InstantTaskExecutorRule()
 
-    @Before
-    public override fun setUp() {
-        super.setUp()
-
-        fakeUnsplashService = object : UnsplashService {
-            override suspend fun searchPhotos(
-                query: String,
-                page: Int,
-                perPage: Int
-            ): Result<UnsplashResponse> = Result.Success(UnsplashResponse(fakePhotoList, 1), 200)
-        }
-        val unSplashRepository = UnsplashRepositoryImpl(fakeUnsplashService, ResponseMapper::responseToPhotoList)
-
-        val getSearchResultOfPageUseCase = GetSearchResultOfPageUseCase(
-            unSplashRepository
-        )
-        val getSearchResultUseCase = GetSearchResultUseCase(
-            unSplashRepository
-        )
-
-        viewModel = GalleryViewModel(
-            getSearchResultUseCase, getSearchResultOfPageUseCase
-        )
-    }
+    private val mockUnsplashService = mock(UnsplashService::class.java)
+    private val fakeUnsplashRepository = UnsplashRepositoryImpl(
+        mockUnsplashService, ResponseMapper::responseToPhotoList
+    )
 
     @Test
     @ExperimentalCoroutinesApi
-    fun testGalleryViewModel() {
-        val pageResult = viewModel.searchPageResult.getOrAwaitValue()?.firstOrNull {
-            it.id == "1" && it.user.username == "first_user"
-        }
-        assert(pageResult != null)
+    fun testGalleryViewModel() = coroutineRule.testCoroutineDispatcher.runBlockingTest {
+        val viewModel = createViewModel()
 
-        val pagingSource = UnsplashPhotoPagingSource(fakeUnsplashService, "")
+        val pageResult = viewModel.searchPageResult.getOrAwaitValue()
+        assertEquals(pageResult, FakePhotoListHolder.fakePhotoList)
+
+        val pagingSource = UnsplashPhotoPagingSource(mockUnsplashService, "")
         runBlockingTest {
             assertEquals(
                 PagingSource.LoadResult.Page(
-                    data = fakePhotoList,
+                    data = FakePhotoListHolder.fakePhotoList,
                     prevKey = null,
                     nextKey = null
                 ),
@@ -91,5 +65,15 @@ class GalleryViewModelTest : TestCase() {
                 )
             )
         }
+    }
+
+    private suspend fun createViewModel() = GalleryViewModel(
+        GetSearchResultUseCase(fakeUnsplashRepository),
+        GetSearchResultOfPageUseCase(fakeUnsplashRepository)
+    ).apply {
+        val fakeUnsplashResponse = UnsplashResponse(FakePhotoListHolder.fakePhotoList, 1)
+
+        `when`(mockUnsplashService.searchPhotos(anyString(), anyInt(), anyInt()))
+            .thenReturn(Result.Success(fakeUnsplashResponse, 200))
     }
 }

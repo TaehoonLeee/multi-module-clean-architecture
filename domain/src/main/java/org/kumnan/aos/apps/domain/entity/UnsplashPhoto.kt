@@ -19,4 +19,12 @@ data class UnsplashPhoto(
         val name: String,
         val username: String
     )
+
+    override fun equals(other: Any?): Boolean {
+        return id == (other as UnsplashPhoto).id
+    }
+
+    override fun hashCode(): Int {
+        return super.hashCode()
+    }
 }

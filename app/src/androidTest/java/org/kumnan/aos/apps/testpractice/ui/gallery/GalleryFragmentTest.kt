@@ -78,7 +78,6 @@ class GalleryFragmentTest {
     @Before
     fun launchScreen() {
         launchFragmentInHiltContainer<GalleryFragment>()
-        hiltRule.inject()
     }
 
     @Test
