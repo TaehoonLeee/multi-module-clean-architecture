@@ -10,15 +10,21 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment<VB: ViewDataBinding>(private val resId: Int) : Fragment() {
 
-    protected lateinit var binding: VB
+    private var _binding: VB? = null
+    protected val binding: VB get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, resId,  container, false)
+        _binding = DataBindingUtil.inflate(inflater, resId,  container, false)
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
