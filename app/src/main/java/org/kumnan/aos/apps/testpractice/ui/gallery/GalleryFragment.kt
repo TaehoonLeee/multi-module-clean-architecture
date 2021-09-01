@@ -24,10 +24,6 @@ class GalleryFragment : BaseFragment<FragGalleryBinding>(R.layout.frag_gallery) 
             rvPhoto.adapter = photoAdapter
         }
 
-        galleryViewModel.searchPageResult.observe(viewLifecycleOwner) {
-
-        }
-
         galleryViewModel.searchResult.observe(viewLifecycleOwner) {
             photoAdapter.submitData(lifecycle, it)
         }
