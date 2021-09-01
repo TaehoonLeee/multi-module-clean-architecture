@@ -6,5 +6,4 @@ import org.kumnan.aos.apps.testpractice.databinding.FragMarketBinding
 import org.kumnan.aos.apps.testpractice.ui.base.BaseFragment
 
 @AndroidEntryPoint
-class MarketFragment : BaseFragment<FragMarketBinding>(R.layout.frag_market) {
-}
+class MarketFragment : BaseFragment<FragMarketBinding>(R.layout.frag_market)
