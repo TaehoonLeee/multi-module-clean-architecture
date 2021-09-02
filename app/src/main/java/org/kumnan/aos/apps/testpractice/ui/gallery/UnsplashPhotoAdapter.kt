@@ -34,5 +34,4 @@ class UnsplashPhotoDiffCallback: DiffUtil.ItemCallback<UnsplashPhoto>() {
 
     override fun areContentsTheSame(oldItem: UnsplashPhoto, newItem: UnsplashPhoto): Boolean
         = oldItem == newItem
-
 }
