@@ -19,6 +19,7 @@ abstract class BaseFragment<VB: ViewDataBinding>(private val resId: Int) : Fragm
         savedInstanceState: Bundle?
     ): View {
         _binding = DataBindingUtil.inflate(inflater, resId,  container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
     }

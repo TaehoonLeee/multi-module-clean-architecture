@@ -16,7 +16,6 @@ class MyPageFragment : BaseFragment<FragMyPageBinding>(R.layout.frag_my_page) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = userCountViewModel
     }
 }
