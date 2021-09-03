@@ -21,5 +21,4 @@ class UserCountViewModel @Inject constructor(
 
         super.onCleared()
     }
-
 }
