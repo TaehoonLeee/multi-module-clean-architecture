@@ -1,5 +1,7 @@
 on:
   push:
+    paths-ignore:
+      - '.github/workflows/main.yml'
   pull_request:
 
 jobs:
@@ -18,13 +20,7 @@ jobs:
           key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Run Unit Tests
-        run: bash ./gradlew test
-
-      - name: Publish Unit Test Report
-        uses: EnricoMi/publish-unit-test-result-action/composite@v1
-        if: always()
-        with:
-          files: '**/build/test-results/testReleaseUnitTest/TEST-*.xml'
+        run: bash ./gradlew testRelease
           
       - name: AVD Cache
         uses: actions/cache@v2
@@ -54,11 +50,11 @@ jobs:
           disable-animations: false
           script: ./gradlew connectedCheck
           
-      - name: Publish Instrumentation Test Report
+      - name: All Test Report
         uses: EnricoMi/publish-unit-test-result-action/composite@v1
         if: always()
         with:
-          files: '**/build/outputs/androidTest-results/connected/TEST-*.xml'
+          files: '**/*-results/**/TEST-*.xml'
           
 #       - name: Slack Notification
 #         uses: rtCamp/action-slack-notify@v2
