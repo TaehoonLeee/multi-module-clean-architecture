@@ -21,10 +21,10 @@ jobs:
         run: bash ./gradlew test
 
       - name: Publish Unit Test Report
-        uses: mikepenz/action-junit-report@v2
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
         if: always()
         with:
-          report_paths: '**/build/test-results/testReleaseUnitTest/TEST-*.xml'
+          files: '**/build/test-results/testReleaseUnitTest/TEST-*.xml'
           
       - name: AVD Cache
         uses: actions/cache@v2
@@ -55,14 +55,14 @@ jobs:
           script: ./gradlew connectedCheck
           
       - name: Publish Instrumentation Test Report
-        uses: mikepenz/action-junit-report@v2
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
         if: always()
         with:
-          report_paths: '**/build/outputs/androidTest-results/connected/TEST-*.xml'
+          files: '**/build/outputs/androidTest-results/connected/TEST-*.xml'
           
-      - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_CHANNEL: test
-          SLACK_COLOR: ${{ job.status }}
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#       - name: Slack Notification
+#         uses: rtCamp/action-slack-notify@v2
+#         env:
+#           SLACK_CHANNEL: test
+#           SLACK_COLOR: ${{ job.status }}
+#           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
