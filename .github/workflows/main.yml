@@ -17,3 +17,12 @@ jobs:
         if: always()
         with:
           report_paths: '**/build/test-results/testReleaseUnitTest/TEST-*.xml'
+          
+      - name: Slack Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: test
+          SLACK_COLOR: ${{ job.status }}
+          SLACK_MESSAGE: '${{ GITHUB_ACTION }}, ${{ GITHUB_JOB }}, ${{ GITHUB_RUN_ID }}, ${{ GITHUB_RUN_NUMBER }}'
+          SLACK_TITLE: 'Title'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
