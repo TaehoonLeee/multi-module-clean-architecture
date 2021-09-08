@@ -24,5 +24,5 @@ jobs:
           SLACK_CHANNEL: test
           SLACK_COLOR: ${{ job.status }}
           SLACK_MESSAGE: "$GITHUB_ACTION, $GITHUB_JOB, $GITHUB_RUN_ID, $GITHUB_RUN_NUMBER"
-          SLACK_TITLE: 'Title'
+          SLACK_TITLE: 'title'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
