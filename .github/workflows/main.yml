@@ -7,7 +7,6 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-
     steps:
       - uses: actions/checkout@v2
       
@@ -55,10 +54,14 @@ jobs:
         if: always()
         with:
           files: '**/*-results/**/TEST-*.xml'
-          
-#       - name: Slack Notification
-#         uses: rtCamp/action-slack-notify@v2
-#         env:
-#           SLACK_CHANNEL: test
-#           SLACK_COLOR: ${{ job.status }}
-#           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+  slack:
+      needs: build
+      runs-on: ubuntu-latest
+      steps:
+        - name: Slack Notification
+          uses: rtCamp/action-slack-notify@v2
+          env:
+            SLACK_CHANNEL: test
+            SLACK_COLOR: ${{ job.status }}
+            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
