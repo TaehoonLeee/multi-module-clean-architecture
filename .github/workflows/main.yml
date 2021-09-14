@@ -49,27 +49,16 @@ jobs:
           disable-animations: false
           script: ./gradlew connectedCheck
 
-#      - name: All Test Report
-#        uses: EnricoMi/publish-unit-test-result-action/composite@v1
-#        if: always()
-#        with:
-#          files: '**/*-results/**/TEST-*xml'
+      - name: All Test Report
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        if: always()
+        with:
+          files: '**/*-results/**/TEST-*xml'
           
   slack:
       needs: build
       runs-on: ubuntu-latest
       steps:
-        - uses: actions/checkout@v2
-
-        - name: All Test Report
-          uses: dorny/test-reporter@v1
-          id: test-result
-          with:
-            artifact: '**/*-results/**/TEST-*.xml'
-            name: JEST Tests
-            path: '**/*-results/**/TEST-*.xml'
-            reporter: java-junit
-
         - name: Slack Notification
           uses: rtCamp/action-slack-notify@v2
           env:
