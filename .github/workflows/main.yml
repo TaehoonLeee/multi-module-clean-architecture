@@ -57,6 +57,7 @@ jobs:
           uses: dorny/test-reporter@v1
           id: test-result
           with:
+            name: JEST Tests
             path: '**/*-results/**/TEST-*.xml'
             reporter: java-junit
 
