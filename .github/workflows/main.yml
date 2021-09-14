@@ -48,11 +48,19 @@ jobs:
           emulator-options: -no-window -noaudio -no-boot-anim
           disable-animations: false
           script: ./gradlew connectedCheck
+
+#      - name: All Test Report
+#        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+#        if: always()
+#        with:
+#          files: '**/*-results/**/TEST-*xml'
           
   slack:
       needs: build
       runs-on: ubuntu-latest
       steps:
+        - uses: actions/checkout@v2
+
         - name: All Test Report
           uses: dorny/test-reporter@v1
           id: test-result
@@ -67,4 +75,4 @@ jobs:
             SLACK_CHANNEL: test
             SLACK_COLOR: ${{ job.status }}
             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-            SLACK_MESSAGE: steps.test-result.passed
+            SLACK_MESSAGE: steps.test-result.outputs.passed
