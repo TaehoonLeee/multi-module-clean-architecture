@@ -65,4 +65,3 @@ jobs:
             SLACK_CHANNEL: test
             SLACK_COLOR: ${{ job.status }}
             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-            SLACK_MESSAGE: steps.test-result.outputs.passed
