@@ -1,5 +1,5 @@
 on:
-  push:
+#  push:
 #    paths-ignore:
 #      - '.github/workflows/main.yml'
   pull_request:
