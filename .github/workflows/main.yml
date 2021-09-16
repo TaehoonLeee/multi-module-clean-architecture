@@ -1,7 +1,7 @@
 on:
-  push:
-    paths-ignore:
-      - '.github/*'
+#  push:
+#    paths-ignore:
+#      - '.github/*'
   pull_request:
 
 jobs:
