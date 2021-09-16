@@ -1,27 +1,33 @@
-<!--
-⚠️ NOTE: 이슈를 해결하기 위한 PR이라면, Problem - Solution 템플릿을 이용합니다.
--->
-## Problem
+## Description
 
-## Solution
+바꾼 부분에 대한 설명을 적어주세요.
 
-<!--
-⚠️ NOTE: 새로운 기능을 추가하거나 변경된 요구사항에 대응하기 위한 PR이라면, Purpose - Changes 테플릿을 이용합니다.
--->
-## Purpose
+## Types of changes
 
-## Changes
-<!--
-⚠️ NOTE: 아래의 항목은 선택적으로 필요하다면 이용합니다.
--->
+해당되는 박스에 x를 적어주세요.
 
-## CheckList
-- [ ] Ready to be merged
+- [ ] Bugfix
+- [ ] New feature
+- [ ] Code style update
+- [ ] Refactoring
+- [ ] Build related changes
+- [ ] Documentation Update
+- [ ] Other :
+
+## Checklist
+
+해당되는 박스에 x를 적어주세요.
+
+- [ ] Code compiles correctly
+- [ ] Tests for the changes have been added
 - [ ] Written document
+
+## Current behavior
+
+
+## New behavior
+
 
 ## References
 
 **Related document links**
-
-## Other changes (e.g. bug fixes, UI tweaks, small refactors)
-
