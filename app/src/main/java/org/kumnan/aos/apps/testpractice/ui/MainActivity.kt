@@ -25,4 +25,5 @@ class MainActivity : AppCompatActivity() {
             bottomNavigationView.setOnItemReselectedListener {  }
         }
     }
+
 }
