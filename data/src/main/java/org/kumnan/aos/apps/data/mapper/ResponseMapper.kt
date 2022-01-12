@@ -1,8 +1,8 @@
 package org.kumnan.aos.apps.data.mapper
 
 import org.kumnan.aos.apps.data.entity.UnsplashResponse
-import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
-import org.kumnan.aos.apps.domain.entity.status.Result
+import org.kumnan.aos.apps.domain.model.UnsplashPhoto
+import org.kumnan.aos.apps.domain.model.status.Result
 
 object ResponseMapper {
 

@@ -3,8 +3,8 @@ package org.kumnan.aos.apps.data.repository.datasource
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import org.kumnan.aos.apps.data.network.UnsplashService
-import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
-import org.kumnan.aos.apps.domain.entity.status.Result
+import org.kumnan.aos.apps.domain.model.UnsplashPhoto
+import org.kumnan.aos.apps.domain.model.status.Result
 
 class UnsplashPhotoPagingSource constructor(
     private val unsplashService: UnsplashService,

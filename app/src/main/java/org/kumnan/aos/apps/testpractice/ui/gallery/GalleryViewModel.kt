@@ -5,8 +5,8 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
-import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
-import org.kumnan.aos.apps.domain.entity.status.Result
+import org.kumnan.aos.apps.domain.model.UnsplashPhoto
+import org.kumnan.aos.apps.domain.model.status.Result
 import org.kumnan.aos.apps.domain.interactor.GetSearchResultOfPageUseCase
 import org.kumnan.aos.apps.domain.interactor.GetSearchResultUseCase
 import javax.inject.Inject

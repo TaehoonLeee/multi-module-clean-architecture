@@ -2,7 +2,7 @@ package org.kumnan.aos.apps.data.network.retrofit
 
 import org.kumnan.aos.apps.data.entity.UnsplashResponse
 import org.kumnan.aos.apps.data.network.UnsplashService
-import org.kumnan.aos.apps.domain.entity.status.Result
+import org.kumnan.aos.apps.domain.model.status.Result
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query

@@ -1,6 +1,6 @@
 package org.kumnan.aos.apps.data.network.retrofit.factory
 
-import org.kumnan.aos.apps.domain.entity.status.Result
+import org.kumnan.aos.apps.domain.model.status.Result
 import retrofit2.Call
 import retrofit2.CallAdapter
 import java.lang.reflect.Type

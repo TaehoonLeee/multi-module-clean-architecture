@@ -4,7 +4,7 @@ import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import java.lang.reflect.ParameterizedType
-import org.kumnan.aos.apps.domain.entity.status.Result
+import org.kumnan.aos.apps.domain.model.status.Result
 import java.lang.reflect.Type
 
 class ResponseAdapterFactory : CallAdapter.Factory() {

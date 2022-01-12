@@ -5,29 +5,20 @@ import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
-import org.kumnan.aos.apps.data.entity.UnsplashResponse
-import org.kumnan.aos.apps.data.network.UnsplashService
+import org.kumnan.aos.apps.data.entity.ItemEntity
 import org.kumnan.aos.apps.domain.model.status.Result
 import javax.inject.Inject
 import javax.inject.Named
 import javax.inject.Singleton
 
 @Singleton
-class KtorUnsplashService @Inject constructor(
-    @Named("unsplash") private val httpClient: HttpClient
-) : UnsplashService {
+class ItemService @Inject constructor(
+    @Named("item") private val httpClient: HttpClient
+) {
 
-    override suspend fun searchPhotos(
-        query: String,
-        page: Int,
-        perPage: Int
-    ): Result<UnsplashResponse> {
+    suspend fun getItemList(): Result<List<ItemEntity>> {
         return try {
-            val response = httpClient.get<HttpResponse>(path = "search/photos") {
-                parameter("query", query)
-                parameter("page", page)
-                parameter("per_page", perPage)
-            }
+            val response = httpClient.get<HttpResponse>()
 
             if (response.status.isSuccess()) {
                 Result.Success(response.receive(), response.status.value)

@@ -1,8 +1,10 @@
 package org.kumnan.aos.apps.data.module
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import io.ktor.client.*
 import io.ktor.client.engine.okhttp.OkHttp
@@ -12,14 +14,20 @@ import io.ktor.client.features.logging.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import okhttp3.OkHttpClient
+import org.kumnan.aos.apps.data.cache.AppDatabase
+import org.kumnan.aos.apps.data.cache.ItemDao
 import org.kumnan.aos.apps.data.mapper.ResponseMapper
 import org.kumnan.aos.apps.data.network.UnsplashService
 import org.kumnan.aos.apps.data.network.ktor.KtorUnsplashService
+import org.kumnan.aos.apps.data.network.ktor.ItemService
 import org.kumnan.aos.apps.data.repository.KtorUnsplashRepositoryImpl
 import org.kumnan.aos.apps.data.network.retrofit.factory.ResponseAdapterFactory
+import org.kumnan.aos.apps.data.repository.ItemRepositoryImpl
+import org.kumnan.aos.apps.domain.repository.ItemRepository
 import org.kumnan.aos.apps.domain.repository.UnsplashRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -39,7 +47,8 @@ object DataModule {
 
     @Singleton
     @Provides
-    fun provideKtorHttpClient(): HttpClient {
+    @Named("unsplash")
+    fun provideKtorUnsplashHttpClient(): HttpClient {
         return HttpClient(OkHttp) {
             defaultRequest {
                 headers {
@@ -63,12 +72,44 @@ object DataModule {
 
     @Singleton
     @Provides
+    @Named("item")
+    fun provideKtorItemHttpClient(): HttpClient {
+        return HttpClient(OkHttp) {
+            defaultRequest {
+                url {
+                    protocol = URLProtocol.HTTPS
+                    host = "api.themoviedb.org/3"
+                }
+            }
+            install(JsonFeature) {
+                GsonSerializer()
+            }
+            install(Logging) {
+                logger = Logger.DEFAULT
+                level = LogLevel.ALL
+            }
+        }
+    }
+
+    @Provides
+    @Singleton
+    fun provideItemDao(appDatabase: AppDatabase): ItemDao =
+        appDatabase.itemDao()
+
+    @Provides
+    @Singleton
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
+        AppDatabase.buildDatabase(context)
+
+
+    @Singleton
+    @Provides
     fun provideUnsplashService(
         retrofit: Retrofit,
-        okHttpClient: HttpClient
+        @Named("unsplash") httpClient: HttpClient
     ): UnsplashService {
 //        return retrofit.create(RetrofitUnsplashService::class.java)
-        return KtorUnsplashService(okHttpClient)
+        return KtorUnsplashService(httpClient)
     }
 
     @Singleton
@@ -78,5 +119,14 @@ object DataModule {
     ): UnsplashRepository {
 //        return UnsplashRepositoryImpl(unsplashService, ResponseMapper::responseToPhotoList)
         return KtorUnsplashRepositoryImpl(unsplashService, ResponseMapper::responseToPhotoList)
+    }
+
+    @Singleton
+    @Provides
+    fun provideMovieRepository(
+        itemDao: ItemDao,
+        itemService: ItemService
+    ): ItemRepository {
+        return ItemRepositoryImpl(itemService, itemDao)
     }
 }

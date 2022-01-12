@@ -13,7 +13,7 @@ import org.kumnan.aos.apps.data.mapper.ResponseMapper
 import org.kumnan.aos.apps.data.network.UnsplashService
 import org.kumnan.aos.apps.data.repository.UnsplashRepositoryImpl
 import org.kumnan.aos.apps.data.repository.datasource.UnsplashPhotoPagingSource
-import org.kumnan.aos.apps.domain.entity.status.Result
+import org.kumnan.aos.apps.domain.model.status.Result
 import org.kumnan.aos.apps.domain.interactor.GetSearchResultOfPageUseCase
 import org.kumnan.aos.apps.domain.interactor.GetSearchResultUseCase
 import org.kumnan.aos.apps.testpractice.ui.gallery.GalleryViewModel

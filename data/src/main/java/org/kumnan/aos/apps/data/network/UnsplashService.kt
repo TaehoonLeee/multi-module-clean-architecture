@@ -1,7 +1,7 @@
 package org.kumnan.aos.apps.data.network
 
 import org.kumnan.aos.apps.data.entity.UnsplashResponse
-import org.kumnan.aos.apps.domain.entity.status.Result
+import org.kumnan.aos.apps.domain.model.status.Result
 
 interface UnsplashService {
 
