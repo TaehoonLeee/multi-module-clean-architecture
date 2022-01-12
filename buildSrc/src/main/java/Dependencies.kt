@@ -53,6 +53,16 @@ object Dependencies {
             val fragment by lazy { "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}" }
             val ui by lazy { "androidx.navigation:navigation-ui-ktx:${Versions.navigation}" }
         }
+
+        val room = Room()
+        class Room(
+            private val name: String = "androidx.room:room-runtime:${Versions.room}"
+        ) : CharSequence by name {
+            val ktx by lazy { "androidx.room:room-ktx:${Versions.room}" }
+            val compiler by lazy { "androidx.room:room-compiler:${Versions.room}" }
+            
+            override fun toString(): String = name
+        }
     }
 
     class Retrofit(

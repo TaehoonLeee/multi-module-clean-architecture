@@ -1,4 +1,4 @@
-package org.kumnan.aos.apps.domain.entity.status
+package org.kumnan.aos.apps.domain.model.status
 
 sealed class Result<T> {
 

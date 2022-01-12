@@ -1,6 +1,6 @@
 package org.kumnan.aos.apps.testpractice.util.fakes.data
 
-import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
+import org.kumnan.aos.apps.domain.model.UnsplashPhoto
 
 object FakePhotoListHolder {
 

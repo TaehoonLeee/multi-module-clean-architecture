@@ -1,4 +1,4 @@
-package org.kumnan.aos.apps.domain.entity
+package org.kumnan.aos.apps.domain.model
 
 data class UnsplashPhoto(
     val id: String,

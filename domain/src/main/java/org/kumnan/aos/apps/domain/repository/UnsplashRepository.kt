@@ -1,8 +1,8 @@
 package org.kumnan.aos.apps.domain.repository
 
 import kotlinx.coroutines.flow.Flow
-import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
-import org.kumnan.aos.apps.domain.entity.status.Result
+import org.kumnan.aos.apps.domain.model.UnsplashPhoto
+import org.kumnan.aos.apps.domain.model.status.Result
 
 interface UnsplashRepository {
     fun getSearchResultOfPage(query: String, page: Int): Flow<Result<List<UnsplashPhoto>>>

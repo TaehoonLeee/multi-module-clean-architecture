@@ -5,6 +5,8 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.3974358974358974" />
         <entry key="app/src/main/res/layout/frag_gallery.xml" value="0.3974358974358974" />
+        <entry key="app/src/main/res/layout/frag_market.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/item_market.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/item_unsplash_photo.xml" value="0.3974358974358974" />
       </map>
     </option>

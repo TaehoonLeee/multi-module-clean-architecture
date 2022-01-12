@@ -2,7 +2,7 @@ package org.kumnan.aos.apps.data.network.retrofit.factory
 
 import okhttp3.Request
 import okio.Timeout
-import org.kumnan.aos.apps.domain.entity.status.Result
+import org.kumnan.aos.apps.domain.model.status.Result
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

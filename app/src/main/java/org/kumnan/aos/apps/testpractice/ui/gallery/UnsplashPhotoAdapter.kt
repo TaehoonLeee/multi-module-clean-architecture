@@ -6,7 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import org.kumnan.aos.apps.domain.entity.UnsplashPhoto
+import org.kumnan.aos.apps.domain.model.UnsplashPhoto
 import org.kumnan.aos.apps.testpractice.databinding.ItemUnsplashPhotoBinding
 
 class UnsplashPhotoAdapter : PagingDataAdapter<UnsplashPhoto, UnsplashPhotoAdapter.UnsplashPhotoViewHolder>(UnsplashPhotoDiffCallback()) {

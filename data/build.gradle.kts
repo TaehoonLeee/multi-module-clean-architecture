@@ -37,32 +37,51 @@ android {
 dependencies {
     api(project(":domain"))
 
-    implementation(Dependencies.kotlin.stdLib)
-    implementation(Dependencies.androidX.core)
-    implementation(Dependencies.androidX.appCompat)
+    with(Dependencies.kotlin) {
+        implementation(stdLib)
+        implementation(coroutine)
+        implementation(coroutineAndroid)
+    }
+
+    with(Dependencies.androidX) {
+        implementation(core)
+        implementation(appCompat)
+
+        implementation(room)
+        implementation(room.ktx)
+        annotationProcessor(room.compiler)
+        kapt(room.compiler)
+
+        androidTestImplementation(junit)
+        androidTestImplementation(espresso)
+    }
+
     implementation(Dependencies.material)
     testImplementation(Dependencies.test.junit)
-    androidTestImplementation(Dependencies.androidX.junit)
-    androidTestImplementation(Dependencies.androidX.espresso)
 
-    implementation(Dependencies.kotlin.coroutine)
-    implementation(Dependencies.kotlin.coroutineAndroid)
+    with(Dependencies.retrofit) {
+        implementation(this)
+        implementation(gsonConverter)
+        implementation(scalarsConverter)
+    }
 
-    implementation(Dependencies.retrofit)
-    implementation(Dependencies.retrofit.gsonConverter)
-    implementation(Dependencies.retrofit.scalarsConverter)
+    with(Dependencies.okHttp) {
+        implementation(this)
+        implementation(loggingInterceptor)
+    }
 
-    implementation(Dependencies.okHttp)
-    implementation(Dependencies.okHttp.loggingInterceptor)
-
-    implementation(Dependencies.ktor.gson)
-    implementation(Dependencies.ktor.okHttp)
-    implementation(Dependencies.ktor.logging)
+    with(Dependencies.ktor) {
+        implementation(gson)
+        implementation(okHttp)
+        implementation(logging)
+    }
 
     implementation(Dependencies.gson)
 
-    implementation(Dependencies.hilt.android)
-    kapt(Dependencies.hilt.compiler)
+    with(Dependencies.hilt) {
+        implementation(android)
+        kapt(compiler)
+    }
 
     implementation(Dependencies.androidX.paging)
 
