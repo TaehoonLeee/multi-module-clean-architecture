@@ -13,7 +13,6 @@ dependencies {
 
     // Coroutine
     implementation(Dependencies.kotlin.coroutine)
-    implementation(Dependencies.kotlin.coroutineAndroid)
 
     implementation(Dependencies.javaInject)
 }
