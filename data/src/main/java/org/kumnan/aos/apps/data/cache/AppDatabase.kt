@@ -14,7 +14,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun itemDao(): ItemDao
 
     companion object {
-        private const val databaseName = "movie-db"
+        private const val databaseName = "item-db"
 
         fun buildDatabase(context: Context): AppDatabase =
             Room.databaseBuilder(context, AppDatabase::class.java, databaseName)
