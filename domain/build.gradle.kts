@@ -14,5 +14,5 @@ dependencies {
     // Coroutine
     implementation(Dependencies.kotlin.coroutine)
 
-    implementation(Dependencies.javaInject)
+    implementation(Dependencies.jsr330)
 }

@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.kumnan.aos.apps.data.entity.UnsplashResponse
+import org.kumnan.aos.apps.data.mapper.ResponseMapper
 import org.kumnan.aos.apps.data.network.UnsplashService
 import org.kumnan.aos.apps.data.repository.datasource.UnsplashPhotoPagingSource
 import org.kumnan.aos.apps.domain.model.UnsplashPhoto
@@ -15,8 +16,7 @@ import javax.inject.Singleton
 
 @Singleton
 class KtorUnsplashRepositoryImpl @Inject constructor(
-    private val unsplashService: UnsplashService,
-    private val responseToPhotoList: (Result<UnsplashResponse>) -> Result<List<UnsplashPhoto>>
+    private val unsplashService: UnsplashService
 ) : UnsplashRepository {
 
     override fun getSearchResultOfPage(
@@ -24,7 +24,7 @@ class KtorUnsplashRepositoryImpl @Inject constructor(
         page: Int
     ): Flow<Result<List<UnsplashPhoto>>> = flow {
         val response = unsplashService.searchPhotos(query, page)
-        emit(responseToPhotoList(response))
+        emit(ResponseMapper.responseToPhotoList(response))
     }
 
     override fun <T> getSearchResult(query: String): Flow<T> =

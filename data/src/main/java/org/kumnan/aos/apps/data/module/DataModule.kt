@@ -1,6 +1,7 @@
 package org.kumnan.aos.apps.data.module
 
 import android.content.Context
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -74,21 +75,7 @@ object DataModule {
     @Provides
     @Named("item")
     fun provideKtorItemHttpClient(): HttpClient {
-        return HttpClient(OkHttp) {
-            defaultRequest {
-                url {
-                    protocol = URLProtocol.HTTPS
-                    host = "api.themoviedb.org/3"
-                }
-            }
-            install(JsonFeature) {
-                GsonSerializer()
-            }
-            install(Logging) {
-                logger = Logger.DEFAULT
-                level = LogLevel.ALL
-            }
-        }
+        return HttpClient(OkHttp)
     }
 
     @Provides
@@ -101,32 +88,21 @@ object DataModule {
     fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
         AppDatabase.buildDatabase(context)
 
+}
 
-    @Singleton
-    @Provides
-    fun provideUnsplashService(
-        retrofit: Retrofit,
-        @Named("unsplash") httpClient: HttpClient
-    ): UnsplashService {
-//        return retrofit.create(RetrofitUnsplashService::class.java)
-        return KtorUnsplashService(httpClient)
-    }
+@Module
+@InstallIn(SingletonComponent::class)
+interface RepositoryModule {
 
+    @Binds
     @Singleton
-    @Provides
-    fun provideUnsplashRepository(
-        unsplashService: UnsplashService
-    ): UnsplashRepository {
-//        return UnsplashRepositoryImpl(unsplashService, ResponseMapper::responseToPhotoList)
-        return KtorUnsplashRepositoryImpl(unsplashService, ResponseMapper::responseToPhotoList)
-    }
+    fun bindUnsplashService(ktorUnsplashService: KtorUnsplashService): UnsplashService
 
+    @Binds
     @Singleton
-    @Provides
-    fun provideMovieRepository(
-        itemDao: ItemDao,
-        itemService: ItemService
-    ): ItemRepository {
-        return ItemRepositoryImpl(itemService, itemDao)
-    }
+    fun bindItemRepository(itemRepositoryImpl: ItemRepositoryImpl): ItemRepository
+
+    @Binds
+    @Singleton
+    fun bindUnsplashRepository(unsplashRepositoryImpl: KtorUnsplashRepositoryImpl): UnsplashRepository
 }
