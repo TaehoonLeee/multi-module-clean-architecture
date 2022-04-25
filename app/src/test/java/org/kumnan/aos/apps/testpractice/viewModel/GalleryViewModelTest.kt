@@ -16,7 +16,7 @@ import org.kumnan.aos.apps.data.repository.datasource.UnsplashPhotoPagingSource
 import org.kumnan.aos.apps.domain.model.status.Result
 import org.kumnan.aos.apps.domain.interactor.GetSearchResultOfPageUseCase
 import org.kumnan.aos.apps.domain.interactor.GetSearchResultUseCase
-import org.kumnan.aos.apps.testpractice.ui.gallery.GalleryViewModel
+import com.example.presentation.ui.gallery.GalleryViewModel
 import org.kumnan.aos.apps.testpractice.util.TestCoroutineRule
 import org.kumnan.aos.apps.testpractice.util.fakes.FakePhotoListHolder
 import org.kumnan.aos.apps.testpractice.util.getOrAwaitValue
@@ -65,7 +65,7 @@ class GalleryViewModelTest : TestCase() {
         )
     }
 
-    private suspend fun createViewModel() = GalleryViewModel(
+    private suspend fun createViewModel() = com.example.presentation.ui.gallery.GalleryViewModel(
         GetSearchResultUseCase(fakeUnsplashRepository),
         GetSearchResultOfPageUseCase(fakeUnsplashRepository)
     ).apply {

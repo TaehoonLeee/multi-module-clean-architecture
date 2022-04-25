@@ -17,7 +17,7 @@ object Dependencies {
     val glide = Glide()
 
     val material by lazy { "com.google.android.material:material:1.4.0" }
-    val javaInject by lazy { "javax.inject:javax.inject:1" }
+    val jsr330 by lazy { "javax.inject:javax.inject:1" }
     val socket by lazy { "io.socket:socket.io-client:1.0.0" }
     val gson by lazy { "com.google.code.gson:gson:${Versions.gson}" }
 

@@ -40,7 +40,9 @@ android {
 
 dependencies {
 
+    implementation(project(":presentation"))
     implementation(project(":data"))
+    implementation(project(":domain"))
 
     implementation(Dependencies.kotlin.stdLib)
     implementation(Dependencies.androidX.core)

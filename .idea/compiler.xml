@@ -5,6 +5,7 @@
       <module name="TestPractice.app" target="11" />
       <module name="TestPractice.buildSrc" target="11" />
       <module name="TestPractice.data" target="11" />
+      <module name="TestPractice.presentation" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
