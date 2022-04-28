@@ -7,7 +7,7 @@ object Versions {
     const val gson = "2.8.6"
     const val okHttp = "5.0.0-alpha.2"
     const val retrofit = "2.9.0"
-    const val room = "2.3.0"
+    const val room = "2.4.2"
     const val glide = "4.12.0"
     const val navigation = "2.4.0-alpha01"
     const val lifecycle = "2.3.1"
