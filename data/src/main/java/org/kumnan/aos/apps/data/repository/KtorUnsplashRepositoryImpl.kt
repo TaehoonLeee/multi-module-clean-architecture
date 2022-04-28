@@ -2,6 +2,7 @@ package org.kumnan.aos.apps.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.kumnan.aos.apps.data.entity.UnsplashResponse
@@ -27,7 +28,7 @@ class KtorUnsplashRepositoryImpl @Inject constructor(
         emit(ResponseMapper.responseToPhotoList(response))
     }
 
-    override fun <T> getSearchResult(query: String): Flow<T> =
+    override fun <T> getSearchResult(query: String) =
         Pager(
             config = PagingConfig(
                 pageSize = 20,
