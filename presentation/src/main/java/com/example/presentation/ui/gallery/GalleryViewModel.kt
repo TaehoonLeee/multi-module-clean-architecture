@@ -24,7 +24,7 @@ class GalleryViewModel @Inject constructor(
         State(),
         viewModelScope,
         ExecutorImpl(),
-        ReducerImpl()
+        ::reduce
     ) {}
 
     val state = store.state
@@ -49,13 +49,8 @@ class GalleryViewModel @Inject constructor(
         }
     }
 
-    private inner class ReducerImpl : Reducer<State, Message> {
-        override fun reduce(
-            state: State,
-            message: Message
-        ): State = when (message) {
-            is Message.Fetched -> state.copy(data = message.result)
-        }
+    private fun reduce(state: State, message: Message) = when (message) {
+        is Message.Fetched -> state.copy(data = message.result)
     }
 
     companion object {
