@@ -15,29 +15,27 @@ import javax.inject.Inject
 
 @HiltViewModel
 class GalleryViewModel @Inject constructor(
-	override val initialState: State,
-	private val getSearchResultUseCase: GetSearchResultUseCase
-) : ViewModelStore<Intent, State, Message>() {
+	override val initialState: GalleryState,
+	private val getSearchResultUseCase: GetSearchResultUseCase,
+) : ViewModelStore<GalleryIntent, GalleryState, GalleryMessage>() {
 
 	init {
 		viewModelScope.launch {
-			accept(Intent.FetchPhotos)
+			accept(GalleryIntent.FetchPhotos)
 		}
 	}
 
-	override fun Executor<Intent, Message>.onIntent(intent: Intent) {
+	override fun Executor<GalleryIntent, GalleryMessage>.onIntent(intent: GalleryIntent) {
 		when (intent) {
-			is Intent.FetchPhotos -> {
-				getSearchResultUseCase<PagingData<UnsplashPhoto>>(DEFAULT_QUERY)
-					.cachedIn(viewModelScope)
-					.onEach { dispatch(Message.Fetched(it)) }
-					.launchIn(viewModelScope)
-			}
+			is GalleryIntent.FetchPhotos -> getSearchResultUseCase<PagingData<UnsplashPhoto>>(DEFAULT_QUERY)
+				.cachedIn(viewModelScope)
+				.onEach { dispatch(GalleryMessage.Fetched(it)) }
+				.launchIn(viewModelScope)
 		}
 	}
 
-	override fun reduce(state: State, message: Message) = when (message) {
-		is Message.Fetched -> state.copy(data = message.result)
+	override fun reduce(state: GalleryState, message: GalleryMessage) = when (message) {
+		is GalleryMessage.Fetched -> state.copy(data = message.result)
 	}
 
 	companion object {

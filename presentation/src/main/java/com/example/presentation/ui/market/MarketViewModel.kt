@@ -1,27 +1,42 @@
 package com.example.presentation.ui.market
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import mvi.Executor
+import mvi.ViewModelStore
 import org.kumnan.aos.apps.domain.interactor.GetItemListUseCase
 import org.kumnan.aos.apps.domain.interactor.InsertItemUseCase
-import org.kumnan.aos.apps.domain.model.Item
 import javax.inject.Inject
 
 @HiltViewModel
 class MarketViewModel @Inject constructor(
-    getItemUseCase: GetItemListUseCase,
-    private val insertItemUseCase: InsertItemUseCase
-) : ViewModel() {
+    override val initialState: MarketState,
+    private val getItemUseCase: GetItemListUseCase,
+    private val insertItemUseCase: InsertItemUseCase,
+) : ViewModelStore<MarketIntent, MarketState, MarketMessage>() {
 
-    val items = getItemUseCase().stateIn(
-        viewModelScope, SharingStarted.WhileSubscribed(5000), null
-    )
+    init {
+    	viewModelScope.launch {
+    	    accept(MarketIntent.ObserveItems)
+        }
+    }
 
-    fun insertItem(item: Item) = viewModelScope.launch {
-        insertItemUseCase(item)
+    override fun Executor<MarketIntent, MarketMessage>.onIntent(intent: MarketIntent) {
+        when (intent) {
+            is MarketIntent.ObserveItems -> getItemUseCase()
+                .onEach { dispatch(MarketMessage.Fetched(it)) }
+                .launchIn(viewModelScope)
+
+            is MarketIntent.InsertItem -> viewModelScope.launch {
+                insertItemUseCase(intent.item)
+            }
+        }
+    }
+
+    override fun reduce(state: MarketState, message: MarketMessage): MarketState = when (message) {
+        is MarketMessage.Fetched -> state.copy(items = message.data)
     }
 }

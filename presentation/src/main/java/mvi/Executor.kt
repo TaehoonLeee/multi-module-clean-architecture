@@ -6,26 +6,22 @@ interface Executor<INTENT, MESSAGE> {
 
     fun dispatch(message: MESSAGE)
 
-    fun init(output: MessageOutput<MESSAGE>)
-
-    fun interface MessageOutput<MESSAGE> {
-        fun onMessage(message: MESSAGE)
-    }
+    fun init(output: (MESSAGE) -> Unit)
 }
 
-open class DefaultExecutor<INTENT, MESSAGE>(
+class DefaultExecutor<INTENT, MESSAGE>(
     private val onIntent: Executor<INTENT, MESSAGE>.(INTENT) -> Unit
 ) : Executor<INTENT, MESSAGE> {
 
-    private var output: Executor.MessageOutput<MESSAGE>? = null
+    private var output: ((MESSAGE) -> Unit)? = null
 
     override fun executeIntent(intent: INTENT) = onIntent(intent)
 
     override fun dispatch(message: MESSAGE) {
-        output?.onMessage(message)
+        output?.invoke(message)
     }
 
-    override fun init(output: Executor.MessageOutput<MESSAGE>) {
+    override fun init(output: (MESSAGE) -> Unit) {
         this.output = output
     }
 

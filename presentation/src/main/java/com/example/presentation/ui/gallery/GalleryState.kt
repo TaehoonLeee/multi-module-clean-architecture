@@ -8,7 +8,7 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import org.kumnan.aos.apps.domain.model.UnsplashPhoto
 import javax.inject.Inject
 
-data class State @Inject constructor(
+data class GalleryState @Inject constructor(
 	val data: PagingData<UnsplashPhoto>
 ) {
 	@Module
@@ -20,10 +20,10 @@ data class State @Inject constructor(
 	}
 }
 
-sealed interface Intent {
-	object FetchPhotos : Intent
+sealed interface GalleryIntent {
+	object FetchPhotos : GalleryIntent
 }
 
-sealed interface Message {
-	class Fetched(val result: PagingData<UnsplashPhoto>) : Message
+sealed interface GalleryMessage {
+	class Fetched(val result: PagingData<UnsplashPhoto>) : GalleryMessage
 }

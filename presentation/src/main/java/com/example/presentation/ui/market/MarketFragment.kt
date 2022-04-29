@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.presentation.R
@@ -12,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import org.kumnan.aos.apps.domain.model.Item
 import com.example.presentation.ui.base.BaseFragment
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class MarketFragment : BaseFragment<FragMarketBinding>(R.layout.frag_market) {
@@ -29,15 +31,16 @@ class MarketFragment : BaseFragment<FragMarketBinding>(R.layout.frag_market) {
 
         var cnt = 0
         binding.insertButton.setOnClickListener {
-            itemViewModel.insertItem(Item("test${cnt++}", "test${cnt++}"))
+            lifecycleScope.launch {
+                itemViewModel.accept(MarketIntent.InsertItem(Item("test${cnt++}", "test${cnt++}")))
+            }
         }
 
         lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                itemViewModel.items.collect {
-                    itemAdapter.submitList(it)
+            itemViewModel.state.flowWithLifecycle(lifecycle)
+                .collect {
+                    itemAdapter.submitList(it.items)
                 }
-            }
         }
     }
 }
