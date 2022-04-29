@@ -1,4 +1,4 @@
-package com.example.presentation.ui.market
+package com.example.presentation.ui.item
 
 import dagger.Module
 import dagger.Provides
@@ -7,7 +7,7 @@ import dagger.hilt.android.components.ActivityRetainedComponent
 import org.kumnan.aos.apps.domain.model.Item
 import javax.inject.Inject
 
-data class MarketState @Inject constructor(
+data class ItemState @Inject constructor(
 	val items: List<Item>
 ) {
 	@Module
@@ -19,11 +19,11 @@ data class MarketState @Inject constructor(
 	}
 }
 
-sealed interface MarketIntent {
-	object ObserveItems : MarketIntent
-	class InsertItem(val item: Item) : MarketIntent
+sealed interface ItemIntent {
+	object ObserveItems : ItemIntent
+	class InsertItem(val item: Item) : ItemIntent
 }
 
-sealed interface MarketMessage {
-	class Fetched(val data: List<Item>) : MarketMessage
+sealed interface ItemMessage {
+	class Fetched(val data: List<Item>) : ItemMessage
 }

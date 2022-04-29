@@ -4,7 +4,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/page_main">
 
-    <include app:graph="@navigation/page_market" />
+    <include app:graph="@navigation/page_item" />
     <include app:graph="@navigation/page_my" />
     <include app:graph="@navigation/page_main" />
 </navigation>

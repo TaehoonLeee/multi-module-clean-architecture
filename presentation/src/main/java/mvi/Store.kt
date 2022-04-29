@@ -16,7 +16,7 @@ interface Store<INTENT, STATE, MESSAGE> {
 
 abstract class ViewModelStore<INTENT, STATE, MESSAGE> : Store<INTENT, STATE, MESSAGE>, ViewModel() {
 
-    abstract val initialState: STATE
+    protected abstract val initialState: STATE
 
     private val executor = DefaultExecutor<INTENT, MESSAGE>(onIntent = { onIntent(it) })
     private val intentStateMachine: Channel<INTENT> = Channel()

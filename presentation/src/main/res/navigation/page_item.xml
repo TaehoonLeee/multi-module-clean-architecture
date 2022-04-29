@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/marketFragment"
-        android:name="com.example.presentation.ui.market.MarketFragment"
+        android:name="com.example.presentation.ui.item.ItemFragment"
         android:label="MarketFragment" />
 </navigation>
