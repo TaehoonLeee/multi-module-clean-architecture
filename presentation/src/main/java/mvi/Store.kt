@@ -1,5 +1,8 @@
 package mvi
 
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.consumeEach
@@ -13,21 +16,21 @@ interface Store<INTENT, STATE, MESSAGE> {
     suspend fun accept(intent: INTENT)
 }
 
-class DefaultStore<INTENT, STATE, MESSAGE>(
+class ViewModelStore<INTENT, STATE, MESSAGE>(
     initialState: STATE,
-    private val coroutineScope: CoroutineScope,
+    viewModelScope: CoroutineScope,
     private val executor: Executor<INTENT, MESSAGE>,
     private val reducer: Reducer<STATE, MESSAGE>
 ) : Store<INTENT, STATE, MESSAGE> {
 
     init {
         executor.init {
-            coroutineScope.launch {
+            viewModelScope.launch {
                 messageStateMachine.send(it)
             }
         }
 
-        coroutineScope.launch {
+        viewModelScope.launch {
             intentStateMachine.consumeEach(executor::executeIntent)
         }
     }
@@ -38,18 +41,17 @@ class DefaultStore<INTENT, STATE, MESSAGE>(
     override val state: StateFlow<STATE> = messageStateMachine
         .receiveAsFlow()
         .runningFold(initialState, reducer::reduce)
-        .stateIn(coroutineScope, SharingStarted.Eagerly, initialState)
+        .stateIn(viewModelScope, SharingStarted.Eagerly, initialState)
 
     override suspend fun accept(intent: INTENT) = intentStateMachine.send(intent)
 
     companion object {
-        fun <INTENT, STATE, MESSAGE> create(
+        fun <INTENT, STATE, MESSAGE> ViewModel.create(
             initialState: STATE,
-            coroutineScope: CoroutineScope,
-            executor: Executor<INTENT, MESSAGE>,
-            reducer: Reducer<STATE, MESSAGE>
-        ): Store<INTENT, STATE, MESSAGE> = DefaultStore(
-            initialState, coroutineScope, executor, reducer
+            onIntent: Executor<INTENT, MESSAGE>.(INTENT) -> Unit,
+            reduce: (STATE, MESSAGE) -> STATE,
+        ): Store<INTENT, STATE, MESSAGE> = ViewModelStore(
+            initialState, viewModelScope, DefaultExecutor(onIntent), reduce
         )
     }
 }
