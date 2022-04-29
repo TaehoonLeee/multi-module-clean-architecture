@@ -1,6 +1,5 @@
 package com.example.presentation.ui.gallery
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -10,32 +9,24 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import mvi.Executor
-import mvi.Store
-import mvi.ViewModelStore.Companion.create
+import mvi.ViewModelStore
 import org.kumnan.aos.apps.domain.interactor.GetSearchResultUseCase
 import org.kumnan.aos.apps.domain.model.UnsplashPhoto
 import javax.inject.Inject
 
 @HiltViewModel
 class GalleryViewModel @Inject constructor(
+	override val initialState: State,
 	private val getSearchResultUseCase: GetSearchResultUseCase
-) : ViewModel() {
-
-	private val store: GalleryStore = object : GalleryStore, Store<Intent, State, Message> by create(
-		State(),
-		{ onIntent(it) },
-		::reduce
-	) {}
-
-	val state get() = store.state
+) : ViewModelStore<Intent, State, Message>() {
 
 	init {
 		viewModelScope.launch {
-			store.accept(Intent.FetchPhotos)
+			accept(Intent.FetchPhotos)
 		}
 	}
 
-	private fun Executor<Intent, Message>.onIntent(intent: Intent) {
+	override fun Executor<Intent, Message>.onIntent(intent: Intent) {
 		when (intent) {
 			is Intent.FetchPhotos -> {
 				getSearchResultUseCase<PagingData<UnsplashPhoto>>(DEFAULT_QUERY)
@@ -46,7 +37,7 @@ class GalleryViewModel @Inject constructor(
 		}
 	}
 
-	private fun reduce(state: State, message: Message) = when (message) {
+	override fun reduce(state: State, message: Message) = when (message) {
 		is Message.Fetched -> state.copy(data = message.result)
 	}
 

@@ -16,12 +16,13 @@ interface Store<INTENT, STATE, MESSAGE> {
     suspend fun accept(intent: INTENT)
 }
 
-class ViewModelStore<INTENT, STATE, MESSAGE>(
-    initialState: STATE,
-    viewModelScope: CoroutineScope,
-    private val executor: Executor<INTENT, MESSAGE>,
-    private val reducer: Reducer<STATE, MESSAGE>
-) : Store<INTENT, STATE, MESSAGE> {
+abstract class ViewModelStore<INTENT, STATE, MESSAGE> : Store<INTENT, STATE, MESSAGE>, ViewModel() {
+
+    abstract val initialState: STATE
+
+    private val executor = DefaultExecutor<INTENT, MESSAGE>(onIntent = { onIntent(it) })
+    private val intentStateMachine: Channel<INTENT> = Channel()
+    private val messageStateMachine: Channel<MESSAGE> = Channel()
 
     init {
         executor.init {
@@ -35,23 +36,15 @@ class ViewModelStore<INTENT, STATE, MESSAGE>(
         }
     }
 
-    private val intentStateMachine: Channel<INTENT> = Channel()
-    private val messageStateMachine: Channel<MESSAGE> = Channel()
-
-    override val state: StateFlow<STATE> = messageStateMachine
-        .receiveAsFlow()
-        .runningFold(initialState, reducer::reduce)
-        .stateIn(viewModelScope, SharingStarted.Eagerly, initialState)
+    override val state: StateFlow<STATE> by lazy {
+        messageStateMachine
+            .receiveAsFlow()
+            .runningFold(initialState, ::reduce)
+            .stateIn(viewModelScope, SharingStarted.Eagerly, initialState)
+    }
 
     override suspend fun accept(intent: INTENT) = intentStateMachine.send(intent)
 
-    companion object {
-        fun <INTENT, STATE, MESSAGE> ViewModel.create(
-            initialState: STATE,
-            onIntent: Executor<INTENT, MESSAGE>.(INTENT) -> Unit,
-            reduce: (STATE, MESSAGE) -> STATE,
-        ): Store<INTENT, STATE, MESSAGE> = ViewModelStore(
-            initialState, viewModelScope, DefaultExecutor(onIntent), reduce
-        )
-    }
+    protected abstract fun Executor<INTENT, MESSAGE>.onIntent(intent: INTENT)
+    protected abstract fun reduce(state: STATE, message: MESSAGE): STATE
 }
