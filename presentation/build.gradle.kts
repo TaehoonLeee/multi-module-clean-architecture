@@ -11,7 +11,7 @@ android {
 	defaultConfig {
 		minSdk = ConfigData.minSdkVersion
 		targetSdk = ConfigData.targetSdkVersion
-		testInstrumentationRunner = "org.kumnan.aos.apps.testpractice.CustomJUnitRunner"
+		testInstrumentationRunner = "com.example.testpractice.CustomJUnitRunner"
 	}
 
 	buildTypes {

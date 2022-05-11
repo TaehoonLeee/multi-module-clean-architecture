@@ -101,11 +101,11 @@ object Dependencies {
         val rules by lazy { "androidx.test:rules:1.4.0" }
         val archCore by lazy { "androidx.arch.core:core-testing:2.1.0" }
         val junit by lazy { "androidx.test.ext:junit-ktx:1.1.3" }
-        val espressoCore by lazy { "androidx.test.espresso:espresso-core:3.3.0" }
-        val espressoContribute by lazy { "androidx.test.espresso:espresso-contrib:3.3.0" }
+        val espressoCore by lazy { "androidx.test.espresso:espresso-core:3.4.0" }
+        val espressoContribute by lazy { "androidx.test.espresso:espresso-contrib:3.4.0" }
         val mockito by lazy { "org.mockito:mockito-android:3.8.0" }
         val hilt by lazy { "com.google.dagger:hilt-android-testing:${Versions.hilt}" }
-        val fragment by lazy { "androidx.fragment:fragment-testing:1.3.6" }
+        val fragment by lazy { "androidx.fragment:fragment-testing:1.4.1" }
     }
 
     class Glide(

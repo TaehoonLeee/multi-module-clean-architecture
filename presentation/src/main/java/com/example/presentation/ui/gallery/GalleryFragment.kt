@@ -3,10 +3,13 @@ package com.example.presentation.ui.gallery
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.example.presentation.R
 import com.example.presentation.databinding.FragGalleryBinding
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.presentation.ui.base.BaseFragment
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GalleryFragment : BaseFragment<FragGalleryBinding>(R.layout.frag_gallery) {
@@ -24,8 +27,10 @@ class GalleryFragment : BaseFragment<FragGalleryBinding>(R.layout.frag_gallery) 
             rvPhoto.adapter = photoAdapter
         }
 
-        galleryViewModel.searchResult.observe(viewLifecycleOwner) {
-            photoAdapter.submitData(lifecycle, it)
+        lifecycleScope.launch {
+            galleryViewModel.searchResult.flowWithLifecycle(lifecycle).collect {
+                photoAdapter.submitData(it)
+            }
         }
     }
 }

@@ -22,7 +22,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/bottom_menu"
-            app:itemBackground="@color/white" />
+            app:itemBackground="@android:color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

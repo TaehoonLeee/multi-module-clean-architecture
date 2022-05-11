@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    api(project(":domain"))
+    implementation(project(":domain"))
 
     with(Dependencies.kotlin) {
         implementation(stdLib)
@@ -56,6 +56,8 @@ dependencies {
 
     implementation(Dependencies.material)
     testImplementation(Dependencies.test.junit)
+    androidTestImplementation(Dependencies.androidTest.hilt)
+    kaptAndroidTest(Dependencies.hilt.compiler)
 
     with(Dependencies.retrofit) {
         implementation(this)
