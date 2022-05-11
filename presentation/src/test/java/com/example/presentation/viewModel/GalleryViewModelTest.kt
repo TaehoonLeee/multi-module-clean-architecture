@@ -48,9 +48,8 @@ class GalleryViewModelTest : TestCase() {
 			.thenReturn(flowOf(PagingData.from(FakePhotoListHolder.fakePhotoList)))
 	}
 
-	private suspend fun PagingData<UnsplashPhoto>.parseData(): List<UnsplashPhoto> {
-		val items = mutableListOf<UnsplashPhoto>()
-		val dif = object : PagingDataDiffer<UnsplashPhoto>(
+	private suspend fun PagingData<UnsplashPhoto>.parseData(): List<UnsplashPhoto> = buildList {
+		object : PagingDataDiffer<UnsplashPhoto>(
 			object : DifferCallback {
 				override fun onChanged(position: Int, count: Int) = Unit
 				override fun onInserted(position: Int, count: Int) = Unit
@@ -66,14 +65,11 @@ class GalleryViewModelTest : TestCase() {
 				onListPresentable: () -> Unit
 			): Int? {
 				for (idx in 0 until newList.size) {
-					items.add(newList.getFromStorage(idx))
+					add(newList.getFromStorage(idx))
 				}
 				onListPresentable()
 				return null
 			}
-		}
-
-		dif.collectFrom(this)
-		return items
+		}.collectFrom(this@parseData)
 	}
 }
