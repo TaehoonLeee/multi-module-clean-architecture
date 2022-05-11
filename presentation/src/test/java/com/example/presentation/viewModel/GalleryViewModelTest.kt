@@ -1,11 +1,9 @@
 package com.example.presentation.viewModel
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.*
 import com.example.domain.interactor.GetSearchResultUseCase
 import com.example.domain.model.UnsplashPhoto
 import com.example.domain.repository.UnsplashRepository
-import com.example.presentation.ui.gallery.GalleryState
 import com.example.presentation.ui.gallery.GalleryViewModel
 import com.example.presentation.util.TestCoroutinesRule
 import com.example.presentation.util.fakes.FakePhotoListHolder
@@ -35,13 +33,12 @@ class GalleryViewModelTest : TestCase() {
 		val viewModel = createViewModel()
 
 		assertEquals(
-			viewModel.state.drop(1).first().data.parseData(),
+			viewModel.searchResult.drop(1).first().parseData(),
 			PagingData.from(FakePhotoListHolder.fakePhotoList).parseData()
 		)
 	}
 
 	private fun createViewModel() = GalleryViewModel(
-		GalleryState(PagingData.empty()),
 		GetSearchResultUseCase(mockUnsplashRepository)
 	).apply {
 		Mockito.`when`(mockUnsplashRepository.getSearchResult<PagingData<UnsplashPhoto>>(ArgumentMatchers.anyString()))

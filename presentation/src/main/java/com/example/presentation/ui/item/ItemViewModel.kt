@@ -1,11 +1,15 @@
 package com.example.presentation.ui.item
 
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.interactor.GetItemListUseCase
 import com.example.domain.interactor.InsertItemUseCase
+import com.example.domain.model.Item
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import mvi.Executor
 import mvi.ViewModelStore
@@ -13,30 +17,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ItemViewModel @Inject constructor(
-    override val initialState: ItemState,
-    private val getItemUseCase: GetItemListUseCase,
-    private val insertItemUseCase: InsertItemUseCase,
-) : ViewModelStore<ItemIntent, ItemState, ItemMessage>() {
+    private val getItem: GetItemListUseCase,
+    private val insertItem: InsertItemUseCase,
+) : ViewModel() {
 
-    init {
-    	viewModelScope.launch {
-    	    accept(ItemIntent.ObserveItems)
-        }
-    }
+    val itemList = getItem()
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    override fun Executor<ItemIntent, ItemMessage>.onIntent(intent: ItemIntent) {
-        when (intent) {
-            is ItemIntent.ObserveItems -> getItemUseCase()
-                .onEach { dispatch(ItemMessage.Fetched(it)) }
-                .launchIn(viewModelScope)
-
-            is ItemIntent.InsertItem -> viewModelScope.launch {
-                insertItemUseCase(intent.item)
-            }
-        }
-    }
-
-    override fun reduce(state: ItemState, message: ItemMessage): ItemState = when (message) {
-        is ItemMessage.Fetched -> state.copy(items = message.data)
+    fun onButtonClick(item: Item) = viewModelScope.launch {
+        insertItem(item)
     }
 }

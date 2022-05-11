@@ -28,16 +28,13 @@ class ItemFragment : BaseFragment<FragMarketBinding>(R.layout.frag_market) {
 
         var cnt = 0
         binding.insertButton.setOnClickListener {
-            lifecycleScope.launch {
-                itemViewModel.accept(ItemIntent.InsertItem(Item("test${cnt++}", "test${cnt++}")))
-            }
+            itemViewModel.onButtonClick(Item("test${cnt++}", "test${cnt++}"))
         }
 
         lifecycleScope.launch {
-            itemViewModel.state.flowWithLifecycle(lifecycle)
-                .collect {
-                    itemAdapter.submitList(it.items)
-                }
+            itemViewModel.itemList.flowWithLifecycle(lifecycle).collect {
+                itemAdapter.submitList(it)
+            }
         }
     }
 }
