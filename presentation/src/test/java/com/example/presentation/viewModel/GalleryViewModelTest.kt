@@ -16,7 +16,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers
-import org.mockito.Mockito
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.`when`
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
@@ -25,7 +26,7 @@ class GalleryViewModelTest : TestCase() {
 	@get:Rule(order = 0)
 	val coroutineRule = TestCoroutinesRule()
 
-	private val mockUnsplashRepository = Mockito.mock(UnsplashRepository::class.java)
+	private val mockUnsplashRepository = mock(UnsplashRepository::class.java)
 
 	@Test
 	@ExperimentalCoroutinesApi
@@ -40,21 +41,18 @@ class GalleryViewModelTest : TestCase() {
 
 	private fun createViewModel() = GalleryViewModel(
 		GetSearchResultUseCase(mockUnsplashRepository)
-	).apply {
-		Mockito.`when`(mockUnsplashRepository.getSearchResult<PagingData<UnsplashPhoto>>(ArgumentMatchers.anyString()))
+	).also {
+		`when`(mockUnsplashRepository.getSearchResult<PagingData<UnsplashPhoto>>(ArgumentMatchers.anyString()))
 			.thenReturn(flowOf(PagingData.from(FakePhotoListHolder.fakePhotoList)))
 	}
 
-	private suspend fun PagingData<UnsplashPhoto>.parseData(): List<UnsplashPhoto> {
-		val items = mutableListOf<UnsplashPhoto>()
-		val dif = object : PagingDataDiffer<UnsplashPhoto>(
-			object : DifferCallback {
-				override fun onChanged(position: Int, count: Int) = Unit
-				override fun onInserted(position: Int, count: Int) = Unit
-				override fun onRemoved(position: Int, count: Int) = Unit
-			},
-			coroutineRule.testDispatcher
-		) {
+	private suspend fun PagingData<UnsplashPhoto>.parseData(): List<UnsplashPhoto> = buildList {
+		val emptyCallback = object : DifferCallback {
+			override fun onChanged(position: Int, count: Int) = Unit
+			override fun onInserted(position: Int, count: Int) = Unit
+			override fun onRemoved(position: Int, count: Int) = Unit
+		}
+		object : PagingDataDiffer<UnsplashPhoto>(emptyCallback, coroutineRule.testDispatcher) {
 			override suspend fun presentNewList(
 				previousList: NullPaddedList<UnsplashPhoto>,
 				newList: NullPaddedList<UnsplashPhoto>,
@@ -63,14 +61,11 @@ class GalleryViewModelTest : TestCase() {
 				onListPresentable: () -> Unit
 			): Int? {
 				for (idx in 0 until newList.size) {
-					items.add(newList.getFromStorage(idx))
+					add(newList.getFromStorage(idx))
 				}
 				onListPresentable()
 				return null
 			}
-		}
-
-		dif.collectFrom(this)
-		return items
+		}.collectFrom(this@parseData)
 	}
 }

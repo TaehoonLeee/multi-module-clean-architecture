@@ -7,17 +7,13 @@ import com.example.domain.interactor.InsertItemUseCase
 import com.example.domain.model.Item
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import mvi.Executor
-import mvi.ViewModelStore
 import javax.inject.Inject
 
 @HiltViewModel
 class ItemViewModel @Inject constructor(
-    private val getItem: GetItemListUseCase,
+    getItem: GetItemListUseCase,
     private val insertItem: InsertItemUseCase,
 ) : ViewModel() {
 

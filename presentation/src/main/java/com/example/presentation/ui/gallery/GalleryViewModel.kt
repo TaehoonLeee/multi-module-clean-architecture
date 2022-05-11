@@ -2,17 +2,13 @@ package com.example.presentation.ui.gallery
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.*
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.example.domain.interactor.GetSearchResultUseCase
 import com.example.domain.model.UnsplashPhoto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
-import mvi.Executor
-import mvi.ViewModelStore
 import javax.inject.Inject
 
 @HiltViewModel
