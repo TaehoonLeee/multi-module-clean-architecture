@@ -6,6 +6,7 @@ import com.example.domain.model.UnsplashPhoto
 import com.example.domain.repository.UnsplashRepository
 import com.example.presentation.ui.gallery.GalleryViewModel
 import com.example.presentation.util.TestCoroutinesRule
+import com.example.presentation.util.extensions.parseData
 import com.example.presentation.util.fakes.FakePhotoListHolder
 import junit.framework.TestCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -48,27 +49,4 @@ class GalleryViewModelTest : TestCase() {
 	}
 
 	private fun createViewModel() = GalleryViewModel(GetSearchResultUseCase(mockUnsplashRepository))
-
-	private suspend fun PagingData<UnsplashPhoto>.parseData(): List<UnsplashPhoto> = buildList {
-		val emptyCallback = object : DifferCallback {
-			override fun onChanged(position: Int, count: Int) = Unit
-			override fun onInserted(position: Int, count: Int) = Unit
-			override fun onRemoved(position: Int, count: Int) = Unit
-		}
-		object : PagingDataDiffer<UnsplashPhoto>(emptyCallback, coroutineRule.testDispatcher) {
-			override suspend fun presentNewList(
-				previousList: NullPaddedList<UnsplashPhoto>,
-				newList: NullPaddedList<UnsplashPhoto>,
-				newCombinedLoadStates: CombinedLoadStates,
-				lastAccessedIndex: Int,
-				onListPresentable: () -> Unit
-			): Int? {
-				for (idx in 0 until newList.size) {
-					add(newList.getFromStorage(idx))
-				}
-				onListPresentable()
-				return null
-			}
-		}.collectFrom(this@parseData)
-	}
 }
