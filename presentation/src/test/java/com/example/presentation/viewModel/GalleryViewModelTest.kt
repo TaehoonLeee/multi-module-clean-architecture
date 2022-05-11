@@ -12,6 +12,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
+import org.junit.Before
+import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,6 +30,12 @@ class GalleryViewModelTest : TestCase() {
 
 	private val mockUnsplashRepository = mock(UnsplashRepository::class.java)
 
+	@Before
+	fun repositoryInit() {
+		`when`(mockUnsplashRepository.getSearchResult<PagingData<UnsplashPhoto>>(ArgumentMatchers.anyString()))
+			.thenReturn(flowOf(PagingData.from(FakePhotoListHolder.fakePhotoList)))
+	}
+
 	@Test
 	@ExperimentalCoroutinesApi
 	fun `뷰모델 리스트 초기화`() = coroutineRule.runTest {
@@ -39,12 +47,7 @@ class GalleryViewModelTest : TestCase() {
 		)
 	}
 
-	private fun createViewModel() = GalleryViewModel(
-		GetSearchResultUseCase(mockUnsplashRepository)
-	).also {
-		`when`(mockUnsplashRepository.getSearchResult<PagingData<UnsplashPhoto>>(ArgumentMatchers.anyString()))
-			.thenReturn(flowOf(PagingData.from(FakePhotoListHolder.fakePhotoList)))
-	}
+	private fun createViewModel() = GalleryViewModel(GetSearchResultUseCase(mockUnsplashRepository))
 
 	private suspend fun PagingData<UnsplashPhoto>.parseData(): List<UnsplashPhoto> = buildList {
 		val emptyCallback = object : DifferCallback {
