@@ -1,10 +1,10 @@
 package com.example.presentation.ui.item
 
+import com.example.domain.model.Item
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
-import org.kumnan.aos.apps.domain.model.Item
 import javax.inject.Inject
 
 data class ItemState @Inject constructor(

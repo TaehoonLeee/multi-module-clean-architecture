@@ -1,16 +1,15 @@
 package com.example.presentation.ui.gallery
 
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
+import androidx.paging.*
+import com.example.domain.interactor.GetSearchResultUseCase
+import com.example.domain.model.UnsplashPhoto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import mvi.Executor
 import mvi.ViewModelStore
-import org.kumnan.aos.apps.domain.interactor.GetSearchResultUseCase
-import org.kumnan.aos.apps.domain.model.UnsplashPhoto
 import javax.inject.Inject
 
 @HiltViewModel

@@ -4,6 +4,8 @@
     <bytecodeTargetLevel target="1.7">
       <module name="TestPractice.app" target="11" />
       <module name="TestPractice.buildSrc" target="11" />
+      <module name="TestPractice.buildSrc.main" target="11" />
+      <module name="TestPractice.buildSrc.test" target="11" />
       <module name="TestPractice.data" target="11" />
       <module name="TestPractice.presentation" target="11" />
     </bytecodeTargetLevel>

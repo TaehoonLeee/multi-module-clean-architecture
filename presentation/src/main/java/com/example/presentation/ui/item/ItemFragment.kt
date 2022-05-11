@@ -5,11 +5,11 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import com.example.domain.model.Item
 import com.example.presentation.R
 import com.example.presentation.databinding.FragMarketBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import org.kumnan.aos.apps.domain.model.Item
 import com.example.presentation.ui.base.BaseFragment
 
 @AndroidEntryPoint

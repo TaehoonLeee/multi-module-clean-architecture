@@ -28,7 +28,7 @@ class GalleryFragment : BaseFragment<FragGalleryBinding>(R.layout.frag_gallery) 
         }
 
         lifecycleScope.launch {
-            galleryViewModel.state.flowWithLifecycle(lifecycle).collect {
+            galleryViewModel.state.flowWithLifecycle(viewLifecycleOwner.lifecycle).collect {
                 photoAdapter.submitData(it.data)
             }
         }

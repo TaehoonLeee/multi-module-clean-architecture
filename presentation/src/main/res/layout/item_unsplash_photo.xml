@@ -31,7 +31,7 @@
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:textColor="@color/white"
+            android:textColor="@android:color/white"
             tools:text="@tools:sample/full_names"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

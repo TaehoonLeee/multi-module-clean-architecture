@@ -1,11 +1,11 @@
 package com.example.presentation.ui.gallery
 
 import androidx.paging.PagingData
+import com.example.domain.model.UnsplashPhoto
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
-import org.kumnan.aos.apps.domain.model.UnsplashPhoto
 import javax.inject.Inject
 
 data class GalleryState @Inject constructor(

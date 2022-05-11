@@ -9,12 +9,12 @@ android {
     compileSdk = ConfigData.compileSdkVersion
 
     defaultConfig {
-        applicationId = "org.kumnan.aos.apps.testpractice"
+        applicationId = "com.example.testpractice"
         minSdk = ConfigData.minSdkVersion
         targetSdk = ConfigData.targetSdkVersion
         versionCode = ConfigData.versionCode
         versionName = ConfigData.versionName
-        testInstrumentationRunner = "org.kumnan.aos.apps.testpractice.CustomJUnitRunner"
+        testInstrumentationRunner = "com.example.presentation.CustomJUnitRunner"
     }
 
     buildTypes {
