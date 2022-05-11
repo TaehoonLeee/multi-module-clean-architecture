@@ -14,7 +14,7 @@ android {
         targetSdk = ConfigData.targetSdkVersion
         versionCode = ConfigData.versionCode
         versionName = ConfigData.versionName
-        testInstrumentationRunner = "com.example.presentation.CustomJUnitRunner"
+        testInstrumentationRunner = "com.example.testpractice.CustomJUnitRunner"
     }
 
     buildTypes {

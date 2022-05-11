@@ -1,8 +1,7 @@
-package com.example.data.di
+package com.example.testpractice.di
 
 import com.example.data.cache.ItemDao
 import com.example.data.entity.UnsplashResponse
-import com.example.data.module.DataModule
 import com.example.data.module.RepositoryModule
 import com.example.data.network.UnsplashService
 import com.example.data.network.ktor.ItemService

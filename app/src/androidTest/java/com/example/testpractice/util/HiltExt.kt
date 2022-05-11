@@ -1,4 +1,4 @@
-package com.example.presentation.util
+package com.example.testpractice.util
 
 import android.content.ComponentName
 import android.content.Intent
@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentFactory
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import com.example.presentation.R
-import com.example.presentation.debug.HiltTestActivity
+import com.example.testpractice.HiltTestActivity
 
 inline fun <reified T: Fragment> launchFragmentInHiltContainer(
 	fragmentArgs: Bundle? = null,

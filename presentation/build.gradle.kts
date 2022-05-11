@@ -11,7 +11,7 @@ android {
 	defaultConfig {
 		minSdk = ConfigData.minSdkVersion
 		targetSdk = ConfigData.targetSdkVersion
-		testInstrumentationRunner = "com.example.presentation.CustomJUnitRunner"
+		testInstrumentationRunner = "com.example.testpractice.CustomJUnitRunner"
 	}
 
 	buildTypes {

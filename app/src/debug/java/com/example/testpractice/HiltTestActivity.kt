@@ -1,4 +1,4 @@
-package com.example.presentation.debug
+package com.example.testpractice
 
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
