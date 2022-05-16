@@ -16,7 +16,7 @@ class GalleryViewModel @Inject constructor(
 	getSearchResult: GetSearchResultUseCase,
 ) : ViewModel() {
 
-	val searchResult = getSearchResult<PagingData<UnsplashPhoto>>(DEFAULT_QUERY)
+	val searchResult = getSearchResult(DEFAULT_QUERY)
 		.cachedIn(viewModelScope)
 		.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), PagingData.empty())
 

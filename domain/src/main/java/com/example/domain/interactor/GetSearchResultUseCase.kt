@@ -7,5 +7,5 @@ class GetSearchResultUseCase @Inject constructor(
     private val unsplashRepository: UnsplashRepository
 ) {
 
-    operator fun <T> invoke(query: String) = unsplashRepository.getSearchResult<T>(query)
+    operator fun invoke(query: String) = unsplashRepository.getSearchResult(query)
 }
