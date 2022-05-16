@@ -88,5 +88,5 @@ dependencies {
 
 	implementation(Dependencies.ktor.gson)
 
-	implementation(Dependencies.androidX.paging)
+	implementation(Dependencies.androidX.paging.runtime)
 }

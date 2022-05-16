@@ -12,7 +12,7 @@ object Versions {
     const val navigation = "2.4.0-alpha01"
     const val lifecycle = "2.3.1"
     const val lifecycleRuntime = "2.4.0-alpha02"
-    const val paging = "3.1.0-alpha02"
+    const val paging = "3.1.1"
     const val ktor = "1.6.0"
     const val ksp = "1.5.30-1.0.0"
 }

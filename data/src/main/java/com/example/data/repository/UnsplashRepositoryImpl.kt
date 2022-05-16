@@ -6,7 +6,6 @@ import com.example.data.mapper.ResponseMapper
 import com.example.data.network.UnsplashService
 import com.example.data.repository.datasource.UnsplashPhotoPagingSource
 import com.example.domain.repository.UnsplashRepository
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -21,7 +20,7 @@ class UnsplashRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun <T> getSearchResult(query: String): Flow<T> =
+    override fun getSearchResult(query: String) =
         Pager(
             config = PagingConfig(
                 pageSize = 20,
@@ -29,5 +28,5 @@ class UnsplashRepositoryImpl @Inject constructor(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = { UnsplashPhotoPagingSource(unsplashService, query) }
-        ).flow as Flow<T>
+        ).flow
 }

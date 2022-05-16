@@ -83,7 +83,7 @@ dependencies {
         kapt(compiler)
     }
 
-    implementation(Dependencies.androidX.paging)
+    implementation(Dependencies.androidX.paging.runtime)
 
     implementation(Dependencies.socket)
 }

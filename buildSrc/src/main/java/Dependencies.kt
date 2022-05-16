@@ -33,9 +33,15 @@ object Dependencies {
     }
 
     object AndroidX {
+        val paging = Paging
+
         val core by lazy { "androidx.core:core-ktx:1.6.0" }
         val appCompat by lazy { "androidx.appcompat:appcompat:1.3.0" }
-        val paging by lazy { "androidx.paging:paging-runtime-ktx:${Versions.paging}" }
+
+        object Paging {
+            val runtime by lazy { "androidx.paging:paging-runtime-ktx:${Versions.paging}" }
+            val common by lazy { "androidx.paging:paging-common:${Versions.paging}" }
+        }
         val constraintLayout by lazy { "androidx.constraintlayout:constraintlayout:2.0.4" }
 
         val junit by lazy { "androidx.test.ext:junit:1.1.3" }
