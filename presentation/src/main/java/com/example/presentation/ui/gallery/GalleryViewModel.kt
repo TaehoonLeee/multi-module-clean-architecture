@@ -26,7 +26,7 @@ class GalleryViewModel @Inject constructor(
 
 	override fun Executor<GalleryIntent, GalleryMessage>.onIntent(intent: GalleryIntent) {
 		when (intent) {
-			is GalleryIntent.FetchPhotos -> getSearchResultUseCase<PagingData<UnsplashPhoto>>(DEFAULT_QUERY)
+			is GalleryIntent.FetchPhotos -> getSearchResultUseCase(DEFAULT_QUERY)
 				.cachedIn(viewModelScope)
 				.onEach { dispatch(GalleryMessage.Fetched(it)) }
 				.launchIn(viewModelScope)

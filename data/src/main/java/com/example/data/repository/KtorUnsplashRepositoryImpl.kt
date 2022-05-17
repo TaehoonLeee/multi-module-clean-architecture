@@ -26,7 +26,7 @@ class KtorUnsplashRepositoryImpl @Inject constructor(
         emit(ResponseMapper.responseToPhotoList(response))
     }
 
-    override fun <T> getSearchResult(query: String) =
+    override fun getSearchResult(query: String) =
         Pager(
             config = PagingConfig(
                 pageSize = 20,
@@ -34,5 +34,5 @@ class KtorUnsplashRepositoryImpl @Inject constructor(
                 enablePlaceholders = false
             ),
             pagingSourceFactory = { UnsplashPhotoPagingSource(unsplashService, query) }
-        ).flow as Flow<T>
+        ).flow
 }
