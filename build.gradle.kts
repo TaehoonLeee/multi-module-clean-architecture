@@ -10,6 +10,7 @@ buildscript {
         classpath(BuildPlugins.hilt)
         classpath(BuildPlugins.android)
         classpath(BuildPlugins.ksp)
+        classpath("com.google.gms:google-services:4.3.10")
     }
 }
 

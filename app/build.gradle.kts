@@ -3,6 +3,7 @@ plugins {
     kotlin("android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -95,4 +96,6 @@ dependencies {
     implementation(Dependencies.ktor.gson)
 
     implementation(Dependencies.androidX.paging.runtime)
+
+    implementation(platform("com.google.firebase:firebase-bom:30.0.1"))
 }
