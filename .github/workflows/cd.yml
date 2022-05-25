@@ -4,11 +4,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: work around permission issue
+        run: git config --global --add safe.directory /github/workspace
       - uses: actions/checkout@v2
       - name: build
         run: ./gradlew assembleDebug
-      - name: work around permission issue
-        run: git config --global --add safe.directory /__w/multi-module-clean-architecture/multi-module-clean-architecture
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1
         with:
