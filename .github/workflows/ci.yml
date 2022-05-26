@@ -3,24 +3,41 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      file: app-debug
     steps:
       - uses: actions/checkout@v2
-#      - uses: actions/cache@v3
-#        with:
-#          path: |
-#            ~/.gradle/caches
-#            ~/.gradle/wrapper
-#          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-#          restore-keys: |
-#            ${{ runner.os }}-gradle-
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
       - name: set up JDK 11
         uses: actions/setup-java@v3
         with:
-          distribution: corretto
           java-version: 11
-          cache: gradle
       - name: build
         run: ./gradlew assembleDebug --no-daemon
+      - name: upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifact
+          path: app/build/outputs/apk/debug/app-debug.apk
+  distribution:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/download-artifact@v3
+        with:
+          name: build-artifact
+      - name: Display
+        run: ls -R
+        working-directory: app/build/outputs/apk/debug
+      - run: echo ${{needs.build.outputs.file}}
 #      - name: upload artifact to Firebase App Distribution
 #        uses: wzieba/Firebase-Distribution-Github-Action@v1
 #        with:
