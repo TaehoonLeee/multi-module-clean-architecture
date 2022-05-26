@@ -6,12 +6,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: set up JDK 11
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
           java-version: 11
           cache: gradle
       - name: build
-        run: ./gradlew assembleDebug
+        run: ./gradlew assembleDebug --no-daemon
 #      - name: upload artifact to Firebase App Distribution
 #        uses: wzieba/Firebase-Distribution-Github-Action@v1
 #        with:
