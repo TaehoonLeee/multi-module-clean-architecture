@@ -37,7 +37,6 @@ jobs:
           name: build-artifact
       - name: Display
         run: ls -R
-        working-directory: app/build/outputs/apk/debug
       - run: echo ${{needs.build.outputs.file}}
 #      - name: upload artifact to Firebase App Distribution
 #        uses: wzieba/Firebase-Distribution-Github-Action@v1
