@@ -1,0 +1,27 @@
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: work around permission issue
+        run: git config --global --add safe.directory /github/workspace
+      - uses: actions/checkout@v2
+      - name: build
+        run: ./gradlew assembleDebug
+      - name: gradle cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle.caches
+            ~/.gradle.wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+#      - name: upload artifact to Firebase App Distribution
+#        uses: wzieba/Firebase-Distribution-Github-Action@v1
+#        with:
+#          appId: ${{secrets.FIREBASE_DEBUG_APP_ID}}
+#          token: ${{secrets.FIREBASE_TOKEN}}
+#          groups: testers
+#          file: app/build/outputs/apk/debug/app-debug.apk
