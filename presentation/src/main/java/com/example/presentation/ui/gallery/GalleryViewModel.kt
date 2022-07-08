@@ -18,7 +18,6 @@ class GalleryViewModel @Inject constructor(
 
 	val searchResult = getSearchResult(DEFAULT_QUERY)
 		.cachedIn(viewModelScope)
-		.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), PagingData.empty())
 
 	companion object {
 		const val DEFAULT_QUERY = "cats"
