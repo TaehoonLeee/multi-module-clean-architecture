@@ -6,9 +6,5 @@ pluginManagement {
 	}
 }
 rootProject.name = "TestPractice"
-include(":app")
-include(":domain")
-include(":data")
-include(":presentation")
-include(":features:gallery")
-include(":features:item")
+val modules = arrayOf(":app", ":domain", ":data", ":presentation", ":features:gallery", ":features:item")
+include(*modules)
