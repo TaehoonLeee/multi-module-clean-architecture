@@ -1,4 +1,4 @@
-package com.example.presentation.ui.item
+package com.example.features.item
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

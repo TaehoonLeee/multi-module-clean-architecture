@@ -15,9 +15,7 @@ object Dependencies {
     val gson by lazy { "com.google.code.gson:gson:${Versions.gson}" }
 
     object Kotlin {
-        val stdLib by lazy { "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}" }
         val coroutine by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutineCore}" }
-        val coroutineAndroid by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutineAndroid}" }
     }
 
     object Hilt {

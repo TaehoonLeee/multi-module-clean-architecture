@@ -1,4 +1,4 @@
-package com.example.presentation.ui.gallery
+package com.example.features.gallery
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.domain.model.UnsplashPhoto
-import com.example.presentation.databinding.ItemUnsplashPhotoBinding
+import com.example.features.gallery.databinding.ItemUnsplashPhotoBinding
 
 class UnsplashPhotoAdapter : PagingDataAdapter<UnsplashPhoto, UnsplashPhotoAdapter.UnsplashPhotoViewHolder>(UnsplashPhotoDiffCallback()) {
 

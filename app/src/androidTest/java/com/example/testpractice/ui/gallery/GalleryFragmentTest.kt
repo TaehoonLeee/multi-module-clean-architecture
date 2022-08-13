@@ -6,7 +6,7 @@ import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.presentation.R
-import com.example.presentation.ui.gallery.GalleryFragment
+import com.example.features.gallery.GalleryFragment
 import com.example.testpractice.util.launchFragmentInHiltContainer
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest

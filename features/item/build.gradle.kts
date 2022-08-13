@@ -30,50 +30,27 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
     implementation(project(":domain"))
 
     with(Dependencies.androidX) {
-        implementation(room)
-        implementation(room.ktx)
-        annotationProcessor(room.compiler)
-        kapt(room.compiler)
-
-        androidTestImplementation(junit)
-        androidTestImplementation(espresso)
+        implementation(core)
+        implementation(appCompat)
+        implementation(lifecycle.runtime)
+        implementation(lifecycle.viewModel)
+        implementation(lifecycle.liveData)
+        implementation(navigation.fragment)
     }
 
-    testImplementation(Dependencies.test.junit)
-    androidTestImplementation(Dependencies.androidTest.hilt)
-    kaptAndroidTest(Dependencies.hilt.compiler)
-
-    with(Dependencies.retrofit) {
-        implementation(this)
-        implementation(gsonConverter)
-        implementation(scalarsConverter)
-    }
-
-    with(Dependencies.okHttp) {
-        implementation(this)
-        implementation(loggingInterceptor)
-    }
-
-    with(Dependencies.ktor) {
-        implementation(gson)
-        implementation(okHttp)
-        implementation(logging)
-    }
-
-    implementation(Dependencies.gson)
+    implementation(Dependencies.material)
 
     with(Dependencies.hilt) {
         implementation(android)
         kapt(compiler)
     }
-
-    implementation(Dependencies.androidX.paging.runtime)
-
-    implementation(Dependencies.socket)
 }

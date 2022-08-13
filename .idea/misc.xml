@@ -8,9 +8,19 @@
         <entry key="app/src/main/res/layout/frag_market.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/item_market.xml" value="0.15070921985815602" />
         <entry key="app/src/main/res/layout/item_unsplash_photo.xml" value="0.3974358974358974" />
+        <entry key="features/gallery/src/main/res/drawable/gradient.xml" value="0.1" />
+        <entry key="features/gallery/src/main/res/drawable/ic_user.xml" value="0.1" />
+        <entry key="features/gallery/src/main/res/layout/frag_gallery.xml" value="0.2947916666666667" />
+        <entry key="features/gallery/src/main/res/layout/item_unsplash_photo.xml" value="0.2947916666666667" />
+        <entry key="features/item/src/main/res/layout/frag_market.xml" value="0.140625" />
+        <entry key="features/item/src/main/res/layout/item_market.xml" value="0.140625" />
         <entry key="presentation/src/main/res/layout/activity_main.xml" value="0.21354166666666666" />
+        <entry key="presentation/src/main/res/layout/frag_gallery.xml" value="0.15520833333333334" />
+        <entry key="presentation/src/main/res/layout/frag_market.xml" value="0.19610507246376813" />
         <entry key="presentation/src/main/res/layout/frag_my_page.xml" value="0.21354166666666666" />
+        <entry key="presentation/src/main/res/layout/item_market.xml" value="0.19610507246376813" />
         <entry key="presentation/src/main/res/layout/item_unsplash_photo.xml" value="0.21354166666666666" />
+        <entry key="presentation/src/main/res/menu/bottom_menu.xml" value="0.2947916666666667" />
       </map>
     </option>
   </component>

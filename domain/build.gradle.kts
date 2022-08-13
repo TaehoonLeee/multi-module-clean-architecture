@@ -9,12 +9,7 @@ java {
 }
 
 dependencies {
-    implementation(Dependencies.kotlin.stdLib)
-
-    // Coroutine
     implementation(Dependencies.kotlin.coroutine)
-
     implementation(Dependencies.androidX.paging.common)
-
     implementation(Dependencies.jsr330)
 }

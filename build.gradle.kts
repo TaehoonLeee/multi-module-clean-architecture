@@ -7,6 +7,13 @@ plugins {
     id("com.google.gms.google-services") version "4.3.10" apply false
 }
 
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
 tasks.register("clean", Delete::class) {
     delete(rootProject.buildDir)
 }

@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
-import com.example.presentation.R
+import com.example.testpractice.R
 import com.example.testpractice.HiltTestActivity
 
 inline fun <reified T: Fragment> launchFragmentInHiltContainer(

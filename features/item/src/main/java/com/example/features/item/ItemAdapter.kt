@@ -1,4 +1,4 @@
-package com.example.presentation.ui.item
+package com.example.features.item
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.model.Item
-import com.example.presentation.databinding.ItemMarketBinding
+import com.example.features.item.databinding.ItemMarketBinding
 
 class ItemAdapter : ListAdapter<Item, ItemAdapter.ItemViewHolder>(COMPARATOR) {
 
