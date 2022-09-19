@@ -6,6 +6,7 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.assertThat
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.features.gallery.GalleryFragment
 import com.example.features.gallery.R
@@ -41,5 +42,11 @@ class GalleryFragmentTest {
 			.check { view, _ ->
 				assertThat((view as RecyclerView).adapter?.itemCount, `is`(1))
 			}
+	}
+
+	@Test
+	fun isItemContentsAppropriate() {
+		Espresso.onView(ViewMatchers.withId(R.id.text_view_user_name))
+			.check(ViewAssertions.matches(withText("first_user")))
 	}
 }
