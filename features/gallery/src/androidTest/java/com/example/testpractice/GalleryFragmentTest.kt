@@ -1,4 +1,4 @@
-package com.exmplate.testpractice
+package com.example.testpractice
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +9,6 @@ import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.features.gallery.GalleryFragment
 import com.example.features.gallery.R
-import com.example.testpractice.launchFragmentInHiltContainer
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.hamcrest.core.Is.`is`

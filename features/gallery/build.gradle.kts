@@ -1,18 +1,12 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
     kotlin("kapt")
+    kotlin("android")
+    id("com.android.library")
     id("dagger.hilt.android.plugin")
 }
 
 android {
     compileSdk = ConfigData.compileSdkVersion
-
-    sourceSets {
-        getByName("androidTest") {
-            java.srcDirs("${rootProject.projectDir}/common/src/androidTest/java")
-        }
-    }
 
     defaultConfig {
         minSdk = ConfigData.minSdkVersion

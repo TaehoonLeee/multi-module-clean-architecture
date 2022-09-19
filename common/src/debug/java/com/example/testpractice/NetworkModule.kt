@@ -1,5 +1,12 @@
 package com.example.testpractice
 
+import com.example.data.cache.ItemDao
+import com.example.data.entity.UnsplashResponse
+import com.example.data.module.RepositoryModule
+import com.example.data.network.UnsplashService
+import com.example.data.network.ktor.ItemService
+import com.example.data.repository.ItemRepositoryImpl
+import com.example.data.repository.UnsplashRepositoryImpl
 import com.example.domain.model.UnsplashPhoto
 import com.example.domain.model.status.Result
 import com.example.domain.repository.ItemRepository

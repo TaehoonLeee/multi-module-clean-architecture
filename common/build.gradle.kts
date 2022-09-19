@@ -39,9 +39,9 @@ dependencies {
 	implementation(Dependencies.hilt.android)
 	kapt(Dependencies.hilt.compiler)
 
-	androidTestImplementation(project(":data"))
-	androidTestImplementation(project(":domain"))
-	androidTestImplementation(Dependencies.androidTest.hilt)
+	implementation(project(":data"))
+	implementation(project(":domain"))
+	implementation(Dependencies.androidTest.hilt)
+	implementation(Dependencies.androidTest.runner)
 	debugImplementation(Dependencies.androidTest.fragment)
-	kaptAndroidTest(Dependencies.hilt.compiler)
 }
