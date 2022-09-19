@@ -1,6 +1,6 @@
 object Versions {
     const val gradlePlugin = "7.2.0"
-    const val kotlin = "1.6.21"
+    const val kotlin = "1.7.10"
     const val hilt = "2.42"
     const val coroutines = "1.6.4"
     const val gson = "2.8.6"
