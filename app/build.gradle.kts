@@ -47,24 +47,6 @@ dependencies {
     implementation(project(":domain"))
 
     implementation(Dependencies.androidX.appCompat)
-
-    testImplementation(Dependencies.test.junit)
-    testImplementation(Dependencies.test.robolectric)
-    testImplementation(Dependencies.test.archCore)
-    testImplementation(Dependencies.test.mockito)
-    testImplementation(Dependencies.test.coroutine)
-
-    androidTestImplementation(Dependencies.androidTest.runner)
-    androidTestImplementation(Dependencies.androidTest.rules)
-    androidTestImplementation(Dependencies.androidTest.archCore)
-    androidTestImplementation(Dependencies.androidTest.junit)
-    androidTestImplementation(Dependencies.androidTest.espressoCore)
-    androidTestImplementation(Dependencies.androidTest.espressoContribute)
-    androidTestImplementation(Dependencies.androidTest.mockito)
-    androidTestImplementation(Dependencies.androidTest.hilt)
-    debugImplementation(Dependencies.androidTest.fragment)
-    kaptAndroidTest(Dependencies.hilt.compiler)
-
     implementation(Dependencies.hilt.android)
     kapt(Dependencies.hilt.compiler)
 

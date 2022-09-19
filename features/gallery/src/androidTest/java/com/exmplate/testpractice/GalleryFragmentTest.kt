@@ -1,15 +1,18 @@
-package com.example.testpractice.ui.gallery
+package com.exmplate.testpractice
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.assertThat
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.presentation.R
 import com.example.features.gallery.GalleryFragment
-import com.example.testpractice.util.launchFragmentInHiltContainer
+import com.example.features.gallery.R
+import com.example.testpractice.launchFragmentInHiltContainer
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import org.hamcrest.core.Is.`is`
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -34,5 +37,10 @@ class GalleryFragmentTest {
 	fun isRecyclerViewVisible_OnStart() {
 		Espresso.onView(ViewMatchers.withId(R.id.rvPhoto))
 			.check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+		Espresso.onView(ViewMatchers.withId(R.id.rvPhoto))
+			.check { view, _ ->
+				assertThat((view as RecyclerView).adapter?.itemCount, `is`(1))
+			}
 	}
 }

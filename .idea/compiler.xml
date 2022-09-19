@@ -8,6 +8,7 @@
       <module name="TestPractice.buildSrc" target="11" />
       <module name="TestPractice.buildSrc.main" target="11" />
       <module name="TestPractice.buildSrc.test" target="11" />
+      <module name="TestPractice.common" target="11" />
       <module name="TestPractice.data" target="11" />
       <module name="TestPractice.features.gallery" target="11" />
       <module name="TestPractice.features.item" target="11" />

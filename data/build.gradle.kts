@@ -74,6 +74,4 @@ dependencies {
     }
 
     implementation(Dependencies.androidX.paging.runtime)
-
-    implementation(Dependencies.socket)
 }

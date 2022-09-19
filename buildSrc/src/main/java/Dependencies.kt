@@ -11,11 +11,10 @@ object Dependencies {
 
     val material by lazy { "com.google.android.material:material:1.4.0" }
     val jsr330 by lazy { "javax.inject:javax.inject:1" }
-    val socket by lazy { "io.socket:socket.io-client:1.0.0" }
     val gson by lazy { "com.google.code.gson:gson:${Versions.gson}" }
 
     object Kotlin {
-        val coroutine by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutineCore}" }
+        val coroutine by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}" }
     }
 
     object Hilt {
@@ -90,7 +89,7 @@ object Dependencies {
         val robolectric by lazy { "org.robolectric:robolectric:4.6.1" }
         val archCore by lazy { "androidx.arch.core:core-testing:2.1.0" }
         val mockito by lazy { "org.mockito:mockito-core:3.8.0" }
-        val coroutine by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1" }
+        val coroutine by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}" }
     }
 
     object AndroidTest {
