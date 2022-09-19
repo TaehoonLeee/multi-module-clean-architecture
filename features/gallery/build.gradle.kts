@@ -1,7 +1,7 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
     kotlin("kapt")
+    kotlin("android")
+    id("com.android.library")
     id("dagger.hilt.android.plugin")
 }
 
@@ -11,7 +11,7 @@ android {
     defaultConfig {
         minSdk = ConfigData.minSdkVersion
         targetSdk = ConfigData.targetSdkVersion
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.example.testpractice.CustomJUnitRunner"
     }
 
     buildTypes {
@@ -58,4 +58,18 @@ dependencies {
     }
 
     implementation(Dependencies.androidX.paging.runtime)
+
+    androidTestImplementation(project(":common"))
+    androidTestImplementation(Dependencies.androidTest.archCore)
+    androidTestImplementation(Dependencies.androidTest.junit)
+    androidTestImplementation(Dependencies.androidTest.espressoCore)
+    androidTestImplementation(Dependencies.androidTest.espressoContribute)
+    androidTestImplementation(Dependencies.androidTest.mockito)
+    androidTestImplementation(Dependencies.androidTest.hilt)
+    kaptAndroidTest(Dependencies.hilt.compiler)
+
+    testImplementation(Dependencies.test.junit)
+    testImplementation(Dependencies.test.mockito)
+    testImplementation(Dependencies.test.coroutine)
+    testImplementation(Dependencies.test.robolectric)
 }

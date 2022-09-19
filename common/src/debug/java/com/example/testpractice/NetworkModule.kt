@@ -1,4 +1,4 @@
-package com.example.testpractice.di
+package com.example.testpractice
 
 import com.example.data.cache.ItemDao
 import com.example.data.entity.UnsplashResponse
