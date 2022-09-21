@@ -10,9 +10,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import javax.inject.Inject
 import javax.inject.Named
-import javax.inject.Singleton
 
-@Singleton
 class KtorUnsplashService @Inject constructor(
     @Named("unsplash") private val httpClient: HttpClient
 ) : UnsplashService {

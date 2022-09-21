@@ -9,9 +9,7 @@ import io.ktor.http.*
 import com.example.domain.model.status.Result
 import javax.inject.Inject
 import javax.inject.Named
-import javax.inject.Singleton
 
-@Singleton
 class ItemService @Inject constructor(
     @Named("item") private val httpClient: HttpClient
 ) {

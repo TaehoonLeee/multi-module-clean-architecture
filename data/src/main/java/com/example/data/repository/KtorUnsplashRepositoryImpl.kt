@@ -11,9 +11,7 @@ import com.example.domain.model.status.Result
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class KtorUnsplashRepositoryImpl @Inject constructor(
     private val unsplashService: UnsplashService
 ) : UnsplashRepository {
