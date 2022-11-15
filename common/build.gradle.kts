@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-	compileSdk = 32
+	compileSdk = libs.versions.compileSdkVersion.get().toInt()
 	sourceSets["main"].manifest.srcFile("src/debug/java/AndroidManifest.xml")
 
 	defaultConfig {
-		minSdk = 21
-		targetSdk = 32
+		minSdk = libs.versions.minSdkVersion.get().toInt()
+		targetSdk = libs.versions.targetSdkVersion.get().toInt()
 
 		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 		consumerProguardFiles("consumer-rules.pro")
@@ -34,14 +34,14 @@ android {
 
 dependencies {
 
-	implementation("androidx.core:core-ktx:1.9.0")
-	implementation("androidx.appcompat:appcompat:1.5.1")
-	implementation(Dependencies.hilt.android)
-	kapt(Dependencies.hilt.compiler)
+	implementation(libs.androidx.core)
+	implementation(libs.androidx.compat)
+	implementation(libs.google.hilt)
+	kapt(libs.google.hilt.compiler)
 
-	implementation(project(":data"))
-	implementation(project(":domain"))
-	implementation(Dependencies.androidTest.hilt)
-	implementation(Dependencies.androidTest.runner)
-	debugImplementation(Dependencies.androidTest.fragment)
+	implementation(projects.data)
+	implementation(projects.domain)
+	implementation(libs.google.hilt.test)
+	implementation(libs.androidx.test.runner)
+	debugImplementation(libs.androidx.test.fragment)
 }

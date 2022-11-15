@@ -1,17 +1,17 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
     kotlin("kapt")
+    kotlin("android")
+    id("com.android.library")
     id("dagger.hilt.android.plugin")
 }
 
 android {
-    compileSdk = ConfigData.compileSdkVersion
+    compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
-        minSdk = ConfigData.minSdkVersion
-        targetSdk = ConfigData.targetSdkVersion
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        minSdk = libs.versions.minSdkVersion.get().toInt()
+        targetSdk = libs.versions.targetSdkVersion.get().toInt()
+        testInstrumentationRunner = "com.example.testpractice.CustomJUnitRunner"
     }
 
     buildTypes {
@@ -36,21 +36,39 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
+    implementation(projects.domain)
 
-    with(Dependencies.androidX) {
+    with(libs.androidx) {
         implementation(core)
-        implementation(appCompat)
+        implementation(compat)
         implementation(lifecycle.runtime)
-        implementation(lifecycle.viewModel)
-        implementation(lifecycle.liveData)
+        implementation(lifecycle.viewmodel)
+        implementation(lifecycle.livedata)
         implementation(navigation.fragment)
+        implementation(fragment)
     }
 
-    implementation(Dependencies.material)
+    implementation(libs.google.material)
 
-    with(Dependencies.hilt) {
-        implementation(android)
-        kapt(compiler)
-    }
+    implementation(libs.glide)
+    implementation(libs.glide.webdecoder)
+
+    implementation(libs.google.hilt)
+    kapt(libs.google.hilt.compiler)
+
+    implementation(libs.androidx.paging.runtime)
+
+    androidTestImplementation(projects.common)
+    androidTestImplementation(libs.androidx.test.arch.core)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.espresso)
+    androidTestImplementation(libs.androidx.test.espresso.contrib)
+    androidTestImplementation(libs.mockito.android)
+    androidTestImplementation(libs.google.hilt.test)
+    kaptAndroidTest(libs.google.hilt.compiler)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.robolectric)
 }
