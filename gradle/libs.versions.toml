@@ -20,8 +20,8 @@ lifecycle = "2.5.1"
 coroutines = "1.6.4"
 androidxCore = "1.9.0"
 gradlePlugin = "7.3.1"
-okHttp = "5.0.0-alpha.2"
 navigation = "2.5.3"
+okHttp = "5.0.0-alpha.10"
 glideWebDecoder = "2.0.4.12.0"
 
 junit = "4.13.2"
@@ -33,7 +33,7 @@ android-application = { id = "com.android.application", version.ref = "gradlePlu
 android-library = { id = "com.android.library", version.ref = "gradlePlugin" }
 kotlin = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
-google-service = { id = "com.google.gms.google-services", version = "4.3.10" }
+google-service = { id = "com.google.gms.google-services", version = "4.3.14" }
 
 [libraries]
 
