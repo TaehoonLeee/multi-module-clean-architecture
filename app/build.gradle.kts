@@ -1,9 +1,10 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.application")
-    kotlin("android")
     kotlin("kapt")
-    id("dagger.hilt.android.plugin")
-    id("com.google.gms.google-services")
+    kotlin("android")
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.google.service)
+    alias(libs.plugins.android.application)
 }
 
 android {

@@ -1,8 +1,9 @@
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.library")
-    kotlin("android")
     kotlin("kapt")
-    id("dagger.hilt.android.plugin")
+    kotlin("android")
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.android.library)
 }
 
 android {
