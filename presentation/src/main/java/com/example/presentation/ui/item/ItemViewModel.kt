@@ -7,16 +7,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import mvi.Executor
 import mvi.ViewModelStore
 import javax.inject.Inject
 
 @HiltViewModel
 class ItemViewModel @Inject constructor(
-    override val initialState: ItemState,
+    initialState: ItemState,
     private val getItemUseCase: GetItemListUseCase,
     private val insertItemUseCase: InsertItemUseCase,
-) : ViewModelStore<ItemIntent, ItemState, ItemMessage>() {
+) : ViewModelStore<ItemIntent, ItemState, ItemMessage>(initialState) {
 
     init {
     	viewModelScope.launch {
@@ -24,7 +23,7 @@ class ItemViewModel @Inject constructor(
         }
     }
 
-    override fun Executor<ItemIntent, ItemMessage>.onIntent(intent: ItemIntent) {
+    override fun onIntent(intent: ItemIntent) {
         when (intent) {
             is ItemIntent.ObserveItems -> getItemUseCase()
                 .onEach { dispatch(ItemMessage.Fetched(it)) }

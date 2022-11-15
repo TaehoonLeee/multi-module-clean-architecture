@@ -14,35 +14,32 @@ interface Store<INTENT, STATE, MESSAGE> {
     suspend fun accept(intent: INTENT)
 }
 
-abstract class ViewModelStore<INTENT, STATE, MESSAGE> : Store<INTENT, STATE, MESSAGE>, ViewModel() {
+abstract class ViewModelStore<INTENT, STATE, MESSAGE>(
+    initialState: STATE,
+    sharingStarted: SharingStarted = SharingStarted.Eagerly
+) : Store<INTENT, STATE, MESSAGE>, ViewModel() {
 
-    protected abstract val initialState: STATE
-
-    private val executor = DefaultExecutor<INTENT, MESSAGE>(onIntent = { onIntent(it) })
     private val intentStateMachine: Channel<INTENT> = Channel()
     private val messageStateMachine: Channel<MESSAGE> = Channel()
 
     init {
-        executor.init {
-            viewModelScope.launch {
-                messageStateMachine.send(it)
-            }
-        }
-
         viewModelScope.launch {
-            intentStateMachine.consumeEach(executor::executeIntent)
+            intentStateMachine.consumeEach(::onIntent)
         }
     }
 
-    override val state: StateFlow<STATE> by lazy {
-        messageStateMachine
-            .receiveAsFlow()
-            .runningFold(initialState, ::reduce)
-            .stateIn(viewModelScope, SharingStarted.Eagerly, initialState)
-    }
+    override val state: StateFlow<STATE> = messageStateMachine
+        .receiveAsFlow()
+        .runningFold(initialState, ::reduce)
+        .stateIn(viewModelScope, sharingStarted, initialState)
 
     override suspend fun accept(intent: INTENT) = intentStateMachine.send(intent)
+    protected fun dispatch(message: MESSAGE) {
+        viewModelScope.launch {
+            messageStateMachine.send(message)
+        }
+    }
 
-    protected abstract fun Executor<INTENT, MESSAGE>.onIntent(intent: INTENT)
+    protected abstract fun onIntent(intent: INTENT)
     protected abstract fun reduce(state: STATE, message: MESSAGE): STATE
 }
