@@ -41,7 +41,6 @@ android {
 
 dependencies {
 
-    implementation(projects.features.gallery)
     implementation(projects.presentation)
     implementation(projects.domain)
     implementation(projects.data)
