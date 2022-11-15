@@ -41,10 +41,10 @@ android {
 
 dependencies {
 
-    implementation(project(":features:gallery"))
-    implementation(project(":presentation"))
-    implementation(project(":data"))
-    implementation(project(":domain"))
+    implementation(projects.features.gallery)
+    implementation(projects.presentation)
+    implementation(projects.domain)
+    implementation(projects.data)
 
     implementation(Dependencies.androidX.appCompat)
     implementation(Dependencies.hilt.android)

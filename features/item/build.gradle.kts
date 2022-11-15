@@ -36,7 +36,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
+    implementation(projects.domain)
+    implementation(projects.mvi)
 
     with(Dependencies.androidX) {
         implementation(core)

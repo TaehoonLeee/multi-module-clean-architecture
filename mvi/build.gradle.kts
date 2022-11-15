@@ -1,13 +1,11 @@
 plugins {
-	kotlin("kapt")
-	kotlin("android")
 	id("com.android.library")
-	id("dagger.hilt.android.plugin")
+	id("org.jetbrains.kotlin.android")
 }
 
 android {
+	namespace = "com.example.mvi"
 	compileSdk = ConfigData.compileSdkVersion
-	sourceSets["main"].manifest.srcFile("src/debug/java/AndroidManifest.xml")
 
 	defaultConfig {
 		minSdk = ConfigData.minSdkVersion
@@ -34,14 +32,6 @@ android {
 
 dependencies {
 
-	implementation("androidx.core:core-ktx:1.9.0")
-	implementation("androidx.appcompat:appcompat:1.5.1")
-	implementation(Dependencies.hilt.android)
-	kapt(Dependencies.hilt.compiler)
-
-	implementation(projects.data)
-	implementation(projects.domain)
-	implementation(Dependencies.androidTest.hilt)
-	implementation(Dependencies.androidTest.runner)
-	debugImplementation(Dependencies.androidTest.fragment)
+	implementation(Dependencies.androidX.lifecycle.viewModel)
+	implementation(Dependencies.kotlin.coroutine)
 }

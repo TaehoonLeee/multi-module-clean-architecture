@@ -1,4 +1,4 @@
-package mvi
+package com.example.mvi
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
 	repositories {
 		gradlePluginPortal()
@@ -11,3 +13,4 @@ val modules = arrayOf(
 	":app", ":domain", ":data", ":presentation", ":features:gallery", ":features:item", ":common"
 )
 include(*modules)
+include(":mvi")

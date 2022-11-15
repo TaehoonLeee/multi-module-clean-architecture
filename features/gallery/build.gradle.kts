@@ -36,7 +36,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
+    implementation(projects.domain)
+    implementation(projects.mvi)
 
     with(Dependencies.androidX) {
         implementation(core)
@@ -59,7 +60,7 @@ dependencies {
 
     implementation(Dependencies.androidX.paging.runtime)
 
-    androidTestImplementation(project(":common"))
+    androidTestImplementation(projects.common)
     androidTestImplementation(Dependencies.androidTest.archCore)
     androidTestImplementation(Dependencies.androidTest.junit)
     androidTestImplementation(Dependencies.androidTest.espressoCore)

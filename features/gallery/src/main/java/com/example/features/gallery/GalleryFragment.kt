@@ -40,8 +40,8 @@ class GalleryFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            galleryViewModel.searchResult.flowWithLifecycle(lifecycle).collect {
-                photoAdapter.submitData(it)
+            galleryViewModel.state.flowWithLifecycle(lifecycle).collect {
+                photoAdapter.submitData(it.data)
             }
         }
     }

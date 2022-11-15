@@ -36,9 +36,9 @@ android {
 }
 
 dependencies {
-	implementation(project(":domain"))
-	implementation(project(":features:gallery"))
-	implementation(project(":features:item"))
+	implementation(projects.domain)
+	implementation(projects.features.gallery)
+	implementation(projects.features.item)
 
 	implementation(Dependencies.androidX.core)
 	implementation(Dependencies.androidX.appCompat)

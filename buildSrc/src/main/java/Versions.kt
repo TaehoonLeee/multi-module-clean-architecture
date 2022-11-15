@@ -1,7 +1,7 @@
 object Versions {
-    const val gradlePlugin = "7.2.0"
-    const val kotlin = "1.7.10"
-    const val hilt = "2.42"
+    const val gradlePlugin = "7.3.0"
+    const val kotlin = "1.7.21"
+    const val hilt = "2.44"
     const val coroutines = "1.6.4"
     const val gson = "2.8.6"
     const val okHttp = "5.0.0-alpha.2"
