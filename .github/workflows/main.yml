@@ -52,7 +52,7 @@ jobs:
           script: ./gradlew connectedCheck
 
       - name: All Test Report
-        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
         if: always()
         with:
           files: '**/*-results/**/TEST-*xml'
