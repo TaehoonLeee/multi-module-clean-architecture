@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/galleryFragment"
-        android:name="com.example.presentation.ui.gallery.GalleryFragment"
+        android:name="com.example.features.gallery.GalleryFragment"
         android:label="GalleryFragment" />
 </navigation>

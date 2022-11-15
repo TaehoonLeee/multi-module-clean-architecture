@@ -1,7 +1,7 @@
 plugins {
     id("com.android.library")
     kotlin("android")
-    id("kotlin-kapt")
+    kotlin("kapt")
     id("dagger.hilt.android.plugin")
 }
 
@@ -35,16 +35,7 @@ android {
 dependencies {
     implementation(project(":domain"))
 
-    with(Dependencies.kotlin) {
-        implementation(stdLib)
-        implementation(coroutine)
-        implementation(coroutineAndroid)
-    }
-
     with(Dependencies.androidX) {
-        implementation(core)
-        implementation(appCompat)
-
         implementation(room)
         implementation(room.ktx)
         annotationProcessor(room.compiler)
@@ -54,7 +45,6 @@ dependencies {
         androidTestImplementation(espresso)
     }
 
-    implementation(Dependencies.material)
     testImplementation(Dependencies.test.junit)
     androidTestImplementation(Dependencies.androidTest.hilt)
     kaptAndroidTest(Dependencies.hilt.compiler)
@@ -84,6 +74,4 @@ dependencies {
     }
 
     implementation(Dependencies.androidX.paging.runtime)
-
-    implementation(Dependencies.socket)
 }

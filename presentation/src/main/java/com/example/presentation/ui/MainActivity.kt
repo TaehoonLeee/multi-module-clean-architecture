@@ -3,6 +3,7 @@ package com.example.presentation.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.presentation.R
@@ -25,3 +26,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+class EmptyFragment : Fragment()

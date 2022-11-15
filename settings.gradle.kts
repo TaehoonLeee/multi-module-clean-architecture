@@ -1,5 +1,13 @@
+pluginManagement {
+	repositories {
+		gradlePluginPortal()
+		google()
+		mavenCentral()
+	}
+}
 rootProject.name = "TestPractice"
-include(":app")
-include(":domain")
-include(":data")
-include(":presentation")
+
+val modules = arrayOf(
+	":app", ":domain", ":data", ":presentation", ":features:gallery", ":features:item", ":common"
+)
+include(*modules)

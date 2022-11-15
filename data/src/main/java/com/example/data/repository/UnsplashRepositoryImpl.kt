@@ -6,7 +6,6 @@ import com.example.data.mapper.ResponseMapper
 import com.example.data.network.UnsplashService
 import com.example.data.repository.datasource.UnsplashPhotoPagingSource
 import com.example.domain.repository.UnsplashRepository
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton

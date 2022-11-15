@@ -1,10 +1,3 @@
-object BuildPlugins {
-    val android by lazy { "com.android.tools.build:gradle:${Versions.gradlePlugin}" }
-    val hilt by lazy { "com.google.dagger:hilt-android-gradle-plugin:${Versions.hilt}" }
-    val kotlin by lazy { "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}" }
-    val ksp by lazy { "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin:${Versions.ksp}" }
-}
-
 object Dependencies {
     val kotlin = Kotlin
     val hilt = Hilt
@@ -18,13 +11,10 @@ object Dependencies {
 
     val material by lazy { "com.google.android.material:material:1.4.0" }
     val jsr330 by lazy { "javax.inject:javax.inject:1" }
-    val socket by lazy { "io.socket:socket.io-client:1.0.0" }
     val gson by lazy { "com.google.code.gson:gson:${Versions.gson}" }
 
     object Kotlin {
-        val stdLib by lazy { "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}" }
-        val coroutine by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutineCore}" }
-        val coroutineAndroid by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutineAndroid}" }
+        val coroutine by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}" }
     }
 
     object Hilt {
@@ -33,10 +23,11 @@ object Dependencies {
     }
 
     object AndroidX {
+        val paging = Paging
+
         val core by lazy { "androidx.core:core-ktx:1.6.0" }
         val appCompat by lazy { "androidx.appcompat:appcompat:1.3.0" }
 
-        val paging = Paging
         object Paging {
             val runtime by lazy { "androidx.paging:paging-runtime-ktx:${Versions.paging}" }
             val common by lazy { "androidx.paging:paging-common:${Versions.paging}" }
@@ -98,7 +89,7 @@ object Dependencies {
         val robolectric by lazy { "org.robolectric:robolectric:4.6.1" }
         val archCore by lazy { "androidx.arch.core:core-testing:2.1.0" }
         val mockito by lazy { "org.mockito:mockito-core:3.8.0" }
-        val coroutine by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1" }
+        val coroutine by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}" }
     }
 
     object AndroidTest {
