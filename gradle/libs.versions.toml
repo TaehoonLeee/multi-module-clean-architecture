@@ -7,7 +7,7 @@ versionCode = "1"
 versionName = "1.0"
 
 hilt = "2.44.2"
-gson = "2.8.6"
+gson = "2.10"
 room = "2.4.3"
 ktor = "1.6.8"
 glide = "4.14.2"
