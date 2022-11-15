@@ -25,7 +25,7 @@ okHttp = "5.0.0-alpha.10"
 glideWebDecoder = "2.2.4.13.2"
 junit = "4.13.2"
 mockito = "3.8.0"
-robolectric = "4.6.1"
+robolectric = "4.9"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradlePlugin" }
