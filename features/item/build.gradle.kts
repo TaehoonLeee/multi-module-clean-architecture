@@ -38,6 +38,7 @@ android {
 
 dependencies {
     implementation(projects.domain)
+    implementation(projects.mvi)
 
     with(libs.androidx) {
         implementation(core)
