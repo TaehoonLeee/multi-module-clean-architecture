@@ -1,9 +1,9 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.application") version libs.versions.gradlePlugin.get() apply false
-    id("com.android.library") version libs.versions.gradlePlugin.get() apply false
-    id("org.jetbrains.kotlin.android") version libs.versions.kotlin.get() apply false
-    id("com.google.dagger.hilt.android") version libs.versions.hilt.get() apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin) apply false
+    alias(libs.plugins.hilt) apply false
     id("com.google.gms.google-services") version "4.3.10" apply false
 }
 
