@@ -50,5 +50,5 @@ dependencies {
     implementation(libs.google.hilt)
     kapt(libs.google.hilt.compiler)
 
-    implementation(platform("com.google.firebase:firebase-bom:30.5.0"))
+    implementation(platform("com.google.firebase:firebase-bom:31.0.3"))
 }
