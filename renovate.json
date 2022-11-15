@@ -1,0 +1,28 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    ":timezone(Asia/Seoul)",
+    "config:base",
+    "schedule:daily"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": [
+        "org.jetbrains.*"
+      ],
+      "groupName": "kotlin"
+    },
+    {
+      "matchPackagePatterns": [
+        "io.ktor.*"
+      ],
+      "groupName": "kotlin"
+    },
+    {
+      "matchPackagePatterns": [
+        "androidx.*"
+      ],
+      "groupName": "android"
+    }
+  ]
+}
