@@ -5,14 +5,11 @@ plugins {
 
 android {
 	namespace = "com.example.mvi"
-	compileSdk = ConfigData.compileSdkVersion
+	compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
 	defaultConfig {
-		minSdk = ConfigData.minSdkVersion
-		targetSdk = ConfigData.targetSdkVersion
-
-		testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-		consumerProguardFiles("consumer-rules.pro")
+		minSdk = libs.versions.minSdkVersion.get().toInt()
+		targetSdk = libs.versions.targetSdkVersion.get().toInt()
 	}
 
 	buildTypes {
@@ -32,6 +29,6 @@ android {
 
 dependencies {
 
-	implementation(Dependencies.androidX.lifecycle.viewModel)
-	implementation(Dependencies.kotlin.coroutine)
+	compileOnly(libs.androidx.lifecycle.viewmodel)
+	compileOnly(libs.kotlin.coroutines)
 }

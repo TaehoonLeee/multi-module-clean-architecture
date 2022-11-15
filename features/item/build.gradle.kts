@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk = ConfigData.compileSdkVersion
+    compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
-        minSdk = ConfigData.minSdkVersion
-        targetSdk = ConfigData.targetSdkVersion
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        minSdk = libs.versions.minSdkVersion.get().toInt()
+        targetSdk = libs.versions.targetSdkVersion.get().toInt()
+        testInstrumentationRunner = "com.example.testpractice.CustomJUnitRunner"
     }
 
     buildTypes {
@@ -39,19 +39,17 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.mvi)
 
-    with(Dependencies.androidX) {
+    with(libs.androidx) {
         implementation(core)
-        implementation(appCompat)
+        implementation(compat)
         implementation(lifecycle.runtime)
-        implementation(lifecycle.viewModel)
-        implementation(lifecycle.liveData)
+        implementation(lifecycle.viewmodel)
+        implementation(lifecycle.livedata)
         implementation(navigation.fragment)
     }
 
-    implementation(Dependencies.material)
+    implementation(libs.google.material)
 
-    with(Dependencies.hilt) {
-        implementation(android)
-        kapt(compiler)
-    }
+    implementation(libs.google.hilt)
+    kapt(libs.google.hilt.compiler)
 }

@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    compileSdk = ConfigData.compileSdkVersion
+    compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
-        minSdk = ConfigData.minSdkVersion
-        targetSdk = ConfigData.targetSdkVersion
+        minSdk = libs.versions.minSdkVersion.get().toInt()
+        targetSdk = libs.versions.targetSdkVersion.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -33,45 +33,40 @@ android {
 }
 
 dependencies {
-    implementation(project(":domain"))
+    implementation(projects.domain)
 
-    with(Dependencies.androidX) {
+    with(libs.androidx) {
         implementation(room)
-        implementation(room.ktx)
+        implementation(room.runtime)
         annotationProcessor(room.compiler)
         kapt(room.compiler)
 
-        androidTestImplementation(junit)
-        androidTestImplementation(espresso)
+        androidTestImplementation(test.junit)
+        androidTestImplementation(test.espresso)
     }
 
-    testImplementation(Dependencies.test.junit)
-    androidTestImplementation(Dependencies.androidTest.hilt)
-    kaptAndroidTest(Dependencies.hilt.compiler)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.google.hilt.test)
+    kaptAndroidTest(libs.google.hilt.compiler)
 
-    with(Dependencies.retrofit) {
-        implementation(this)
-        implementation(gsonConverter)
-        implementation(scalarsConverter)
+    with(libs.squareup) {
+        implementation(retrofit)
+        implementation(retrofit.gson.converter)
+        implementation(retrofit.scalars.converter)
+        implementation(okhttp)
+        implementation(okhttp.logging.interceptor)
     }
 
-    with(Dependencies.okHttp) {
-        implementation(this)
-        implementation(loggingInterceptor)
-    }
-
-    with(Dependencies.ktor) {
+    with(libs.ktor) {
         implementation(gson)
-        implementation(okHttp)
+        implementation(okhttp)
         implementation(logging)
     }
 
-    implementation(Dependencies.gson)
+    implementation(libs.google.gson)
 
-    with(Dependencies.hilt) {
-        implementation(android)
-        kapt(compiler)
-    }
+    implementation(libs.google.hilt)
+    kapt(libs.google.hilt.compiler)
 
-    implementation(Dependencies.androidX.paging.runtime)
+    implementation(libs.androidx.paging.runtime)
 }

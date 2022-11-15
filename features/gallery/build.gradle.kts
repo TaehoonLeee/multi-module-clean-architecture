@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    compileSdk = ConfigData.compileSdkVersion
+    compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
-        minSdk = ConfigData.minSdkVersion
-        targetSdk = ConfigData.targetSdkVersion
+        minSdk = libs.versions.minSdkVersion.get().toInt()
+        targetSdk = libs.versions.targetSdkVersion.get().toInt()
         testInstrumentationRunner = "com.example.testpractice.CustomJUnitRunner"
     }
 
@@ -39,38 +39,37 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.mvi)
 
-    with(Dependencies.androidX) {
+    with(libs.androidx) {
         implementation(core)
-        implementation(appCompat)
+        implementation(compat)
         implementation(lifecycle.runtime)
-        implementation(lifecycle.viewModel)
-        implementation(lifecycle.liveData)
+        implementation(lifecycle.viewmodel)
+        implementation(lifecycle.livedata)
         implementation(navigation.fragment)
+        implementation(fragment)
     }
 
-    implementation(Dependencies.material)
+    implementation(libs.google.material)
 
-    implementation(Dependencies.glide)
-    implementation(Dependencies.glide.webDecoder)
+    implementation(libs.glide)
+    implementation(libs.glide.webdecoder)
 
-    with(Dependencies.hilt) {
-        implementation(android)
-        kapt(compiler)
-    }
+    implementation(libs.google.hilt)
+    kapt(libs.google.hilt.compiler)
 
-    implementation(Dependencies.androidX.paging.runtime)
+    implementation(libs.androidx.paging.runtime)
 
     androidTestImplementation(projects.common)
-    androidTestImplementation(Dependencies.androidTest.archCore)
-    androidTestImplementation(Dependencies.androidTest.junit)
-    androidTestImplementation(Dependencies.androidTest.espressoCore)
-    androidTestImplementation(Dependencies.androidTest.espressoContribute)
-    androidTestImplementation(Dependencies.androidTest.mockito)
-    androidTestImplementation(Dependencies.androidTest.hilt)
-    kaptAndroidTest(Dependencies.hilt.compiler)
+    androidTestImplementation(libs.androidx.test.arch.core)
+    androidTestImplementation(libs.androidx.test.junit)
+    androidTestImplementation(libs.androidx.test.espresso)
+    androidTestImplementation(libs.androidx.test.espresso.contrib)
+    androidTestImplementation(libs.mockito.android)
+    androidTestImplementation(libs.google.hilt.test)
+    kaptAndroidTest(libs.google.hilt.compiler)
 
-    testImplementation(Dependencies.test.junit)
-    testImplementation(Dependencies.test.mockito)
-    testImplementation(Dependencies.test.coroutine)
-    testImplementation(Dependencies.test.robolectric)
+    testImplementation(libs.junit)
+    testImplementation(libs.mockito)
+    testImplementation(libs.kotlin.coroutines.test)
+    testImplementation(libs.robolectric)
 }

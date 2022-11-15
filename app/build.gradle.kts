@@ -7,14 +7,14 @@ plugins {
 }
 
 android {
-    compileSdk = ConfigData.compileSdkVersion
+    compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {
         applicationId = "com.example.testpractice"
-        minSdk = ConfigData.minSdkVersion
-        targetSdk = ConfigData.targetSdkVersion
-        versionCode = ConfigData.versionCode
-        versionName = ConfigData.versionName
+        minSdk = libs.versions.minSdkVersion.get().toInt()
+        targetSdk = libs.versions.targetSdkVersion.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
         testInstrumentationRunner = "com.example.testpractice.CustomJUnitRunner"
     }
 
@@ -46,9 +46,9 @@ dependencies {
     implementation(projects.domain)
     implementation(projects.data)
 
-    implementation(Dependencies.androidX.appCompat)
-    implementation(Dependencies.hilt.android)
-    kapt(Dependencies.hilt.compiler)
+    implementation(libs.androidx.compat)
+    implementation(libs.google.hilt)
+    kapt(libs.google.hilt.compiler)
 
     implementation(platform("com.google.firebase:firebase-bom:30.0.1"))
 }

@@ -9,7 +9,7 @@ java {
 }
 
 dependencies {
-    implementation(Dependencies.kotlin.coroutine)
-    implementation(Dependencies.androidX.paging.common)
-    implementation(Dependencies.jsr330)
+    implementation(libs.kotlin.coroutines)
+    implementation(libs.androidx.paging.common)
+    implementation(libs.javax.inject)
 }

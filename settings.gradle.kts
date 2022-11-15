@@ -10,7 +10,6 @@ pluginManagement {
 rootProject.name = "TestPractice"
 
 val modules = arrayOf(
-	":app", ":domain", ":data", ":presentation", ":features:gallery", ":features:item", ":common"
+	":app", ":domain", ":data", ":presentation", ":features:gallery", ":features:item", ":common", ":mvi"
 )
 include(*modules)
-include(":mvi")
