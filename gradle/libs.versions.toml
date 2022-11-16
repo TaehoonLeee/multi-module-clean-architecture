@@ -9,7 +9,7 @@ versionName = "1.0"
 hilt = "2.44.2"
 gson = "2.10"
 room = "2.4.3"
-ktor = "1.6.8"
+ktor = "2.1.3"
 glide = "4.14.2"
 material="1.7.0"
 paging = "3.1.1"
@@ -77,9 +77,10 @@ squareup-retrofit-scalars-converter = { module = "com.squareup.retrofit2:convert
 squareup-okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okHttp" }
 squareup-okhttp-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okHttp" }
 
-ktor-gson = { module = "io.ktor:ktor-client-gson", version.ref = "ktor" }
 ktor-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-gson = { module = "io.ktor:ktor-serialization-gson", version.ref = "ktor" }
 ktor-logging = { module = "io.ktor:ktor-client-logging-jvm", version.ref = "ktor" }
+ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glide-webdecoder = { module = "com.github.zjupure:webpdecoder", version.ref = "glideWebDecoder" }
@@ -88,3 +89,18 @@ junit = { module = "junit:junit", version.ref = "junit" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 mockito = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 mockito-android = { module = "org.mockito:mockito-android", version.ref = "mockito" }
+
+[bundles]
+ktor = [
+    "ktor-gson",
+    "ktor-okhttp",
+    "ktor-logging",
+    "ktor-content-negotiation"
+]
+squareup = [
+    "squareup-retrofit",
+    "squareup-retrofit-gson-converter",
+    "squareup-retrofit-scalars-converter",
+    "squareup-okhttp",
+    "squareup-okhttp-logging-interceptor"
+]
