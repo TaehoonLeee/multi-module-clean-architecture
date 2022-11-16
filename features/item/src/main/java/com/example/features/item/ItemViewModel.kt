@@ -1,41 +1,39 @@
 package com.example.features.item
 
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.ViewModel
 import com.example.domain.interactor.GetItemListUseCase
 import com.example.domain.interactor.InsertItemUseCase
-import com.example.mvi.ViewModelStore
+import com.example.mvi.*
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
 class ItemViewModel @Inject constructor(
     initialState: ItemState,
-    private val getItemUseCase: GetItemListUseCase,
-    private val insertItemUseCase: InsertItemUseCase,
-) : ViewModelStore<ItemIntent, ItemState, ItemMessage>(initialState) {
+    getItemUseCase: GetItemListUseCase,
+    insertItemUseCase: InsertItemUseCase,
+) : ViewModel() {
 
-    init {
-        viewModelScope.launch {
-            accept(ItemIntent.ObserveItems)
-        }
-    }
-
-    override fun onIntent(intent: ItemIntent) {
-        when (intent) {
-            is ItemIntent.ObserveItems -> getItemUseCase()
-                .onEach { dispatch(ItemMessage.Fetched(it)) }
-                .launchIn(viewModelScope)
-
-            is ItemIntent.InsertItem -> viewModelScope.launch {
-                insertItemUseCase(intent.item)
+    private val stateProducer = actionStateProducer<ItemAction, ItemState>(
+        initialState = initialState,
+        mutationFlows = listOf(
+            getItemUseCase().map {
+                mutation { copy(items = it) }
+            }
+        ),
+        actionTransform = { actionStream ->
+            actionStream.toMutationStream {
+                when (this) {
+                    is ItemAction.InsertItem -> flow.map {
+                        insertItemUseCase(it.item)
+                        Mutations.identity()
+                    }
+                }
             }
         }
-    }
+    )
 
-    override fun reduce(state: ItemState, message: ItemMessage): ItemState = when (message) {
-        is ItemMessage.Fetched -> state.copy(items = message.data)
-    }
+    val uiState = stateProducer.state
+    val process = stateProducer.process
 }

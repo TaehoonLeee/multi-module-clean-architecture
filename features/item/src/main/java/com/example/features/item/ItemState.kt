@@ -19,11 +19,6 @@ data class ItemState @Inject constructor(
 	}
 }
 
-sealed interface ItemIntent {
-	object ObserveItems : ItemIntent
-	class InsertItem(val item: Item) : ItemIntent
-}
-
-sealed interface ItemMessage {
-	class Fetched(val data: List<Item>) : ItemMessage
+sealed interface ItemAction {
+	class InsertItem(val item: Item) : ItemAction
 }

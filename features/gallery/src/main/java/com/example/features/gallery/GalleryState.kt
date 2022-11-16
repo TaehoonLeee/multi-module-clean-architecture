@@ -20,10 +20,6 @@ data class GalleryState @Inject constructor(
 	}
 }
 
-sealed interface GalleryIntent {
-	object FetchPhotos : GalleryIntent
-}
-
-sealed interface GalleryMessage {
-	class Fetched(val result: PagingData<UnsplashPhoto>) : GalleryMessage
+sealed interface GalleryAction {
+	data class FetchPhotos(val query: String) : GalleryAction
 }

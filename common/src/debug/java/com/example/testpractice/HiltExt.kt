@@ -11,7 +11,6 @@ import androidx.fragment.app.FragmentFactory
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 
-@SuppressLint("RestrictedApi")
 inline fun <reified T: Fragment> launchFragmentInHiltContainer(
 	fragmentArgs: Bundle? = null,
 	@StyleRes themeResId: Int = R.style.FragmentScenarioEmptyFragmentActivityTheme,
@@ -31,7 +30,7 @@ inline fun <reified T: Fragment> launchFragmentInHiltContainer(
 			activity.supportFragmentManager.fragmentFactory = it
 		}
 		val fragment = activity.supportFragmentManager.fragmentFactory.instantiate(
-			Preconditions.checkNotNull(T::class.java.classLoader),
+			checkNotNull(T::class.java.classLoader),
 			T::class.java.name
 		)
 

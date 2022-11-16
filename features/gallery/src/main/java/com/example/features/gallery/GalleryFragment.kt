@@ -40,7 +40,7 @@ class GalleryFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            galleryViewModel.state.flowWithLifecycle(lifecycle).collect {
+            galleryViewModel.uiState.flowWithLifecycle(lifecycle).collect {
                 photoAdapter.submitData(it.data)
             }
         }
