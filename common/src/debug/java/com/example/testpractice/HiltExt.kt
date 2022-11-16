@@ -1,5 +1,6 @@
 package com.example.testpractice
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +11,7 @@ import androidx.fragment.app.FragmentFactory
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 
+@SuppressLint("RestrictedApi")
 inline fun <reified T: Fragment> launchFragmentInHiltContainer(
 	fragmentArgs: Bundle? = null,
 	@StyleRes themeResId: Int = R.style.FragmentScenarioEmptyFragmentActivityTheme,

@@ -21,14 +21,14 @@ class KtorUnsplashService @Inject constructor(
         perPage: Int
     ): Result<UnsplashResponse> {
         return try {
-            val response = httpClient.get<HttpResponse>(path = "search/photos") {
+            val response = httpClient.get("search/photos") {
                 parameter("query", query)
                 parameter("page", page)
                 parameter("per_page", perPage)
-            }
+            }.body<HttpResponse>()
 
             if (response.status.isSuccess()) {
-                Result.Success(response.receive(), response.status.value)
+                Result.Success(response.body(), response.status.value)
             } else {
                 Result.ApiError(response.status.description, response.status.value)
             }

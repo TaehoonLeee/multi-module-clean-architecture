@@ -10,10 +10,10 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       
       - name: Gardle Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ~/.gradle/caches
@@ -24,7 +24,7 @@ jobs:
         run: bash ./gradlew testRelease
           
       - name: AVD Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: avd-cache
         with:
           path: |
@@ -52,7 +52,7 @@ jobs:
           script: ./gradlew connectedCheck
 
       - name: All Test Report
-        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
         if: always()
         with:
           files: '**/*-results/**/TEST-*xml'

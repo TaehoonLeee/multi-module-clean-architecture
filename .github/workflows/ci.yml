@@ -6,7 +6,7 @@ jobs:
     outputs:
       file: app-debug
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/cache@v3
         with:
           path: |
@@ -21,27 +21,4 @@ jobs:
           distribution: corretto
           java-version: 11
       - name: build
-        run: ./gradlew assembleDebug --no-daemon
-      - name: upload artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: build-artifact
-          path: app/build/outputs/apk/debug/app-debug.apk
-  distribution:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v3
-        with:
-          name: build-artifact
-      - name: Display
-        run: ls -R
-      - run: echo ${{needs.build.outputs.file}}
-#      - name: upload artifact to Firebase App Distribution
-#        uses: wzieba/Firebase-Distribution-Github-Action@v1
-#        with:
-#          appId: ${{secrets.FIREBASE_DEBUG_APP_ID}}
-#          token: ${{secrets.FIREBASE_TOKEN}}
-#          groups: testers
-#          file: app/build/outputs/apk/debug/app-debug.apk
+        run: ./gradlew build
