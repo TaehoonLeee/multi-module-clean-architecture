@@ -50,19 +50,9 @@ dependencies {
     androidTestImplementation(libs.google.hilt.test)
     kaptAndroidTest(libs.google.hilt.compiler)
 
-    with(libs.squareup) {
-        implementation(retrofit)
-        implementation(retrofit.gson.converter)
-        implementation(retrofit.scalars.converter)
-        implementation(okhttp)
-        implementation(okhttp.logging.interceptor)
-    }
+    implementation(libs.bundles.squareup)
 
-    with(libs.ktor) {
-        implementation(gson)
-        implementation(okhttp)
-        implementation(logging)
-    }
+    implementation(libs.bundles.ktor)
 
     implementation(libs.google.gson)
 
