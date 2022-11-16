@@ -23,12 +23,10 @@ class GalleryViewModel @Inject constructor(
 		mutationFlows = listOf(
 			getSearchResult.mutation(DEFAULT_QUERY)
 		),
-		actionTransform = { actionStream ->
-			actionStream.toMutationStream {
-				when (this) {
-					is GalleryAction.FetchPhotos -> flow.flatMapLatest {
-						getSearchResult.mutation(it.query)
-					}
+		actionTransform = {
+			onAction<GalleryAction.FetchPhotos> {
+				flow.flatMapLatest {
+					getSearchResult.mutation(it.query)
 				}
 			}
 		}

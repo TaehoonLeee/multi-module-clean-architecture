@@ -6,6 +6,18 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
+class ActionTransformBuilder<Action : Any, State: Any> {
+	val actionHandlers = ArrayList<(Flow<Action>) -> Flow<Mutation<State>>>()
+
+	inline fun <reified T: Action> onAction(
+		noinline block: context(TransformationContext<T>) T.() -> Flow<Mutation<State>>
+	) {
+		actionHandlers += { action ->
+			action.filterIsInstance<T>().toMutationStream(transform = block)
+		}
+	}
+}
+
 interface ActionStateProducer<Action : Any, State : Any> {
 	val process: (Action) -> Unit
 
@@ -17,14 +29,19 @@ fun <Action : Any, State : Any> ViewModel.actionStateProducer(
 	started: SharingStarted = SharingStarted.WhileSubscribed(5000),
 	mutationFlows: List<Flow<Mutation<State>>> = listOf(),
 	scope: CoroutineScope = viewModelScope,
-	actionTransform: (Flow<Action>) -> Flow<Mutation<State>>
+	actionTransform: ActionTransformBuilder<Action, State>.() -> Unit
 ): ActionStateProducer<Action, State> = object : ActionStateProducer<Action, State> {
 	val actions = MutableSharedFlow<Action>()
+	val builder = ActionTransformBuilder<Action, State>()
+
+	init {
+		actionTransform(builder)
+	}
 
 	override val state: StateFlow<State> = scope.produceState(
 		initial = initialState,
 		started = started,
-		mutationFlows = mutationFlows + actionTransform(actions)
+		mutationFlows = mutationFlows + builder.actionHandlers.map { it(actions) }
 	)
 
 	override val process: (Action) -> Unit = { action ->

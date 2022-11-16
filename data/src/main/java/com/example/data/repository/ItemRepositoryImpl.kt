@@ -36,6 +36,10 @@ class ItemRepositoryImpl @Inject constructor(
         itemDao.insertItem(item.mapFromDomainModel())
     }
 
+    override suspend fun clearItem() {
+        itemDao.deleteAll()
+    }
+
     private fun List<ItemEntity>.mapToDomainModel() =
         map { it.mapToDomainModel() }
 }

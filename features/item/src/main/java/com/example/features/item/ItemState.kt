@@ -20,5 +20,6 @@ data class ItemState @Inject constructor(
 }
 
 sealed interface ItemAction {
+	object ClearItem : ItemAction
 	class InsertItem(val item: Item) : ItemAction
 }

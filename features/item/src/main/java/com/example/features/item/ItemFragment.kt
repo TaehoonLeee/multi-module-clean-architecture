@@ -40,11 +40,13 @@ class ItemFragment : Fragment(R.layout.frag_market) {
 
         var cnt = 0
         binding.insertButton.setOnClickListener {
-            lifecycleScope.launch {
-                itemViewModel.process(
-                    ItemAction.InsertItem(Item("test${cnt++}", "test${cnt++}"))
-                )
-            }
+            itemViewModel.process(
+                ItemAction.InsertItem(Item("test${cnt++}", "test${cnt++}"))
+            )
+        }
+
+        binding.clearButton.setOnClickListener {
+            itemViewModel.process(ItemAction.ClearItem)
         }
 
         lifecycleScope.launch {

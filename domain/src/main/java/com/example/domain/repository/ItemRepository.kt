@@ -5,5 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface ItemRepository {
     fun getItems(): Flow<List<Item>>
+    suspend fun clearItem()
     suspend fun insertItem(item: Item)
 }

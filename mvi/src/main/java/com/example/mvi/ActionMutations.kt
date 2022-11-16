@@ -25,32 +25,30 @@ fun <Input : Any, Selector : Any, Output : Any> Flow<Input>.splitByType(
 	typeSelector: (Input) -> Selector,
 	keySelector: (Selector) -> String = Any::defaultKeySelector,
 	transform: context(TransformationContext<Selector>) Selector.() -> Flow<Output>
-): Flow<Output> =
-	channelFlow mutationFlow@{
-		val keysToFlowHolders = mutableMapOf<String, FlowHolder<Selector>>()
-		this@splitByType
-			.collect { item ->
-				val selected = typeSelector(item)
-				val flowKey = keySelector(selected)
-				when (val existingHolder = keysToFlowHolders[flowKey]) {
-					null -> {
-						val holder = FlowHolder(selected)
-						keysToFlowHolders[flowKey] = holder
-						val context = TransformationContext(holder.exposedFlow)
-						val mutationFlow = with(context) { transform(selected) }
-						channel.send(mutationFlow)
-					}
-					else -> {
-						existingHolder.internalSharedFlow.subscriptionCount.first { it > 0 }
-						existingHolder.internalSharedFlow.emit(selected)
-					}
+): Flow<Output> = channelFlow mutationFlow@{
+	val keysToFlowHolders = mutableMapOf<String, FlowHolder<Selector>>()
+	this@splitByType
+		.collect { item ->
+			val selected = typeSelector(item)
+			val flowKey = keySelector(selected)
+			when (val existingHolder = keysToFlowHolders[flowKey]) {
+				null -> {
+					val holder = FlowHolder(selected)
+					keysToFlowHolders[flowKey] = holder
+					val context = TransformationContext(holder.exposedFlow)
+					val mutationFlow = with(context) { transform(selected) }
+					channel.send(mutationFlow)
+				}
+				else -> {
+					existingHolder.internalSharedFlow.subscriptionCount.first { it > 0 }
+					existingHolder.internalSharedFlow.emit(selected)
 				}
 			}
-	}
-		.flatMapMerge(
-			concurrency = Int.MAX_VALUE,
-			transform = { it }
-		)
+		}
+}.flatMapMerge(
+	concurrency = Int.MAX_VALUE,
+	transform = { it }
+)
 
 private data class FlowHolder<Action>(
 	val firstEmission: Action,
