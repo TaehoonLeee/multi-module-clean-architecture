@@ -3,6 +3,7 @@ package com.example.presentation.viewModel
 import androidx.paging.PagingData
 import com.example.domain.interactor.GetSearchResultUseCase
 import com.example.domain.repository.UnsplashRepository
+import com.example.features.gallery.GalleryState
 import com.example.features.gallery.GalleryViewModel
 import com.example.presentation.util.TestCoroutinesRule
 import com.example.presentation.util.extensions.parseData
@@ -40,10 +41,10 @@ class GalleryViewModelTest : TestCase() {
 		val viewModel = createViewModel()
 
 		assertEquals(
-			viewModel.searchResult.first().parseData(),
+			viewModel.uiState.first().data.parseData(),
 			PagingData.from(FakePhotoListHolder.fakePhotoList).parseData()
 		)
 	}
 
-	private fun createViewModel() = GalleryViewModel(GetSearchResultUseCase(mockUnsplashRepository))
+	private fun createViewModel() = GalleryViewModel(GalleryState(PagingData.empty()), GetSearchResultUseCase(mockUnsplashRepository))
 }

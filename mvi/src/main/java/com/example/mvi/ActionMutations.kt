@@ -3,14 +3,8 @@ package com.example.mvi
 import kotlinx.coroutines.flow.*
 
 class TransformationContext<Action : Any>(
-	private val backing: Flow<Action>
-) {
-
-	@Suppress("unused", "UNCHECKED_CAST")
-	val <Subtype : Action> Subtype.flow: Flow<Subtype>
-		get() = backing as Flow<Subtype>
-}
-
+	val flow: Flow<Action>
+)
 
 fun <Action : Any, State : Any> Flow<Action>.toMutationStream(
 	keySelector: (Action) -> String = Any::defaultKeySelector,
