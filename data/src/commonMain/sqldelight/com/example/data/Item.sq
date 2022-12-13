@@ -1,0 +1,11 @@
+CREATE TABLE Item (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    description TEXT NOT NULL,
+    title TEXT NOT NULL
+);
+
+selectAll:
+SELECT * FROM Item;
+
+insert:
+INSERT INTO Item VALUES ?;

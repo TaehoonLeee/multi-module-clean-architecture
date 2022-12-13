@@ -1,9 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-	kotlin("kapt")
-	kotlin("android")
-	alias(libs.plugins.hilt)
 	alias(libs.plugins.android.library)
+	alias(libs.plugins.kotlin.multiplatform)
 }
 
 android {
@@ -12,7 +10,6 @@ android {
 	defaultConfig {
 		minSdk = libs.versions.minSdkVersion.get().toInt()
 		targetSdk = libs.versions.targetSdkVersion.get().toInt()
-		testInstrumentationRunner = "com.example.testpractice.CustomJUnitRunner"
 	}
 
 	buildTypes {
@@ -28,27 +25,18 @@ android {
 		sourceCompatibility = JavaVersion.VERSION_1_8
 		targetCompatibility = JavaVersion.VERSION_1_8
 	}
-	kotlinOptions {
-		jvmTarget = "1.8"
-	}
-	buildFeatures {
-		dataBinding = true
-	}
 }
 
-dependencies {
-	implementation(projects.domain)
-	implementation(projects.features.gallery)
-	implementation(projects.features.item)
+kotlin {
+	ios()
+	android()
 
-	implementation(libs.androidx.core)
-	implementation(libs.androidx.compat)
-	implementation(libs.google.material)
-	implementation(libs.androidx.constraintlayout)
-
-	implementation(libs.google.hilt)
-	kapt(libs.google.hilt.compiler)
-
-	implementation(libs.androidx.navigation.fragment)
-	implementation(libs.androidx.navigation.ui)
+	sourceSets.commonMain {
+		dependencies {
+			implementation(projects.domain)
+			implementation(libs.bundles.decompose)
+			implementation(projects.features.item)
+			implementation(projects.features.gallery)
+		}
+	}
 }

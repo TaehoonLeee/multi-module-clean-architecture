@@ -2,8 +2,6 @@
 plugins {
     kotlin("kapt")
     kotlin("android")
-    alias(libs.plugins.hilt)
-    alias(libs.plugins.google.service)
     alias(libs.plugins.android.application)
 }
 
@@ -42,13 +40,10 @@ android {
 
 dependencies {
 
-    implementation(projects.presentation)
+//    implementation(projects.presentation)
     implementation(projects.domain)
     implementation(projects.data)
 
     implementation(libs.androidx.compat)
-    implementation(libs.google.hilt)
-    kapt(libs.google.hilt.compiler)
 
-    implementation(platform("com.google.firebase:firebase-bom:31.1.1"))
 }
