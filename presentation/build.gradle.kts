@@ -1,6 +1,7 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
 	alias(libs.plugins.android.library)
+	alias(libs.plugins.jetbrains.compose)
 	alias(libs.plugins.kotlin.multiplatform)
 }
 
@@ -25,10 +26,15 @@ kotlin {
 	sourceSets.commonMain {
 		dependencies {
 			implementation(projects.domain)
-			implementation(libs.kotlin.coroutines)
-			implementation(libs.bundles.decompose)
 			implementation(projects.features.item)
 			implementation(projects.features.gallery)
+
+			implementation(compose.foundation)
+			implementation(compose.material)
+
+			implementation(libs.koin)
+			implementation(libs.kotlin.coroutines)
+			implementation(libs.bundles.decompose)
 		}
 	}
 }

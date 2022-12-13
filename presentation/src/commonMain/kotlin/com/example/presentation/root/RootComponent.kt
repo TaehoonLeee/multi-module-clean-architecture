@@ -8,10 +8,10 @@ import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
-import com.example.presentation.gallery.GalleryComponent
-import com.example.presentation.gallery.GalleryComponentImpl
-import com.example.presentation.item.ItemComponent
-import com.example.presentation.item.ItemComponentImpl
+import com.example.features.gallery.GalleryComponent
+import com.example.features.gallery.GalleryComponentImpl
+import com.example.features.item.ItemComponent
+import com.example.features.item.ItemComponentImpl
 
 interface RootComponent {
 

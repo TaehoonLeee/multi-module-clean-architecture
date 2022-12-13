@@ -60,6 +60,7 @@ ktor-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 
 koin = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 multiplatform-paging-common = { module = "app.cash.paging:paging-common", version.ref="multiplatform-paging" }
 multiplatform-paging-runtime = { module = "app.cash.paging:paging-runtime", version.ref="multiplatform-paging" }
 

@@ -40,9 +40,10 @@ android {
 
 dependencies {
 
-//    implementation(projects.presentation)
-    implementation(projects.domain)
     implementation(projects.data)
+    implementation(projects.domain)
+    implementation(projects.presentation)
+    implementation(libs.koin.android)
 
     implementation(libs.androidx.compat)
 

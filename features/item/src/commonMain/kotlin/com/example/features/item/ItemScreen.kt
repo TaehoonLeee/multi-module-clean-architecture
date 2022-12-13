@@ -7,14 +7,15 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.example.domain.model.Item
 
 @Composable
-fun ItemScreen(viewModel: ItemViewModel) {
-    val uiState by viewModel.uiState.collectAsState()
+fun ItemScreen(itemComponent: ItemComponent) {
+    val uiState by itemComponent.state.subscribeAsState()
 
     LazyColumn {
-        Button(onClick = viewModel::insertItem) {
+        Button(onClick = itemComponent::onInsertItem) {
             Text("Insert Item")
         }
 

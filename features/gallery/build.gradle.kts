@@ -17,8 +17,13 @@ kotlin {
     sourceSets.commonMain {
         dependencies {
             implementation(projects.domain)
+
             implementation(compose.material)
             implementation(compose.foundation)
+
+            implementation(libs.koin)
+            implementation(libs.kotlin.coroutines)
+            implementation(libs.bundles.decompose)
         }
     }
 }

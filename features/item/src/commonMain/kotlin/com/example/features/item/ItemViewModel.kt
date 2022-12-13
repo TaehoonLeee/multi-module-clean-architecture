@@ -1,36 +1,50 @@
 package com.example.features.item
 
+import com.arkivanov.decompose.value.Value
+import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import com.example.domain.interactor.GetItemListUseCase
 import com.example.domain.interactor.InsertItemUseCase
 import com.example.domain.model.Item
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
-
-data class ItemScreenUiState(
-    val items: List<Item>
-) {
-    companion object {
-        val Empty = ItemScreenUiState(emptyList())
-    }
-}
+import com.example.features.item.ItemComponent.ItemComponentState
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 
 class ItemViewModel(
     getItem: GetItemListUseCase,
     private val insertItem: InsertItemUseCase
-) {
+) : InstanceKeeper.Instance {
 
-    private val tmpCoroutineScope = CoroutineScope(Dispatchers.Main.immediate)
+    private val viewModelScope = CoroutineScope(Dispatchers.Main.immediate + SupervisorJob())
 
-    val uiState: StateFlow<ItemScreenUiState> = getItem()
-        .map(::ItemScreenUiState)
-        .stateIn(tmpCoroutineScope, SharingStarted.WhileSubscribed(5000), ItemScreenUiState.Empty)
+    val state: Value<ItemComponentState> = getItem()
+        .map(::ItemComponentState)
+        .valueIn(ItemComponentState(emptyList()), SharingStarted.Eagerly, viewModelScope)
 
     fun insertItem() {
-        val tmpItem = Item("tmp", "tmp")
-        insertItem(tmpItem)
+        insertItem(Item("tmp", "tmp"))
+    }
+
+    override fun onDestroy() {
+        viewModelScope.cancel()
+    }
+
+    private fun <T: Any> Flow<T>.valueIn(
+        initial: T,
+        started: SharingStarted,
+        coroutineScope: CoroutineScope
+    ): Value<T> = object : Value<T>() {
+
+        private val backing: StateFlow<T> = stateIn(coroutineScope, started, initial)
+        override val value: T
+            get() = backing.value
+
+        override fun subscribe(observer: (T) -> Unit) {
+            coroutineScope.launch {
+                collect(observer)
+            }
+        }
+
+        override fun unsubscribe(observer: (T) -> Unit) = Unit
+
     }
 }
