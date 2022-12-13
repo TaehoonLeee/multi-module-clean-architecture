@@ -8,6 +8,10 @@ import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
+import com.example.presentation.gallery.GalleryComponent
+import com.example.presentation.gallery.GalleryComponentImpl
+import com.example.presentation.item.ItemComponent
+import com.example.presentation.item.ItemComponentImpl
 
 interface RootComponent {
 
@@ -18,8 +22,8 @@ interface RootComponent {
     fun navigateToEmpty()
 
     sealed class Child {
-        class Gallery(val component: Any) : Child()
-        class Item(val component: Any) : Child()
+        class Gallery(val component: GalleryComponent) : Child()
+        class Item(val component: ItemComponent) : Child()
         object Empty : Child()
     }
 }
@@ -51,8 +55,8 @@ class RootComponentImpl(
 
     private fun resolveChild(configuration: Configuration, componentContext: ComponentContext): RootComponent.Child {
         return when (configuration) {
-            is Configuration.Item -> RootComponent.Child.Item(Any())
-            is Configuration.Gallery -> RootComponent.Child.Gallery(Any())
+            is Configuration.Item -> RootComponent.Child.Item(ItemComponentImpl(componentContext))
+            is Configuration.Gallery -> RootComponent.Child.Gallery(GalleryComponentImpl(componentContext))
             is Configuration.Empty -> RootComponent.Child.Empty
         }
     }

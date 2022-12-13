@@ -12,15 +12,6 @@ android {
 		targetSdk = libs.versions.targetSdkVersion.get().toInt()
 	}
 
-	buildTypes {
-		getByName("release") {
-			isMinifyEnabled = false
-			proguardFiles(
-				getDefaultProguardFile("proguard-android-optimize.txt"),
-				"proguard-rules.pro"
-			)
-		}
-	}
 	compileOptions {
 		sourceCompatibility = JavaVersion.VERSION_1_8
 		targetCompatibility = JavaVersion.VERSION_1_8
@@ -34,6 +25,7 @@ kotlin {
 	sourceSets.commonMain {
 		dependencies {
 			implementation(projects.domain)
+			implementation(libs.kotlin.coroutines)
 			implementation(libs.bundles.decompose)
 			implementation(projects.features.item)
 			implementation(projects.features.gallery)
