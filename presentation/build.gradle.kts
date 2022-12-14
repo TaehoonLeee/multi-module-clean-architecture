@@ -22,10 +22,6 @@ android {
 		sourceCompatibility = JavaVersion.VERSION_1_8
 		targetCompatibility = JavaVersion.VERSION_1_8
 	}
-
-	buildFeatures {
-		compose = true
-	}
 }
 
 kotlin {
@@ -34,12 +30,6 @@ kotlin {
 		binaries.framework {
 			isStatic = true
 			baseName = "Example"
-			transitiveExport = true
-//			export(projects.data)
-//			export(projects.common)
-//			export(projects.domain)
-//			export(projects.features.item)
-//			export(projects.features.gallery)
 			xcFramework.add(this)
 		}
 	}
@@ -66,12 +56,10 @@ kotlin {
 			implementation(libs.androidx.activity.compose)
 		}
 	}
-}
 
-kotlin {
-	targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
-		binaries.all {
-			freeCompilerArgs += "-Xdisable-phases=VerifyBitcode"
+	sourceSets.getByName("iosMain") {
+		dependencies {
+			implementation(projects.data)
 		}
 	}
 }

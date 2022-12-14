@@ -20,7 +20,7 @@ import com.example.features.item.ItemScreen
 
 @Composable
 @OptIn(ExperimentalDecomposeApi::class)
-fun ExampleApp(rootComponent: RootComponent) {
+internal fun ExampleApp(rootComponent: RootComponent) {
     Scaffold(
         bottomBar = {
             BottomBar(rootComponent)
