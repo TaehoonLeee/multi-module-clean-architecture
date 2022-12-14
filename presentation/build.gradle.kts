@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
+
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
 	alias(libs.plugins.android.library)
@@ -27,7 +29,20 @@ android {
 }
 
 kotlin {
-	ios()
+	val xcFramework = XCFramework("Example")
+	ios {
+		binaries.framework {
+			isStatic = true
+			baseName = "Example"
+			transitiveExport = true
+//			export(projects.data)
+//			export(projects.common)
+//			export(projects.domain)
+//			export(projects.features.item)
+//			export(projects.features.gallery)
+			xcFramework.add(this)
+		}
+	}
 	android()
 
 	sourceSets.commonMain {
@@ -49,6 +64,14 @@ kotlin {
 		dependencies {
 			implementation(libs.androidx.compat)
 			implementation(libs.androidx.activity.compose)
+		}
+	}
+}
+
+kotlin {
+	targets.withType<org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget> {
+		binaries.all {
+			freeCompilerArgs += "-Xdisable-phases=VerifyBitcode"
 		}
 	}
 }
