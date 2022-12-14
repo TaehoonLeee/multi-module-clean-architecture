@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace = "com.example.features.item"
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
     sourceSets["main"].manifest.srcFile("src/AndroidManifest.xml")
 }

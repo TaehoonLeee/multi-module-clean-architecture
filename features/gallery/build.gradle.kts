@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace = "com.example.features.gallery"
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
     sourceSets["main"].manifest.srcFile("src/AndroidManifest.xml")
 }
@@ -24,6 +25,7 @@ kotlin {
             implementation(libs.koin)
             implementation(libs.kotlin.coroutines)
             implementation(libs.bundles.decompose)
+            implementation(libs.multiplatform.paging.common)
         }
     }
 }

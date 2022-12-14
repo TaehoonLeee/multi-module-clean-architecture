@@ -1,10 +1,7 @@
 package com.example.presentation.root
 
 import com.arkivanov.decompose.ComponentContext
-import com.arkivanov.decompose.router.stack.ChildStack
-import com.arkivanov.decompose.router.stack.StackNavigation
-import com.arkivanov.decompose.router.stack.childStack
-import com.arkivanov.decompose.router.stack.push
+import com.arkivanov.decompose.router.stack.*
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
@@ -17,9 +14,7 @@ interface RootComponent {
 
     val childStack: Value<ChildStack<*, Child>>
 
-    fun navigateToGallery()
-    fun navigateToItem()
-    fun navigateToEmpty()
+    fun navigate(route: String)
 
     sealed class Child {
         class Gallery(val component: GalleryComponent) : Child()
@@ -41,16 +36,15 @@ class RootComponentImpl(
         childFactory = ::resolveChild
     )
 
-    override fun navigateToGallery() {
-        navigation.push(Configuration.Gallery)
-    }
+    override fun navigate(route: String) {
+        val destination = when (route) {
+            "item" -> Configuration.Item
+            "gallery" -> Configuration.Gallery
+            "empty" -> Configuration.Empty
+            else -> throw IllegalStateException()
+        }
 
-    override fun navigateToItem() {
-        navigation.push(Configuration.Item)
-    }
-
-    override fun navigateToEmpty() {
-        navigation.push(Configuration.Empty)
+        navigation.replaceCurrent(destination)
     }
 
     private fun resolveChild(configuration: Configuration, componentContext: ComponentContext): RootComponent.Child {

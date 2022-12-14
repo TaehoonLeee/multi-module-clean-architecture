@@ -6,6 +6,7 @@ plugins {
 }
 
 android {
+    namespace = "com.example.testpractice"
     compileSdk = libs.versions.compileSdkVersion.get().toInt()
 
     defaultConfig {

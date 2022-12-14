@@ -17,7 +17,9 @@ import com.example.domain.interactor.GetSearchResultUseCase
 import com.example.domain.interactor.InsertItemUseCase
 import com.example.data.repository.UnsplashRepositoryImpl
 import com.example.data.repository.ItemRepositoryImpl
+import com.example.data.network.UnsplashApiExecutor
 import org.koin.core.KoinApplication
+import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.bind
 
@@ -45,6 +47,7 @@ val networkModule = module {
             }
         }
     }
+    factoryOf(::UnsplashApiExecutor)
 }
 
 val repositoryModule = module {

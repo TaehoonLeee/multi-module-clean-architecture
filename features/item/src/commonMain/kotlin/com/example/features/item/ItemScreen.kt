@@ -15,8 +15,10 @@ fun ItemScreen(itemComponent: ItemComponent) {
     val uiState by itemComponent.state.subscribeAsState()
 
     LazyColumn {
-        Button(onClick = itemComponent::onInsertItem) {
-            Text("Insert Item")
+        item {
+            Button(onClick = itemComponent::onInsertItem) {
+                Text("Insert Item")
+            }
         }
 
         items(uiState.items) {

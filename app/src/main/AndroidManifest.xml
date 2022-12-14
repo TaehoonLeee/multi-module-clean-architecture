@@ -15,7 +15,7 @@
         android:theme="@style/Theme.TestPractice"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.example.presentation.ui.MainActivity"
+            android:name="com.example.presentation.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

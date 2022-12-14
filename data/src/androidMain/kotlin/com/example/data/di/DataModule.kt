@@ -1,3 +1,5 @@
+@file:JvmName("AndroidDataModule")
+
 package com.example.data.di
 
 import com.example.data.cache.DatabaseDriverFactory

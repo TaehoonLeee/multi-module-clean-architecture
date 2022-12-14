@@ -8,4 +8,4 @@ selectAll:
 SELECT * FROM Item;
 
 insert:
-INSERT INTO Item VALUES ?;
+INSERT INTO Item VALUES (?, ?, ?);
