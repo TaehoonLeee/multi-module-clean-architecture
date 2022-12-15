@@ -3,9 +3,9 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
 	alias(libs.plugins.android.library)
+	alias(libs.plugins.kotlin.parcelize)
 	alias(libs.plugins.jetbrains.compose)
 	alias(libs.plugins.kotlin.multiplatform)
-	id("kotlin-parcelize")
 }
 
 android {

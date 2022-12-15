@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		E3F52CC5294A42C2007AF5A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F52CC4294A42C2007AF5A7 /* AppDelegate.swift */; };
-		E3FE8EF1294A468E00739455 /* Example.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3FE8EF0294A468E00739455 /* Example.xcframework */; };
+		E3FEB858294B081D00BF77BF /* Example.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3FEB857294B081D00BF77BF /* Example.xcframework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E3F52CC1294A42C2007AF5A7 /* TestPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3F52CC4294A42C2007AF5A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E3F52CD2294A42C2007AF5A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E3FE8EF0294A468E00739455 /* Example.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Example.xcframework; path = ../../presentation/build/XCFrameworks/debug/Example.xcframework; sourceTree = "<group>"; };
+		E3FEB857294B081D00BF77BF /* Example.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Example.xcframework; path = ../../presentation/build/XCFrameworks/debug/Example.xcframework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,7 +23,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3FE8EF1294A468E00739455 /* Example.xcframework in Frameworks */,
+				E3FEB858294B081D00BF77BF /* Example.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -33,7 +33,7 @@
 		E3F52CB8294A42C2007AF5A7 = {
 			isa = PBXGroup;
 			children = (
-				E3FE8EEF294A468000739455 /* Frameworks */,
+				E3FEB856294B081200BF77BF /* Frameworks */,
 				E3F52CC3294A42C2007AF5A7 /* TestPractice */,
 				E3F52CC2294A42C2007AF5A7 /* Products */,
 			);
@@ -56,10 +56,10 @@
 			path = TestPractice;
 			sourceTree = "<group>";
 		};
-		E3FE8EEF294A468000739455 /* Frameworks */ = {
+		E3FEB856294B081200BF77BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E3FE8EF0294A468E00739455 /* Example.xcframework */,
+				E3FEB857294B081D00BF77BF /* Example.xcframework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";

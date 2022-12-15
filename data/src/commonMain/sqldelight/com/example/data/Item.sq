@@ -9,3 +9,6 @@ SELECT * FROM Item;
 
 insert:
 INSERT INTO Item VALUES (?, ?, ?);
+
+deleteAll:
+DELETE FROM Item;

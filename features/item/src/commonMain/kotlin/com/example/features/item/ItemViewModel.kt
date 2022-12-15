@@ -3,6 +3,7 @@ package com.example.features.item
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import com.example.common.valueIn
+import com.example.domain.interactor.ClearItemUseCase
 import com.example.domain.interactor.GetItemListUseCase
 import com.example.domain.interactor.InsertItemUseCase
 import com.example.domain.model.Item
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.*
 
 class ItemViewModel(
     getItem: GetItemListUseCase,
+    private val clearItem: ClearItemUseCase,
     private val insertItem: InsertItemUseCase
 ) : InstanceKeeper.Instance {
 
@@ -23,6 +25,10 @@ class ItemViewModel(
 
     fun insertItem() {
         insertItem(Item("tmp", "tmp"))
+    }
+
+    fun clear() {
+        clearItem()
     }
 
     override fun onDestroy() {

@@ -11,6 +11,7 @@ interface ItemComponent {
     val state: Value<ItemComponentState>
 
     fun onInsertItem()
+    fun onClearItem()
 
     data class ItemComponentState(
         val items: List<Item>
@@ -22,9 +23,11 @@ class ItemComponentImpl(
 ) : ItemComponent, ComponentContext by componentContext, KoinComponent {
 
     private val viewModel = instanceKeeper.getOrCreate {
-        ItemViewModel(get(), get())
+        ItemViewModel(get(), get(), get())
     }
 
     override val state: Value<ItemComponent.ItemComponentState> = viewModel.state
+
     override fun onInsertItem() = viewModel.insertItem()
+    override fun onClearItem() = viewModel.clear()
 }

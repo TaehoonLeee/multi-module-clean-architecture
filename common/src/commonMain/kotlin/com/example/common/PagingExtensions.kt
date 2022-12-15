@@ -7,26 +7,35 @@ import app.cash.paging.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 class LazyPagingItems<T: Any>(
 	private val flow: Flow<PagingData<T>>
 ) {
 
-	val itemCount: Int get() = pagingDataDiffer.size
-	val recomposerPlaceholder: MutableState<Int> = mutableStateOf(0)
+	var itemSnapshotList by mutableStateOf(
+		ItemSnapshotList<T>(0, 0, emptyList())
+	)
+		private set
 
-	private val differCallback = object : DifferCallback {
+	val itemCount: Int get() = itemSnapshotList.size
+
+	private val differCallback: DifferCallback = object : DifferCallback {
 		override fun onChanged(position: Int, count: Int) {
-			recomposerPlaceholder.value++
+			if (count > 0) {
+				updateItemSnapshotList()
+			}
 		}
 
 		override fun onInserted(position: Int, count: Int) {
-			recomposerPlaceholder.value++
+			if (count > 0) {
+				updateItemSnapshotList()
+			}
 		}
 
 		override fun onRemoved(position: Int, count: Int) {
-			recomposerPlaceholder.value++
+			if (count > 0) {
+				updateItemSnapshotList()
+			}
 		}
 	}
 
@@ -41,14 +50,18 @@ class LazyPagingItems<T: Any>(
 			onListPresentable: () -> Unit
 		): Int? {
 			onListPresentable()
-			recomposerPlaceholder.value++
-
+			updateItemSnapshotList()
 			return null
 		}
 	}
 
+	private fun updateItemSnapshotList() {
+		itemSnapshotList = pagingDataDiffer.snapshot()
+	}
+
 	operator fun get(index: Int): T? {
-		return pagingDataDiffer[index]
+		pagingDataDiffer[index]
+		return itemSnapshotList[index]
 	}
 
 	var loadState: CombinedLoadStates by mutableStateOf(
@@ -76,7 +89,7 @@ class LazyPagingItems<T: Any>(
 
 private val IncompleteLoadState: LoadState = LoadStateNotLoading(false)
 private val InitialLoadStates = LoadStates(
-	IncompleteLoadState,
+	LoadStateLoading,
 	IncompleteLoadState,
 	IncompleteLoadState
 )
@@ -86,22 +99,20 @@ fun <T: Any> Flow<PagingData<T>>.collectAsLazyPagingItems(): LazyPagingItems<T> 
 	val lazyPagingItems = remember(this) { LazyPagingItems(this) }
 
 	LaunchedEffect(lazyPagingItems) {
-		launch { lazyPagingItems.collectPagingData() }
-		launch { lazyPagingItems.collectLoadState() }
+		lazyPagingItems.collectPagingData()
+	}
+	LaunchedEffect(lazyPagingItems) {
+		lazyPagingItems.collectLoadState()
 	}
 
 	return lazyPagingItems
 }
 
 fun <T: Any> LazyListScope.items(
-	lazyPagingItems: LazyPagingItems<T>,
+	items: LazyPagingItems<T>,
 	itemContent: @Composable LazyItemScope.(value: T?) -> Unit
 ) {
-	@Suppress("UNUSED_VARIABLE")
-	val recomposerPlaceholder = lazyPagingItems.recomposerPlaceholder.value
-
-	items(lazyPagingItems.itemCount) { index ->
-		val item = lazyPagingItems[index]
-		itemContent(item)
+	items(items.itemCount) { index ->
+		itemContent(items[index])
 	}
 }

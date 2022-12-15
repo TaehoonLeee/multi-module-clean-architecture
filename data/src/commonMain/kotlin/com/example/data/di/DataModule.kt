@@ -15,9 +15,11 @@ import com.example.domain.repository.ItemRepository
 import com.example.domain.interactor.GetItemListUseCase
 import com.example.domain.interactor.GetSearchResultUseCase
 import com.example.domain.interactor.InsertItemUseCase
+import com.example.domain.interactor.ClearItemUseCase
 import com.example.data.repository.UnsplashRepositoryImpl
 import com.example.data.repository.ItemRepositoryImpl
 import com.example.data.network.UnsplashApiExecutor
+import kotlinx.serialization.json.Json
 import org.koin.core.KoinApplication
 import org.koin.core.module.dsl.factoryOf
 import org.koin.dsl.KoinAppDeclaration
@@ -39,7 +41,7 @@ val networkModule = module {
                 }
             }
             install(ContentNegotiation) {
-                json()
+                json(Json { ignoreUnknownKeys = true })
             }
             install(Logging) {
                 logger = Logger.DEFAULT
@@ -59,11 +61,12 @@ val interactorModule = module {
     singleOf(::GetItemListUseCase)
     singleOf(::GetSearchResultUseCase)
     singleOf(::InsertItemUseCase)
+    singleOf(::ClearItemUseCase)
 }
 
 val dataModule get() = databaseModule + networkModule + repositoryModule + interactorModule
 
-fun startKoin(appDeclaration: KoinAppDeclaration): KoinApplication = org.koin.core.context.startKoin {
+fun startKoin(appDeclaration: KoinAppDeclaration = {}): KoinApplication = org.koin.core.context.startKoin {
     modules(dataModule)
     appDeclaration()
 }

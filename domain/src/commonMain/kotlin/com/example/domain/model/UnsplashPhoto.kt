@@ -1,5 +1,8 @@
 package com.example.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class UnsplashPhoto(
     val id: String,
     val description: String?,
@@ -7,6 +10,7 @@ data class UnsplashPhoto(
     val user: UnsplashUser
 ) {
 
+    @Serializable
     data class UnsplashPhotoUrls(
         val raw: String,
         val full: String,
@@ -15,6 +19,7 @@ data class UnsplashPhoto(
         val thumb: String,
     )
 
+    @Serializable
     data class UnsplashUser(
         val name: String,
         val username: String

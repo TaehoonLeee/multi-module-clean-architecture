@@ -11,12 +11,26 @@ kotlin {
 
     sourceSets.commonMain {
         dependencies {
+            implementation(libs.ktor.core)
             implementation(libs.kotlin.coroutines)
             implementation(libs.multiplatform.paging.common)
 
             implementation(compose.foundation)
 
             implementation(libs.bundles.decompose)
+        }
+    }
+
+    sourceSets {
+        getByName("androidMain") {
+            dependencies {
+                implementation(libs.ktor.okhttp)
+            }
+        }
+        getByName("iosMain") {
+            dependencies {
+                implementation(libs.ktor.darwin)
+            }
         }
     }
 }

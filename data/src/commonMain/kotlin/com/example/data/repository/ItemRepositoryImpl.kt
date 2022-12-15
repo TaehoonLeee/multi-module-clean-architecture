@@ -8,7 +8,6 @@ import com.squareup.sqldelight.Query
 import com.squareup.sqldelight.runtime.coroutines.asFlow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import com.example.data.Item as ItemEntity
 
 class ItemRepositoryImpl(
     databaseDriverFactory: DatabaseDriverFactory
@@ -28,5 +27,9 @@ class ItemRepositoryImpl(
 
     override fun insertItem(item: Item) {
         database.itemQueries.insert(null, item.description, item.title)
+    }
+
+    override fun clearItem() {
+        database.itemQueries.deleteAll()
     }
 }
