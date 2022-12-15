@@ -20,3 +20,14 @@
 - Flowable Programming with Kotlinx Coroutines
 - Declarative UI Programming and Sharing UI Code with [Jetbrains Compose](https://github.com/JetBrains/compose-jb)
 - Service Locator Pattern with Koin (Dependency Injection by this)
+
+
+
+
+
+https://user-images.githubusercontent.com/48707020/207821369-4fa94ec5-974b-4205-897b-8701f3f855f6.mov
+
+
+
+https://user-images.githubusercontent.com/48707020/207821399-44ae9e33-b871-4427-ab6b-13e341008be8.mov
+
