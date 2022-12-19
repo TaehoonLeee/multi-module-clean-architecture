@@ -8,21 +8,13 @@ versionName = "1.0"
 
 koin = "3.2.2"
 ktor = "2.2.1"
-material="1.7.0"
-paging = "3.1.1"
-multiplatform-paging = "3.1.1-0.1.1"
 kotlin = "1.7.20"
-fragment = "1.5.5"
-lifecycle = "2.5.1"
 coroutines = "1.6.4"
-androidxCore = "1.9.0"
-gradlePlugin = "7.3.1"
-navigation = "2.5.3"
-okHttp = "5.0.0-alpha.10"
 sqldelight = "1.5.4"
-junit = "4.13.2"
-decompose="1.0.0-beta-01-native-compose"
+gradlePlugin = "7.3.1"
+multiplatform-paging = "3.1.1-0.1.1"
 jetbrains-compose="1.3.0-beta04-dev889"
+decompose="1.0.0-beta-01-native-compose"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradlePlugin" }
@@ -32,11 +24,9 @@ kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref =
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 sqldelight = { id = "com.squareup.sqldelight", version.ref = "sqldelight" }
-jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "jetbrains-compose" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "jetbrains.compose" }
 
 [libraries]
-
-google-material = { module = "com.google.android.material:material", version.ref = "material" }
 
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
@@ -59,8 +49,8 @@ ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation",
 koin = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 multiplatform-imageloader = { module = "io.github.qdsfdhvh:image-loader", version = "1.2.3.1" }
-multiplatform-paging-common = { module = "app.cash.paging:paging-common", version.ref="multiplatform-paging" }
-multiplatform-paging-runtime = { module = "app.cash.paging:paging-runtime", version.ref="multiplatform-paging" }
+multiplatform-paging-common = { module = "app.cash.paging:paging-common", version.ref="multiplatform.paging" }
+multiplatform-paging-runtime = { module = "app.cash.paging:paging-runtime", version.ref="multiplatform.paging" }
 
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
 decompose-compose = { module = "com.arkivanov.decompose:extensions-compose-jetbrains", version.ref = "decompose" }
