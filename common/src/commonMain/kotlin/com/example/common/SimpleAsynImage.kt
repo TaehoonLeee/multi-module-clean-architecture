@@ -2,34 +2,29 @@ package com.example.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.produceState
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.request.*
+import com.seiko.imageloader.ImageLoader
+import com.seiko.imageloader.LocalImageLoader
+import com.seiko.imageloader.rememberAsyncImagePainter
 
-private val imageFetcher = HttpClient()
-expect fun ByteArray.decode(): ImageBitmap
+internal var imageLoader: ImageLoader? = null
+
+@Composable
+expect fun createImageLoader(): ImageLoader
 
 @Composable
 fun SimpleAsyncImage(
 	source: String,
 	modifier: Modifier = Modifier
 ) {
-	val image by produceState<ImageBitmap?>(null) {
-		val image = imageFetcher.get(source).body<ByteArray>()
-		value = image.decode()
-	}
-
-	image?.let {
+	CompositionLocalProvider(LocalImageLoader provides createImageLoader()) {
 		Image(
-			bitmap = it,
 			modifier = modifier,
 			contentDescription = null,
-			contentScale = ContentScale.FillWidth
+			contentScale = ContentScale.FillWidth,
+			painter = rememberAsyncImagePainter(source)
 		)
 	}
 }
