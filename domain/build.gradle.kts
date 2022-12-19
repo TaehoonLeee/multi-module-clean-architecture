@@ -10,6 +10,7 @@ kotlin {
 
     sourceSets.commonMain {
         dependencies {
+            implementation(libs.koin)
             implementation(libs.kotlin.coroutines)
             implementation(libs.kotlinx.serialization)
             implementation(libs.multiplatform.paging.common)

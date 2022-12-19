@@ -14,18 +14,23 @@ internal class UnsplashPagingSource(
         return state.anchorPosition
     }
 
+    @Suppress("UNCHECKED_CAST")
     override suspend fun load(params: PagingSourceLoadParams<Int>): PagingSourceLoadResult<Int, UnsplashPhoto> {
         val position = params.key?: 1
         val response = unsplashApiExecutor.searchPhotos(query, position, params.loadSize)
 
-        return if (response is Result.Success) {
-            PagingSourceLoadResultPage(
-                data = response.data.results,
-                prevKey = if (position == 1) null else position - 1,
-                nextKey = if (position == response.data.totalPages) null else position + 1
-            ) as PagingSourceLoadResult<Int, UnsplashPhoto>
-        } else {
-            PagingSourceLoadResultError<Int, UnsplashPhoto>(Exception()) as PagingSourceLoadResult<Int, UnsplashPhoto>
-        }
+        return try {
+            if (response is Result.Success) {
+                PagingSourceLoadResultPage(
+                    data = response.data.results,
+                    prevKey = if (position == 1) null else position - 1,
+                    nextKey = if (position == response.data.totalPages) null else position + 1
+                )
+            } else {
+                PagingSourceLoadResultInvalid<Int, UnsplashPhoto>()
+            }
+        } catch (e: Exception) {
+            PagingSourceLoadResultError<Int, UnsplashPhoto>(e)
+        } as PagingSourceLoadResult<Int, UnsplashPhoto>
     }
 }
