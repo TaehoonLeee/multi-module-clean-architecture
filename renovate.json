@@ -5,6 +5,11 @@
     "config:base",
     "schedule:daily"
   ],
+  "baseBranches": [
+    "main",
+    "mvi-coroutines",
+    "multi-platform"
+  ],
   "packageRules": [
     {
       "matchPackagePatterns": [
