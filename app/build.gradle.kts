@@ -1,6 +1,5 @@
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("kapt")
     kotlin("android")
     alias(libs.plugins.android.application)
 }
@@ -33,9 +32,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
-    }
-    buildFeatures {
-        dataBinding = true
     }
 }
 
