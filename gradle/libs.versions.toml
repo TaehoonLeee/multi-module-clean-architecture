@@ -48,7 +48,7 @@ ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation",
 
 koin = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
-multiplatform-imageloader = { module = "io.github.qdsfdhvh:image-loader", version = "1.2.3.1" }
+multiplatform-imageloader = { module = "io.github.qdsfdhvh:image-loader", version = "1.2.5" }
 multiplatform-paging-common = { module = "app.cash.paging:paging-common", version.ref="multiplatform.paging" }
 multiplatform-paging-runtime = { module = "app.cash.paging:paging-runtime", version.ref="multiplatform.paging" }
 
