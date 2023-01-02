@@ -6,7 +6,7 @@ targetSdkVersion = "33"
 versionCode = "1"
 versionName = "1.0"
 
-koin = "3.2.2"
+koin = "3.3.2"
 ktor = "2.2.1"
 kotlin = "1.7.22"
 coroutines = "1.6.4"
