@@ -8,7 +8,7 @@ versionName = "1.0"
 
 hilt = "2.44.2"
 gson = "2.10"
-room = "2.4.3"
+room = "2.5.0"
 ktor = "2.2.1"
 glide = "4.14.2"
 material="1.7.0"
@@ -48,7 +48,7 @@ kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", 
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 
 androidx-core = { module = "androidx.core:core-ktx", version = "1.9.0" }
-androidx-compat = { module = "androidx.appcompat:appcompat", version = "1.5.1" }
+androidx-compat = { module = "androidx.appcompat:appcompat", version = "1.6.0" }
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
 androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "paging" }
 androidx-paging-runtime = { module = "androidx.paging:paging-runtime-ktx", version.ref = "paging" }
@@ -62,13 +62,13 @@ androidx-room = { module = "androidx.room:room-ktx", version.ref = "room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 
-androidx-text-junit = { module = "androidx.test.ext:junit", version = "1.1.4" }
-androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", version = "3.5.0" }
-androidx-test-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version = "3.5.0" }
+androidx-text-junit = { module = "androidx.test.ext:junit", version = "1.1.5" }
+androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", version = "3.5.1" }
+androidx-test-espresso-contrib = { module = "androidx.test.espresso:espresso-contrib", version = "3.5.1" }
 androidx-test-arch-core = { module = "androidx.arch.core:core-testing", version = "2.1.0" }
-androidx-test-runner = { module = "androidx.test:runner", version = "1.5.1" }
+androidx-test-runner = { module = "androidx.test:runner", version = "1.5.2" }
 androidx-test-rules = { module = "androidx.test:rules", version = "1.5.0"}
-androidx-test-junit = { module = "androidx.test.ext:junit-ktx", version = "1.1.4" }
+androidx-test-junit = { module = "androidx.test.ext:junit-ktx", version = "1.1.5" }
 androidx-test-fragment = { module = "androidx.fragment:fragment-testing", version = "1.5.5" }
 
 squareup-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
