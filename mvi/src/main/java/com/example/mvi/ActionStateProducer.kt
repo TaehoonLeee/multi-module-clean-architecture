@@ -7,10 +7,12 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class ActionTransformBuilder<Action : Any, State: Any> {
-	val actionHandlers = ArrayList<(Flow<Action>) -> Flow<Mutation<State>>>()
+
+	@PublishedApi
+	internal val actionHandlers = ArrayList<(Flow<Action>) -> Flow<Mutation<State>>>()
 
 	inline fun <reified T: Action> onAction(
-		noinline block: context(TransformationContext<T>) T.() -> Flow<Mutation<State>>
+		noinline block: TransformationContext<T>.() -> Flow<Mutation<State>>
 	) {
 		actionHandlers += { action ->
 			action.filterIsInstance<T>().toMutationStream(transform = block)

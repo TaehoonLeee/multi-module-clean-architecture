@@ -8,7 +8,7 @@ class TransformationContext<Action : Any>(
 
 fun <Action : Any, State : Any> Flow<Action>.toMutationStream(
 	keySelector: (Action) -> String = Any::defaultKeySelector,
-	transform: context(TransformationContext<Action>) Action.() -> Flow<Mutation<State>>
+	transform: context(TransformationContext<Action>) () -> Flow<Mutation<State>>
 ): Flow<Mutation<State>> = splitByType(
 	typeSelector = { it },
 	keySelector = keySelector,
@@ -18,7 +18,7 @@ fun <Action : Any, State : Any> Flow<Action>.toMutationStream(
 fun <Input : Any, Selector : Any, Output : Any> Flow<Input>.splitByType(
 	typeSelector: (Input) -> Selector,
 	keySelector: (Selector) -> String = Any::defaultKeySelector,
-	transform: context(TransformationContext<Selector>) Selector.() -> Flow<Output>
+	transform: context(TransformationContext<Selector>) () -> Flow<Output>
 ): Flow<Output> = channelFlow mutationFlow@{
 	val keysToFlowHolders = mutableMapOf<String, FlowHolder<Selector>>()
 	this@splitByType
@@ -30,7 +30,7 @@ fun <Input : Any, Selector : Any, Output : Any> Flow<Input>.splitByType(
 					val holder = FlowHolder(selected)
 					keysToFlowHolders[flowKey] = holder
 					val context = TransformationContext(holder.exposedFlow)
-					val mutationFlow = with(context) { transform(selected) }
+					val mutationFlow = transform(context)
 					channel.send(mutationFlow)
 				}
 				else -> {
