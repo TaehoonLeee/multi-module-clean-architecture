@@ -8,13 +8,13 @@ versionName = "1.0"
 
 koin = "3.3.2"
 ktor = "2.2.1"
-kotlin = "1.7.22"
+kotlin = "1.7.20"
 coroutines = "1.6.4"
 sqldelight = "1.5.4"
 gradlePlugin = "7.3.1"
 multiplatform-paging = "3.1.1-0.1.1"
-jetbrains-compose="1.3.0-beta04-dev889"
-decompose="1.0.0-beta-02"
+jetbrains-compose="1.2.2"
+decompose="1.0.0-beta-03-native-compose"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradlePlugin" }
