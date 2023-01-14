@@ -7,8 +7,7 @@
   ],
   "baseBranches": [
     "main",
-    "mvi-coroutines",
-    "multi-platform"
+    "mvi-coroutines"
   ],
   "packageRules": [
     {
