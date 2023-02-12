@@ -48,7 +48,7 @@ kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", 
 kotlin-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
 
 androidx-core = { module = "androidx.core:core-ktx", version = "1.9.0" }
-androidx-compat = { module = "androidx.appcompat:appcompat", version = "1.6.0" }
+androidx-compat = { module = "androidx.appcompat:appcompat", version = "1.6.1" }
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "fragment" }
 androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "paging" }
 androidx-paging-runtime = { module = "androidx.paging:paging-runtime-ktx", version.ref = "paging" }
