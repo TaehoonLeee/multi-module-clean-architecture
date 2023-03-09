@@ -25,7 +25,6 @@ kotlin {
 
             implementation(libs.koin)
             implementation(libs.kotlin.coroutines)
-            implementation(libs.bundles.decompose)
             implementation(libs.multiplatform.paging.common)
         }
     }

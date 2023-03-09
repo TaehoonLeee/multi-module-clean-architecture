@@ -9,15 +9,18 @@ kotlin {
     ios()
     android()
 
-    sourceSets.commonMain {
-        dependencies {
+    sourceSets {
+        commonMain.get().dependencies {
             implementation(libs.kotlin.coroutines)
             implementation(libs.multiplatform.imageloader)
             implementation(libs.multiplatform.paging.common)
 
             implementation(compose.foundation)
+        }
 
-            implementation(libs.bundles.decompose)
+        getByName("androidMain").dependencies {
+            compileOnly(libs.androidx.lifecycle.viewmodel)
+            compileOnly(libs.androidx.lifecycle.viewmodel.ktx)
         }
     }
 }
