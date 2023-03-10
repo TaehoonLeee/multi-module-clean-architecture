@@ -16,9 +16,9 @@
 ## Multi Platform Branch (Sharing Code with Kotlin Multiplatform and Jetbrains Compose)
 - Http Client with Ktor Client
 - Caching with [SQLDelight](https://github.com/cashapp/sqldelight)
-- Sharing UI Business Logic with [Decompose](https://github.com/arkivanov/Decompose)
 - Flowable Programming with Kotlinx Coroutines
 - Declarative UI Programming and Sharing UI Code with [Jetbrains Compose](https://github.com/JetBrains/compose-jb)
+- SwiftUI Interop with Jetbrains Compose
 - Service Locator Pattern with Koin (Dependency Injection by this)
 
 
