@@ -8,13 +8,12 @@ versionName = "1.0"
 
 koin = "3.3.2"
 ktor = "2.2.1"
-kotlin = "1.7.20"
+kotlin = "1.8.0"
 coroutines = "1.6.4"
-sqldelight = "1.5.4"
+sqldelight = "1.5.5"
 gradlePlugin = "7.3.1"
 multiplatform-paging = "3.1.1-0.1.1"
-jetbrains-compose="1.2.2"
-decompose="1.0.0-beta-03-native-compose"
+jetbrains-compose="1.4.0-alpha01-dev968"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "gradlePlugin" }
@@ -34,6 +33,9 @@ kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-
 
 androidx-compat = { module = "androidx.appcompat:appcompat", version = "1.5.1" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version = "1.6.1" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version = "2.5.3" }
+androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel", version = "2.5.1" }
+androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version = "2.5.1" }
 
 sqldelight-coroutines = { module = "com.squareup.sqldelight:coroutines-extensions", version.ref = "sqldelight" }
 sqldelight-native = { module = "com.squareup.sqldelight:native-driver", version.ref = "sqldelight" }
@@ -52,16 +54,9 @@ multiplatform-imageloader = { module = "io.github.qdsfdhvh:image-loader", versio
 multiplatform-paging-common = { module = "app.cash.paging:paging-common", version.ref="multiplatform.paging" }
 multiplatform-paging-runtime = { module = "app.cash.paging:paging-runtime", version.ref="multiplatform.paging" }
 
-decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
-decompose-compose = { module = "com.arkivanov.decompose:extensions-compose-jetbrains", version.ref = "decompose" }
-
 [bundles]
 ktor = [
     "ktor-json",
     "ktor-logging",
     "ktor-content-negotiation"
-]
-decompose = [
-    "decompose",
-    "decompose-compose"
 ]

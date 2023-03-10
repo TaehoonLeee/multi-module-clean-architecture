@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E3F52CC5294A42C2007AF5A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F52CC4294A42C2007AF5A7 /* AppDelegate.swift */; };
-		E3FEB858294B081D00BF77BF /* Example.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3FEB857294B081D00BF77BF /* Example.xcframework */; };
+		E332CD3929BAAD530014A5CE /* GalleryScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332CD3829BAAD530014A5CE /* GalleryScreen.swift */; };
+		E332CD3B29BAAD5A0014A5CE /* ItemScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332CD3A29BAAD5A0014A5CE /* ItemScreen.swift */; };
+		E332CD3D29BAAD630014A5CE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332CD3C29BAAD630014A5CE /* ContentView.swift */; };
+		E332CD3F29BAAE290014A5CE /* Example.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = E332CD3E29BAAE290014A5CE /* Example.xcframework */; };
+		E3F52CC5294A42C2007AF5A7 /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F52CC4294A42C2007AF5A7 /* iOSApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E332CD3829BAAD530014A5CE /* GalleryScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryScreen.swift; sourceTree = "<group>"; };
+		E332CD3A29BAAD5A0014A5CE /* ItemScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemScreen.swift; sourceTree = "<group>"; };
+		E332CD3C29BAAD630014A5CE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		E332CD3E29BAAE290014A5CE /* Example.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Example.xcframework; path = ../../presentation/build/XCFrameworks/release/Example.xcframework; sourceTree = "<group>"; };
 		E3F52CC1294A42C2007AF5A7 /* TestPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E3F52CC4294A42C2007AF5A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E3F52CD2294A42C2007AF5A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E3FEB857294B081D00BF77BF /* Example.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Example.xcframework; path = ../../presentation/build/XCFrameworks/debug/Example.xcframework; sourceTree = "<group>"; };
+		E3F52CC4294A42C2007AF5A7 /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -23,7 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3FEB858294B081D00BF77BF /* Example.xcframework in Frameworks */,
+				E332CD3F29BAAE290014A5CE /* Example.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,8 +55,10 @@
 		E3F52CC3294A42C2007AF5A7 /* TestPractice */ = {
 			isa = PBXGroup;
 			children = (
-				E3F52CC4294A42C2007AF5A7 /* AppDelegate.swift */,
-				E3F52CD2294A42C2007AF5A7 /* Info.plist */,
+				E3F52CC4294A42C2007AF5A7 /* iOSApp.swift */,
+				E332CD3829BAAD530014A5CE /* GalleryScreen.swift */,
+				E332CD3A29BAAD5A0014A5CE /* ItemScreen.swift */,
+				E332CD3C29BAAD630014A5CE /* ContentView.swift */,
 			);
 			path = TestPractice;
 			sourceTree = "<group>";
@@ -59,7 +66,7 @@
 		E3FEB856294B081200BF77BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E3FEB857294B081D00BF77BF /* Example.xcframework */,
+				E332CD3E29BAAE290014A5CE /* Example.xcframework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -132,7 +139,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E3F52CC5294A42C2007AF5A7 /* AppDelegate.swift in Sources */,
+				E332CD3929BAAD530014A5CE /* GalleryScreen.swift in Sources */,
+				E332CD3B29BAAD5A0014A5CE /* ItemScreen.swift in Sources */,
+				E332CD3D29BAAD630014A5CE /* ContentView.swift in Sources */,
+				E3F52CC5294A42C2007AF5A7 /* iOSApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +275,7 @@
 				DEVELOPMENT_TEAM = VDDAM6X539;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TestPractice/Info.plist;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -295,7 +305,7 @@
 				DEVELOPMENT_TEAM = VDDAM6X539;
 				ENABLE_BITCODE = NO;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TestPractice/Info.plist;
+				INFOPLIST_FILE = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

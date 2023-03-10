@@ -38,6 +38,7 @@ kotlin {
 	sourceSets.commonMain {
 		dependencies {
 			implementation(projects.domain)
+			implementation(projects.common)
 			implementation(projects.features.item)
 			implementation(projects.features.gallery)
 
@@ -46,7 +47,6 @@ kotlin {
 
 			implementation(libs.koin)
 			implementation(libs.kotlin.coroutines)
-			implementation(libs.bundles.decompose)
 		}
 	}
 
@@ -54,6 +54,7 @@ kotlin {
 		dependencies {
 			implementation(libs.androidx.compat)
 			implementation(libs.androidx.activity.compose)
+			implementation(libs.androidx.navigation.compose)
 		}
 	}
 

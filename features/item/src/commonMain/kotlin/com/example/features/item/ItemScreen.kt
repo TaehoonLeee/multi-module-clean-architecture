@@ -7,14 +7,14 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.example.domain.model.Item
 
 @Composable
-fun ItemScreen(itemComponent: ItemComponent) {
-    val uiState by itemComponent.state.subscribeAsState()
+fun ItemScreen(itemViewModel: ItemViewModel) {
+    val uiState by itemViewModel.uiState.collectAsState()
 
     LazyColumn {
         item {
@@ -22,16 +22,16 @@ fun ItemScreen(itemComponent: ItemComponent) {
                 modifier = Modifier.fillMaxSize(),
                 horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Button(onClick = itemComponent::onInsertItem) {
+                Button(onClick = itemViewModel::insertItem) {
                     Text("Insert Item")
                 }
-                Button(onClick = itemComponent::onClearItem) {
+                Button(onClick = itemViewModel::clear) {
                     Text("Clear Item")
                 }
             }
         }
 
-        items(uiState.items) {
+        items(uiState) {
             ItemCard(it)
         }
     }

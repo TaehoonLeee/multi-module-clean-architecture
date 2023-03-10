@@ -1,33 +1,26 @@
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Application
-import com.arkivanov.decompose.DefaultComponentContext
-import com.arkivanov.essenty.lifecycle.LifecycleRegistry
+import androidx.compose.ui.window.ComposeUIViewController
 import com.example.data.di.dataModule
 import com.example.domain.di.domainModule
-import com.example.presentation.root.ExampleApp
-import com.example.presentation.root.RootComponentImpl
+import com.example.features.gallery.GalleryScreen
+import com.example.features.gallery.GalleryViewModel
+import com.example.features.item.ItemScreen
+import com.example.features.item.ItemViewModel
 import org.koin.core.context.startKoin
-import platform.UIKit.UIViewController
 
-private val rootComponent by lazy {
-    RootComponentImpl(
-        DefaultComponentContext(LifecycleRegistry())
-    )
+object IoCContainer {
+    fun startKoin() {
+        startKoin {
+            modules(dataModule + domainModule)
+        }
+    }
 }
 
-fun createExampleViewController(): UIViewController {
-    startKoin {
-        modules(dataModule + domainModule)
+object ScreenProvider {
+    fun createItemViewController() = ComposeUIViewController {
+        ItemScreen(ItemViewModel())
     }
 
-    return Application("Example") {
-        Column {
-            Spacer(Modifier.height(100.dp))
-            ExampleApp(rootComponent)
-        }
+    fun createGalleryViewController() = ComposeUIViewController {
+        GalleryScreen(GalleryViewModel())
     }
 }
