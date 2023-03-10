@@ -25,6 +25,8 @@ kotlin {
 
             implementation(libs.koin)
             implementation(libs.kotlin.coroutines)
+
+            compileOnly(libs.androidx.lifecycle.viewmodel)
         }
     }
 }

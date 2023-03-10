@@ -26,6 +26,8 @@ kotlin {
             implementation(libs.koin)
             implementation(libs.kotlin.coroutines)
             implementation(libs.multiplatform.paging.common)
+
+            compileOnly(libs.androidx.lifecycle.viewmodel)
         }
     }
 }

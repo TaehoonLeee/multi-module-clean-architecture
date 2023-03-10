@@ -38,6 +38,7 @@ kotlin {
 	sourceSets.commonMain {
 		dependencies {
 			implementation(projects.domain)
+			implementation(projects.common)
 			implementation(projects.features.item)
 			implementation(projects.features.gallery)
 

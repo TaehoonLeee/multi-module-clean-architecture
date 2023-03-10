@@ -9,13 +9,11 @@ import kotlinx.coroutines.flow.Flow
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class GalleryViewModel(
-    getSearchResult: GetSearchResultUseCase
-) : ViewModel(), KoinComponent {
+class GalleryViewModel : ViewModel(), KoinComponent {
 
     private val getSearchResult: GetSearchResultUseCase by inject()
 
-    val uiState: Flow<PagingData<UnsplashPhoto>> = getSearchResult(DEFAULT_QUERY).cachedIn()
+    val uiState: Flow<PagingData<UnsplashPhoto>> = getSearchResult(DEFAULT_QUERY).cachedIn(coroutineScope)
 
     private companion object {
         private const val DEFAULT_QUERY = "cats"

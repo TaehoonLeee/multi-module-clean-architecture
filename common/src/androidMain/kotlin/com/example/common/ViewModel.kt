@@ -1,8 +1,9 @@
 package com.example.common
 
+import androidx.lifecycle.ViewModel as PlatformViewModel
 import androidx.lifecycle.viewModelScope
 
-abstract class ViewModel : androidx.lifecycle.ViewModel() {
+actual abstract class ViewModel : PlatformViewModel() {
 
 	actual val coroutineScope = viewModelScope
 
