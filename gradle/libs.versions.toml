@@ -6,7 +6,7 @@ targetSdkVersion = "33"
 versionCode = "1"
 versionName = "1.0"
 
-hilt = "2.45"
+hilt = "2.52"
 gson = "2.10.1"
 room = "2.5.0"
 ktor = "2.2.4"
